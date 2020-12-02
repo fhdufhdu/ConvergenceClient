@@ -21,11 +21,12 @@ import javafx.scene.layout.AnchorPane;
 
 public class StatisticsInfo implements Initializable
 {
+    // 테이블 뷰에 사용할 리스트
     private ObservableList<String> benefit_list;
     private ObservableList<String> rsv_list;
     private ObservableList<String> cancel_list;
     
-    private String start_date;
+    private String start_date; // 시작, 종료 날짜 저장
     private String end_date;
     
     @FXML
@@ -64,15 +65,16 @@ public class StatisticsInfo implements Initializable
     @FXML
     private DatePicker dp_end;
     
+    // 초기화
     @Override
     public void initialize(URL arg0, ResourceBundle arg1)
     {
         try
         {
-            dp_start.setValue(LocalDate.now());
+            dp_start.setValue(LocalDate.now()); // 현재날짜로 지정
             dp_end.setValue(LocalDate.now());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            start_date = dp_start.getValue().format(formatter) + " 00:00:00.0";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // 포맷터 설정
+            start_date = dp_start.getValue().format(formatter) + " 00:00:00.0"; // 시작, 종료 날짜 설정
             end_date = dp_end.getValue().format(formatter) + " 23:59:00.0";
             
             benefit_list = FXCollections.observableArrayList();
@@ -95,10 +97,12 @@ public class StatisticsInfo implements Initializable
         }
         catch (Exception e)
         {
+            
             e.printStackTrace();
         }
     }
     
+    // date picker 선택 시
     @FXML
     void selectEndDate(ActionEvent event)
     {
@@ -113,12 +117,14 @@ public class StatisticsInfo implements Initializable
         start_date = dp_start.getValue().format(formatter) + " 00:00:00.0";
     }
     
+    // 통계 검색
     @FXML
     void search(ActionEvent event)
     {
         initList();
     }
     
+    // 리스트 초기화
     private void initList()
     {
         try
@@ -166,6 +172,7 @@ public class StatisticsInfo implements Initializable
         }
         catch (Exception e)
         {
+            
             e.printStackTrace();
         }
         

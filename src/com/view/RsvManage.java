@@ -36,11 +36,13 @@ import javafx.scene.input.MouseEvent;
 
 public class RsvManage implements Initializable
 {
+	// 리스트뷰, 테이블뷰를 위한 리스트
 	private ObservableList<MemberDTO> member_id_list;
 	private ObservableList<MovieDTO> movie_title_list;
 	private ObservableList<TheaterDTO> theater_list;
 	private ObservableList<CustomDTO> custom_list;
 	
+	// 리스트, 테이블 뷰에서 선택된 객체
 	private MemberDTO selectedMem;
 	private MovieDTO selectedMov;
 	private TheaterDTO selectedThea;
@@ -103,6 +105,7 @@ public class RsvManage implements Initializable
 	@FXML
 	private DatePicker dp_end_date;
 	
+	// 초기화
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -142,6 +145,7 @@ public class RsvManage implements Initializable
 								
 								member_id_list.add(new MemberDTO(id, role, password, account, name, phone_number, birth, gender));
 							}
+							// 리스트뷰 세팅
 							lv_member.setItems(FXCollections.observableArrayList());
 							lv_member.getItems().addAll(member_id_list);
 							lv_member.setOnMouseClicked((MouseEvent) ->
@@ -153,6 +157,7 @@ public class RsvManage implements Initializable
 								lv_member.getItems().clear();
 								tf_member_id.setText(selectedMem.getId());
 							});
+							// 리스트뷰에 담을 객체
 							lv_member.setCellFactory(lv -> new ListCell<MemberDTO>()
 							{
 								@Override
@@ -166,7 +171,6 @@ public class RsvManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "회원 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -243,7 +247,6 @@ public class RsvManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("영화 리스트", "영화 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -313,7 +316,6 @@ public class RsvManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "영화관 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -461,12 +463,14 @@ public class RsvManage implements Initializable
 		lv_theater.getItems().addAll(temp_list);
 	}
 	
+	// 예매 내역 검색
 	@FXML
 	void getRsvSearch(ActionEvent event)
 	{
 		initList();
 	}
 	
+	// 예매내역 삭제
 	@FXML
 	void deleteRsv(ActionEvent event) throws Exception
 	{
@@ -526,15 +530,18 @@ public class RsvManage implements Initializable
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			
 		}
 	}
 	
+	// 리스트 초기화
 	private void initList()
 	{
 		try
 		{
 			custom_list.clear();
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			// 리스트뷰를 선택했는가 안했는가에 따라서 전체 검색 혹은 특정 값 검색
 			String mem_id = selectedMem == null ? "%" : selectedMem.getId();
 			String mov_id = selectedMov == null ? "%" : selectedMov.getId();
 			String thea_id = selectedThea == null ? "%" : selectedThea.getId();
@@ -596,10 +603,12 @@ public class RsvManage implements Initializable
 		}
 		catch (Exception e)
 		{
+			
 			e.printStackTrace();
 		}
 	}
 	
+	// 테이블 뷰 출력을 위한 DTO의 모음
 	private class CustomDTO
 	{
 		ReservationDTO rDto;

@@ -80,16 +80,16 @@
                   <TableColumn fx:id="tc_current" prefWidth="109.0" text="현재예매인원" />
               </columns>
             </TableView>
-            <ListView fx:id="lv_theater" layoutX="42.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" onMouseClicked="#clickedLvTheater" prefWidth="100.0" />
-            <ListView fx:id="lv_screen" layoutX="156.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" onMouseClicked="#clickedLvScreen" prefWidth="100.0" />
-            <ListView fx:id="lv_movie" layoutX="270.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" onMouseClicked="#clickedLvMovie" prefWidth="100.0" />
+            <ListView fx:id="lv_theater" layoutX="42.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" prefWidth="100.0" />
+            <ListView fx:id="lv_screen" layoutX="156.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" prefWidth="100.0" />
+            <ListView fx:id="lv_movie" layoutX="270.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" prefWidth="100.0" />
             <Text layoutX="133.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사용자 선택">
                <font>
                   <Font name="LG Smart UI Light" size="15.0" />
                </font>
             </Text>
             <TextField fx:id="tf_member" layoutX="214.0" layoutY="575.0" minHeight="0.0" minWidth="100.0" onKeyTyped="#typedTfMember" onMouseClicked="#clickedTfMember" prefWidth="100.0" />
-            <ListView fx:id="lv_member" layoutX="214.0" layoutY="597.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" onMouseClicked="#clickedLvMember" prefWidth="100.0" />
+            <ListView fx:id="lv_member" layoutX="214.0" layoutY="597.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" prefWidth="100.0" />
             <Text layoutX="339.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="은행 입력">
                <font>
                   <Font name="LG Smart UI Light" size="15.0" />

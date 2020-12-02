@@ -1,7 +1,6 @@
 package com.view;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -30,6 +29,7 @@ import javafx.scene.control.TableView;
 
 public class RsvCancel implements Initializable
 {
+	// 테이블 뷰를 위한 리스트
 	private ObservableList<CustomDTO> custom_list;
 	private CustomDTO selectedCustom;
 	
@@ -63,6 +63,7 @@ public class RsvCancel implements Initializable
 	@FXML
 	private Button btn_cancel;
 	
+	// 초기화
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -102,17 +103,20 @@ public class RsvCancel implements Initializable
 		}
 	}
 	
+	// 예매 취소
 	@FXML
 	void getCancel(ActionEvent event) throws Exception
 	{
 		try
 		{
+			// 테이블 row 선택하지 않았을 때
 			if (tv_reservation.getSelectionModel().isEmpty())
 			{
 				mainGUI.alert("취소 오류", "취소할 데이터를 선택해주세요");
 				return;
 			}
 			
+			// 취소 재 확인
 			ButtonType btnType = mainGUI.confirm("취소 확인", "정말로 취소하시겠습니까?");
 			if (btnType != ButtonType.OK)
 			{
@@ -157,6 +161,7 @@ public class RsvCancel implements Initializable
 		}
 	}
 	
+	// 리스트 초기화
 	private void initList() throws Exception
 	{
 		try
@@ -228,6 +233,7 @@ public class RsvCancel implements Initializable
 		}
 	}
 	
+	// 테이블 뷰 출력을 위한 DTO 모음
 	private class CustomDTO
 	{
 		ReservationDTO rDto;

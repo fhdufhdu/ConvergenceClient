@@ -1,6 +1,5 @@
 package com.view;
 
-import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 
 import com.db.model.MovieDTO;
@@ -18,7 +17,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import oracle.net.aso.p;
 
 public class MovieChange
 {
@@ -123,6 +121,7 @@ public class MovieChange
 				for (String temp : ta_plot.getText().split("\n"))
 					plot += temp + "}";
 				
+			// 각 정보들 입력 없을 시 기존 데이터 값 유지
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String id = currentMov.getId();
 			String title = tf_title.getText().equals("") ? currentMov.getTitle() : tf_title.getText();
@@ -133,23 +132,22 @@ public class MovieChange
 			String actor = ta_actor.getText().equals("") ? currentMov.getActor() : tf_trailer.getText();
 			String min = tf_min.getText().equals("") ? Integer.toString(currentMov.getMin()) : tf_min.getText();
 			
-			System.out.println(ta_stillcut.getText().split("\n").length);
-			
+			// 관리자 -> 영화 수정 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_MOVIE_CHANGE + "`" + id + "`" + title + "`" + release_date + "`" + is_current + "`" + plot + "`" + poster + "`" + stillCut + "`" + trailer + "`" + director + "`" + actor + "`" + min);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 영화 수정 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_MOVIE_CHANGE))
 				{
-					String pakcet_result = packetArr[2];
-					switch (pakcet_result)
+					String result = packetArr[2]; // 요청 결과
+					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 화면 전환
 						{
 							mainGUI.alert("수정완료", "수정완료 되었습니다!");
 							
@@ -158,7 +156,7 @@ public class MovieChange
 							parent.setCenter(root);
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("수정실패", "수정실패입니다!");
 							return;
@@ -170,10 +168,6 @@ public class MovieChange
 		catch (NumberFormatException e)
 		{
 			mainGUI.alert("상영시간", "상영시간에는 숫자를 입력해주세요!");
-		}
-		catch (SQLException e)
-		{
-			mainGUI.alert("DB서버 연결오류", "잠시 후 다시 시도해주세요!");
 		}
 		catch (Exception e)
 		{

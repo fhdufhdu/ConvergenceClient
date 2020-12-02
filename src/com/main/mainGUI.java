@@ -29,10 +29,17 @@ public class mainGUI extends Application
 		{
 
 			String localHostAddress = InetAddress.getLocalHost().getHostAddress();
+<<<<<<< HEAD
 			//Socket socket = new Socket(InetAddress.getLocalHost().getHostAddress(), 5000);
 			Socket socket = new Socket("192.168.230.238", 5000);
 
 
+=======
+			// String localHostAddress = "192.168.230.238";
+			// Socket socket = new Socket(InetAddress.getLocalHost().getHostAddress(), 5000);
+			Socket socket = new Socket(localHostAddress, 5000);
+			
+>>>>>>> branch 'master' of https://github.com/fhdufhdu/ConvergenceClient
 			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			launch();

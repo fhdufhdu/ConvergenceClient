@@ -21,11 +21,11 @@ import javafx.scene.text.Text;
 
 public class ScreenManage
 {
+	// 테이블 뷰를 위한 리스트, 객체
 	private ObservableList<ScreenDTO> screen_list;
 	private ScreenDTO table_row_data;
-	private TheaterDTO theater;
 	
-	private String err_type;
+	private TheaterDTO theater; // 현재 관리하는 영화관 객체
 	
 	@FXML
 	private BorderPane bp_parent;
@@ -72,6 +72,51 @@ public class ScreenManage
 	@FXML
 	private Button btn_clear;
 	
+	// 초기화, 이전 컨트롤러에서 값 받아오기
+	void initData(TheaterDTO t)
+	{
+		try
+		{
+			theater = t;
+			theater_name.setText(theater.getName() + "의 상영관 리스트");
+			screen_list = FXCollections.observableArrayList();
+			
+			initList(); // 리스트 초기화
+			
+			tv_screen.getItems().clear();
+			
+			// 테이블 뷰 col 설정
+			tc_name.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+			tc_capacity.setCellValueFactory(cellData -> cellData.getValue().getTotalCapacityProperty());
+			tc_row.setCellValueFactory(cellData -> cellData.getValue().getMaxRowProperty());
+			tc_col.setCellValueFactory(cellData -> cellData.getValue().getMaxColProperty());
+			
+			tv_screen.setItems(screen_list); // 리스트, 테이블 뷰 연결
+			
+			// 테이블 뷰 row 선택시 이벤트
+			tv_screen.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ScreenDTO>()
+			{
+				@Override
+				public void changed(ObservableValue<? extends ScreenDTO> observable, ScreenDTO oldValue, ScreenDTO newValue)
+				{
+					table_row_data = tv_screen.getSelectionModel().getSelectedItem();
+					if (table_row_data != null)
+					{
+						tf_name.setText(table_row_data.getName());
+						tf_row.setText(Integer.toString(table_row_data.getMaxRow()));
+						tf_col.setText(Integer.toString(table_row_data.getMaxCol()));
+					}
+				}
+			});
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			
+		}
+	}
+	
+	// 상영관 추가
 	@FXML
 	void addScreen(ActionEvent event) throws Exception
 	{
@@ -98,11 +143,8 @@ public class ScreenManage
 					{
 						case "1":
 						{
-							// 값 추가 후 각 테이블 및 리스트 초기화
-							initList();
-							
-							// text field 초기화
-							clearText();
+							initList(); // 값 추가 후 각 테이블 및 리스트 초기화
+							clearText(); // 텍스트 초기화
 							return;
 						}
 						case "2":
@@ -114,14 +156,14 @@ public class ScreenManage
 				}
 			}
 		}
-		catch (NumberFormatException e)
+		catch (NumberFormatException e) // 입력값 타입이 맞지 않을때
 		{
-			// 입력값 타입이 맞지 않을때
-			mainGUI.alert("수정오류", err_type);
+			mainGUI.alert("수정오류", "최대 행, 최대 열에는 숫자만 입력해주세요!");
 			e.printStackTrace();
 		}
 		catch (Exception e)
 		{
+			
 			e.printStackTrace();
 		}
 	}
@@ -138,6 +180,7 @@ public class ScreenManage
 				return;
 			}
 			
+			// 값 획득
 			String name = tf_name.getText();
 			String row = tf_row.getText();
 			String col = tf_col.getText();
@@ -172,29 +215,32 @@ public class ScreenManage
 				}
 			}
 		}
-		catch (NumberFormatException e)
+		catch (NumberFormatException e) // 입력값 타입이 맞지 않을때
 		{
-			// 입력값 타입이 맞지 않을때
-			mainGUI.alert("수정오류", err_type);
+			mainGUI.alert("수정오류", "최대 행, 최대 열에는 숫자만 입력해주세요!");
 			e.printStackTrace();
 		}
 		catch (Exception e)
 		{
+			
 			e.printStackTrace();
 		}
 	}
 	
+	// 텍스트 초기화
 	@FXML
 	void clearTextField(ActionEvent event)
 	{
 		clearText();
 	}
 	
+	// 상영관 삭제
 	@FXML
 	void deleteScreen(ActionEvent event) throws Exception
 	{
 		try
 		{
+			// 선택되어있는지 확인
 			if (tv_screen.getSelectionModel().isEmpty())
 			{
 				mainGUI.alert("삭제오류", "삭제할 데이터를 선택해주세요");
@@ -207,7 +253,7 @@ public class ScreenManage
 			{
 				return;
 			}
-			
+			// 선택한 행 상영관 아이디 획득
 			String id = table_row_data.getId();
 			
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SCREEN_DELETE + "`" + id);
@@ -228,7 +274,6 @@ public class ScreenManage
 						{
 							mainGUI.alert("삭제완료", "삭제되었습니다");
 							initList();
-							
 							clearText();
 							return;
 						}
@@ -241,14 +286,14 @@ public class ScreenManage
 				}
 			}
 		}
-		catch (NumberFormatException e)
+		catch (NumberFormatException e) // 입력값 타입이 맞지 않을때
 		{
-			// 입력값 타입이 맞지 않을때
-			mainGUI.alert("수정오류", err_type);
+			mainGUI.alert("수정오류", "최대 행, 최대 열에는 숫자만 입력해주세요!");
 			e.printStackTrace();
 		}
 		catch (Exception e)
 		{
+			
 			e.printStackTrace();
 		}
 	}
@@ -296,7 +341,6 @@ public class ScreenManage
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "상영관 리스트가 없습니다");
 							return;
 						}
 						case "3":
@@ -315,49 +359,7 @@ public class ScreenManage
 		}
 	}
 	
-	// 이전 컨트롤러에서 값 받아오기, 상영관 관리에는 해당하는 영화관 객체가 필요
-	void initData(TheaterDTO t)
-	{
-		try
-		{
-			err_type = "총 좌석, 최대 행, 최대 열에는 숫자만 입력해주세요!";
-			
-			theater = t;
-			theater_name.setText(theater.getName() + "의 상영관 리스트");
-			screen_list = FXCollections.observableArrayList();
-			
-			initList();
-			
-			tv_screen.getItems().clear();
-			
-			tc_name.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
-			tc_capacity.setCellValueFactory(cellData -> cellData.getValue().getTotalCapacityProperty());
-			tc_row.setCellValueFactory(cellData -> cellData.getValue().getMaxRowProperty());
-			tc_col.setCellValueFactory(cellData -> cellData.getValue().getMaxColProperty());
-			
-			tv_screen.setItems(screen_list);
-			
-			tv_screen.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ScreenDTO>()
-			{
-				@Override
-				public void changed(ObservableValue<? extends ScreenDTO> observable, ScreenDTO oldValue, ScreenDTO newValue)
-				{
-					table_row_data = tv_screen.getSelectionModel().getSelectedItem();
-					if (table_row_data != null)
-					{
-						tf_name.setText(table_row_data.getName());
-						tf_row.setText(Integer.toString(table_row_data.getMaxRow()));
-						tf_col.setText(Integer.toString(table_row_data.getMaxCol()));
-					}
-				}
-			});
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
+	// 텍스트 초기화
 	private void clearText()
 	{
 		tf_name.clear();

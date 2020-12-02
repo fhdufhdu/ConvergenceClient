@@ -80,12 +80,12 @@ public class Login
 			String id = tf_id.getText();
 			String passwd = pf_passwd.getText();
 			
-			mainGUI.writePacket(Protocol.PT_REQ_LOGIN + "`" + id + "`" + passwd);
+			mainGUI.writePacket(Protocol.PT_REQ_LOGIN + "`" + id + "`" + passwd); // 로그인 요청
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 로그인 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				
 				switch (packetType)
@@ -96,27 +96,30 @@ public class Login
 					 * mainGUI.writePacket(Protocol.PT_REQ_LOGIN + "`" + id + "`" + passwd); return;
 					 */
 					case Protocol.PT_RES_LOGIN:
-						String result = packetArr[1];
+					{
+						String result = packetArr[1]; // 요청 결과
+						
 						switch (result)
 						{
-							case "1":
+							case "1": // 관리자 로그인 성공
 							{
 								startWindow("./xml/admin_main.fxml", "관리자 모드");
 								USER_ID = id;
 								return;
 							}
-							case "2":
+							case "2": // 사용자 로그인 성공
 							{
 								startWindow("./xml/user_main.fxml", "시네마");
 								USER_ID = id;
 								return;
 							}
-							case "3":
+							case "3": // 로그인 실패
 							{
 								t_result.setText("로그인 실패!");
 								return;
 							}
 						}
+					}
 				}
 			}
 		}

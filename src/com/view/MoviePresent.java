@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.db.model.MovieDTO;
-import com.db.model.TheaterDTO;
 import com.main.mainGUI;
 import com.protocol.Protocol;
 
@@ -84,25 +83,24 @@ public class MoviePresent implements Initializable
 		try
 		{
 			// 현재 상영작을 모두 받아와서 gridview에 뿌리기, 각 gridview에는 MovieSub.java가 컨트롤함
+			// 현재 상영영화 리스트 요청 
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MOVIE_VIEW + "`%`1976-01-01`2222-01-01`%`%`%`1");
 			ArrayList<MovieDTO> m_list = new ArrayList<MovieDTO>();
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				System.out.println(packet);
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MOVIE_VIEW))
 				{
-					String result = packetArr[2];
-					System.out.println(packet);
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							String movieList = packetArr[3];
 							String listArr[] = movieList.split("\\{"); // 각 영화별로 리스트 분할
@@ -135,12 +133,11 @@ public class MoviePresent implements Initializable
 							}
 							return;
 						}
-						case "2":
+						case "2": // 현재 상영작 없음
 						{
-							mainGUI.alert("영화 리스트", "영화 리스트가 없습니다.");
 							return;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("영화 리스트", "영화 리스트 요청 실패했습니다.");
 							return;

@@ -147,6 +147,7 @@ public class MovieSearch implements Initializable
 	{
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
+		// 데이터 입력 없을 시 전체 영화 검색하도록 데이터 설정
 		String title = tf_title.getText().equals("") ? "%" : tf_title.getText();
 		String start_date = dp_start_date.getValue() == null ? "1976-01-01" : dp_start_date.getValue().format(dateFormat);
 		String end_date = dp_end_date.getValue() == null ? "2222-01-01" : dp_end_date.getValue().format(dateFormat);
@@ -188,26 +189,27 @@ public class MovieSearch implements Initializable
 	{
 		try
 		{
+			// 검색하고자 하는 범위의 해당하는 영화리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MOVIE_VIEW + "`" + title + "`" + start_date + "`" + end_date + "`" + is_current + "`" + director + "`" + actor + "`0");
 			
 			while (true)
 			{
 				
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MOVIE_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							String movieList = packetArr[3];
-							String listArr[] = movieList.split("\\{"); // 각 영화별로 리스트 분할
+							String listArr[] = movieList.split("\\{"); // 각 영화별로 분할
 							
 							for (String listInfo : listArr)
 							{
@@ -228,12 +230,11 @@ public class MovieSearch implements Initializable
 							}
 							return;
 						}
-						case "2":
+						case "2": // 검색된 영화 리스트 없음
 						{
-							mainGUI.alert("오류", "영화 리스트가 없습니다.");
 							return;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "영화 리스트 요청 실패했습니다.");
 							return;
