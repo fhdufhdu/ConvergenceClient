@@ -69,22 +69,24 @@ public class MovieSoonSub
             image_load.start();
             
             t_movie_title.setText(movie.getTitle());
+            
+            // 상영예정작 예매율, 별점 요청
             mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MOVIESUB_VIEW + "`" + movie.getId());
             
             while (true)
             {
-                String packet = mainGUI.readLine();
+                String packet = mainGUI.readLine(); // 요청 응답 수신
                 String packetArr[] = packet.split("`"); // 패킷 분할
                 String packetType = packetArr[0];
                 String packetCode = packetArr[1];
                 
                 if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MOVIESUB_VIEW))
                 {
-                    String result = packetArr[2];
+                    String result = packetArr[2]; // 요청 결과
                     
                     switch (result)
                     {
-                        case "1":
+                        case "1": // 요청 성공
                         {
                             double rsv_rate = Double.parseDouble(packetArr[3]);
                             String remain_date = Integer.toString(getRemainDate());
@@ -93,7 +95,7 @@ public class MovieSoonSub
                             t_rsv_rate.setText(t_rsv_rate.getText() + "% | D - " + remain_date);
                             break;
                         }
-                        case "2":
+                        case "2": // 요청 실패
                         {
                             mainGUI.alert("오류", "예매율 요청에 실패했습니다.");
                             break;

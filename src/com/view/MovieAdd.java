@@ -72,10 +72,11 @@ public class MovieAdd
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			
 			String stillCut = "";
-			for (String temp : ta_stillcut.getText().split("\n"))
+			for (String temp : ta_stillcut.getText().split("\n")) // 계행 문자 제거 위해 사용
 				stillCut += temp + " ";
+			
 			String plot = "";
-			for (String temp : ta_plot.getText().split("\n"))
+			for (String temp : ta_plot.getText().split("\n")) // 계행 문자 제거 위해 사용
 				plot += temp + "}";
 			
 			String title = tf_title.getText();
@@ -86,31 +87,32 @@ public class MovieAdd
 			String actor = ta_actor.getText();
 			String min = tf_min.getText();
 			
+			// 관리자 -> 영화 추가 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_MOVIE_ADD + "`" + title + "`" + release_date + "`" + is_current + "`" + plot + "`" + poster + "`" + stillCut + "`" + trailer + "`" + director + "`" + actor + "`" + min);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 영화 추가 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_MOVIE_ADD))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							mainGUI.alert("등록완료", "등록완료 되었습니다!");
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("등록 실패", "이미 존재하는 영화가 있습니다!");
 							return;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("등록실패", "등록실패 되었습니다!");
 							return;
