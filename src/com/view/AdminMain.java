@@ -43,15 +43,10 @@ public class AdminMain implements Initializable
     @FXML
     private ImageView img_web;
     
+    // 초기화
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        /*
-         * WebEngine webEngine = test_webview.getEngine();
-         * 
-         * webEngine.load( "https://m.map.naver.com/search2/search.nhn?query="+"경북 구미시 인동 메가박스" +"&sm=hty&style=v5#/map");
-         */
-        
         // 스크롤 속도 조정
         final double SPEED = 0.005;
         sp_admin_main.getContent().setOnScroll(scrollEvent ->
@@ -59,9 +54,6 @@ public class AdminMain implements Initializable
             double deltaY = scrollEvent.getDeltaY() * SPEED;
             sp_admin_main.setVvalue(sp_admin_main.getVvalue() - deltaY);
         });
-        /*
-         * Image image = new Image("https://static-whale.pstatic.net/main/img_darkmode_v2@2x.png"); img_web.setImage(image);
-         */
     }
     
     @FXML
@@ -125,10 +117,6 @@ public class AdminMain implements Initializable
         {
             Parent root = FXMLLoader.load(AdminMain.class.getResource("./xml/admin_sub_page/" + file_name + ".fxml"));
             bp_admin_sub.setCenter(root);
-            
-            /*
-             * GridPane a = new GridPane(); a.add(root, 1, 0);
-             */
         }
         catch (Exception e)
         {

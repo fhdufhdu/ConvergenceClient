@@ -31,7 +31,7 @@ public class MovieSoonSub
     private Text t_rsv_rate;
     
     @FXML
-    void clickedTheater(ActionEvent event)
+    void clickedTheater(ActionEvent event)// 각 sub페이지 클릭시 영화 상세 페이지(MovieDetail.java)로 이동
     {
         try
         {
@@ -48,6 +48,7 @@ public class MovieSoonSub
         }
     }
     
+    // MoviePresent에서 값을 받아와서 이미지와 글자등 설정
     public void initData(MovieDTO movie)
     {
         try
@@ -91,7 +92,7 @@ public class MovieSoonSub
                             double rsv_rate = Double.parseDouble(packetArr[3]);
                             String remain_date = Integer.toString(getRemainDate());
                             
-                            t_rsv_rate.setText("예매율 : " + String.format("%.2f", rsv_rate * 100)); 
+                            t_rsv_rate.setText("예매율 : " + String.format("%.2f", rsv_rate * 100));
                             t_rsv_rate.setText(t_rsv_rate.getText() + "% | D - " + remain_date);
                             break;
                         }
@@ -113,6 +114,7 @@ public class MovieSoonSub
         
     }
     
+    // d-day 계산
     public int getRemainDate()
     {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");

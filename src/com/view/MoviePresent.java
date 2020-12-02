@@ -8,11 +8,7 @@ import com.db.model.MovieDTO;
 import com.main.mainGUI;
 import com.protocol.Protocol;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -21,60 +17,6 @@ import javafx.scene.layout.GridPane;
 public class MoviePresent implements Initializable
 {
 	@FXML
-	private Button btn_detail;
-	
-	@FXML
-	private Text text_movie;
-	
-	@FXML
-	private Text text_rsv_ratio;
-	
-	@FXML
-	private Text text_movie2;
-	
-	@FXML
-	private Button btn_detail2;
-	
-	@FXML
-	private Text text_rsv_ratio2;
-	
-	@FXML
-	private Text text_movie3;
-	
-	@FXML
-	private Button btn_detail3;
-	
-	@FXML
-	private Text text_rsv_ratio3;
-	
-	@FXML
-	private ImageView img_movie;
-	
-	@FXML
-	private ImageView img_movie2;
-	
-	@FXML
-	private ImageView img_movie3;
-	
-	@FXML
-	void getDetail(ActionEvent event)
-	{
-		
-	}
-	
-	@FXML
-	void getDetail2(ActionEvent event)
-	{
-		
-	}
-	
-	@FXML
-	void getDetail3(ActionEvent event)
-	{
-		
-	}
-	
-	@FXML
 	private GridPane gp_current_movie;
 	
 	@Override
@@ -82,8 +24,7 @@ public class MoviePresent implements Initializable
 	{
 		try
 		{
-			// 현재 상영작을 모두 받아와서 gridview에 뿌리기, 각 gridview에는 MovieSub.java가 컨트롤함
-			// 현재 상영영화 리스트 요청 
+			// 현재 상영영화 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MOVIE_VIEW + "`%`1976-01-01`2222-01-01`%`%`%`1");
 			ArrayList<MovieDTO> m_list = new ArrayList<MovieDTO>();
 			
@@ -125,6 +66,7 @@ public class MoviePresent implements Initializable
 							
 							for (int i = 0; i < m_list.size(); i++)
 							{
+								// 현재 상영작을 모두 받아와서 gridview에 뿌리기, 각 gridview에는 MoviePresentSub.java가 컨트롤함
 								FXMLLoader loader = new FXMLLoader(MovieTable.class.getResource("./xml/user_sub_page/movie_present_sub.fxml"));
 								Parent root = loader.load();
 								MoviePresentSub controller = loader.<MoviePresentSub>getController();
@@ -145,10 +87,6 @@ public class MoviePresent implements Initializable
 					}
 				}
 			}
-			
-			/*
-			 * gp_current_movie.add(FXMLLoader.load(MovieTable.class.getResource("./xml/user_sub_page/movie_grid_sub.fxml")), 2, 0); gp_current_movie.add(FXMLLoader.load(MovieTable.class.getResource("./xml/user_sub_page/movie_grid_sub.fxml")), 3, 0); gp_current_movie.add(FXMLLoader.load(MovieTable.class.getResource("./xml/user_sub_page/movie_grid_sub.fxml")), 0, 1); gp_current_movie.add(FXMLLoader.load(MovieTable.class.getResource("./xml/user_sub_page/movie_grid_sub.fxml")), 1, 1); gp_current_movie.add(FXMLLoader.load(MovieTable.class.getResource("./xml/user_sub_page/movie_grid_sub.fxml")), 2, 1); gp_current_movie.add(FXMLLoader.load(MovieTable.class.getResource("./xml/user_sub_page/movie_grid_sub.fxml")), 3, 1);
-			 */
 		}
 		catch (Exception e)
 		{

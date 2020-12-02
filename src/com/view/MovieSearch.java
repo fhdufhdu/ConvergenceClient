@@ -28,8 +28,9 @@ import javafx.scene.text.Text;
 
 public class MovieSearch implements Initializable
 {
-	
+	// 영화 검색 테이블 뷰를 위한 리스트
 	private ObservableList<MovieDTO> movie_list;
+	// 현재 상영작인지 구분
 	private String is_current;
 	
 	@FXML
@@ -112,7 +113,6 @@ public class MovieSearch implements Initializable
 			// 테이블 뷰와 리스트를 연결
 			tv_movie.setItems(movie_list);
 			
-			// 재준 이 부분 수정해줘
 			tv_movie.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<MovieDTO>()
 			{
 				@Override
@@ -120,6 +120,7 @@ public class MovieSearch implements Initializable
 				{
 					try
 					{
+						// 테이블 뷰 행 클릭시 바로 상세 정보 페이지로
 						FXMLLoader loader = new FXMLLoader(MovieTable.class.getResource("./xml/user_sub_page/movie_detail.fxml"));
 						Parent root = loader.load();
 						MovieDetail controller = loader.<MovieDetail>getController();
