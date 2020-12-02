@@ -466,12 +466,12 @@ public class MovieTable implements Initializable
 							
 							startPayment(price);
 							setRsvButton();
-							// mainGUI.alert("예매", "예매에 성공했습니다.");
 							return;
 						}
 						case "2":
 						{
 							mainGUI.alert("예매", "예매에 실패했습니다.");
+							setRsvButton();
 							return;
 						}
 					}
