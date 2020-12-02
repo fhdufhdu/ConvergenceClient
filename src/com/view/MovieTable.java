@@ -125,7 +125,7 @@ public class MovieTable implements Initializable
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -138,10 +138,10 @@ public class MovieTable implements Initializable
 						case "1":
 						{
 							String theaterList = packetArr[3];
-							String listArr[] = theaterList.split(","); // 각 영화관 별로 리스트 분할
+							String listArr[] = theaterList.split("\\{"); // 각 영화관 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 영화관 별 정보 분할
+								String infoArr[] = listInfo.split("\\|"); // 영화관 별 정보 분할
 								String id = infoArr[0];
 								String name = infoArr[1];
 								String address = infoArr[2];
@@ -201,7 +201,7 @@ public class MovieTable implements Initializable
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -214,11 +214,11 @@ public class MovieTable implements Initializable
 						case "1":
 						{
 							String movieList = packetArr[3];
-							String listArr[] = movieList.split(","); // 각 영화별로 리스트 분할
+							String listArr[] = movieList.split("\\{"); // 각 영화별로 리스트 분할
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 영화 별 정보 분할
+								String infoArr[] = listInfo.split("\\|"); // 영화 별 정보 분할
 								String mv_id = infoArr[0];
 								String mv_title = infoArr[1];
 								String mv_release_date = infoArr[2];
@@ -307,7 +307,7 @@ public class MovieTable implements Initializable
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -320,11 +320,11 @@ public class MovieTable implements Initializable
 						case "1":
 						{
 							String screenList = packetArr[3];
-							String listArr[] = screenList.split(","); // 각 상영시간표 리스트 분할
+							String listArr[] = screenList.split("\\{"); // 각 상영시간표 리스트 분할
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 상영시간표 별 정보 분할
+								String infoArr[] = listInfo.split("\\|"); // 상영시간표 별 정보 분할
 								String tb_id = infoArr[0];
 								String tb_screen_id = infoArr[1];
 								String tb_mov_id = infoArr[2];
@@ -440,10 +440,10 @@ public class MovieTable implements Initializable
 			Iterator<Integer> citer = col_list.iterator();
 			
 			while (riter.hasNext())
-				rowList += Integer.toString(riter.next()) + ",";
+				rowList += Integer.toString(riter.next()) + "|";
 			
 			while (citer.hasNext())
-				colList += Integer.toString(citer.next()) + ",";
+				colList += Integer.toString(citer.next()) + "|";
 			
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_RESERVATION_ADD + "`" + user_id + "`" + timetable_id + "`" + rowList + "`" + colList);
 			
@@ -466,12 +466,12 @@ public class MovieTable implements Initializable
 							
 							startPayment(price);
 							setRsvButton();
-							// mainGUI.alert("예매", "예매에 성공했습니다.");
 							return;
 						}
 						case "2":
 						{
 							mainGUI.alert("예매", "예매에 실패했습니다.");
+							setRsvButton();
 							return;
 						}
 					}
@@ -523,7 +523,7 @@ public class MovieTable implements Initializable
 				while (true)
 				{
 					String packet = mainGUI.readLine();
-					String packetArr[] = packet.split("!"); // 패킷 분할
+					String packetArr[] = packet.split("`"); // 패킷 분할
 					String packetType = packetArr[0];
 					String packetCode = packetArr[1];
 					
@@ -537,7 +537,7 @@ public class MovieTable implements Initializable
 							{
 								this.timetable = timetable;
 								String infoList = packetArr[3];
-								String sc_info[] = infoList.split("`"); // 상영관 정보 분할
+								String sc_info[] = infoList.split("\\|"); // 상영관 정보 분할
 								screen = new ScreenDTO(sc_info[0], sc_info[1], sc_info[2], Integer.valueOf(sc_info[3]), Integer.valueOf(sc_info[4]), Integer.valueOf(sc_info[5]));
 								return;
 							}

@@ -3,11 +3,8 @@ package com.view;
 import java.util.ArrayList;
 
 import com.db.model.DTO;
-import com.db.model.MemberDAO;
 import com.db.model.MemberDTO;
 import com.db.model.MovieDTO;
-import com.db.model.ReservationDAO;
-import com.db.model.ReviewDAO;
 import com.db.model.ReviewDTO;
 import com.main.mainGUI;
 import com.protocol.Protocol;
@@ -122,20 +119,12 @@ public class MovieDetail
 			ImageView view_arr[] = {
 					image_stillcut, image_stillcut2, image_stillcut3 };
 			
-			// 영화 예매 안해두면 입력 불가능하게 - 얘는 죽여도 될 것 같음
-//			ReservationDAO rDao = new ReservationDAO();
-//			if (!rDao.isRsvMovie(Login.USER_ID, movie.getId()))
-//			{
-//				tf_review.setDisable(true);
-//				mb_review.setDisable(true);
-//			}
-			
 			text_title.setText(movie.getTitle());
 			text_open_date.setText(movie.getReleaseDate().toString());
 			text_director.setText(movie.getDirector());
 			text_actor.setText(movie.getActor());
 			text_plot.wrappingWidthProperty().set(225);
-			text_plot.setText(movie.getPlot());
+			text_plot.setText(movie.getPlot().replace("\\|", "\n"));
 			Image image = new Image(movie.getPosterPath());
 			image_movie.setImage(image);
 			for (int i = 0; i < view_arr.length; i++)
@@ -206,9 +195,9 @@ public class MovieDetail
 			{
 				mainGUI.alert("에러", "평점과 리뷰를 입력해주세요");
 			}
+			
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_REVIEW_ADD + "`" + DTO.EMPTY_ID + "`" + Login.USER_ID + "`" + movie.getId() + "`" + Integer.valueOf(mb_review.getText()) + "`" + tf_review.getText() + "`" + "2000-01-01 00:00:00.0");
-			//ReviewDAO rDao = new ReviewDAO();
-			//rDao.addReview(new ReviewDTO(DTO.EMPTY_ID, Login.USER_ID, movie.getId(), Integer.valueOf(mb_review.getText()), tf_review.getText(), "2000-01-01 00:00:00.0"));
+			
 			while (true)
 			{
 				String packet = mainGUI.readLine();
@@ -272,12 +261,13 @@ public class MovieDetail
 			custom_list.clear();
 			
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_REVIEW_VIEW + "`" + movie.getId());
-			//ReviewDAO rDao = new ReviewDAO();
-			ArrayList<ReviewDTO> r_list = new ArrayList<ReviewDTO>();//rDao.getRvListFromMov(movie.getId());
+
+			ArrayList<ReviewDTO> r_list = new ArrayList<ReviewDTO>();
+			
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -290,11 +280,11 @@ public class MovieDetail
 						case "1":
 						{
 							String reviewList = packetArr[3];
-							String listArr[] = reviewList.split(","); 
-
+							String listArr[] = reviewList.split("\\{");
+							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`");
+								String infoArr[] = listInfo.split("\\|");
 								String rv_id = infoArr[0];
 								String rv_memId = infoArr[1];
 								String rv_movId = infoArr[2];
@@ -336,10 +326,10 @@ public class MovieDetail
 			{
 				mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_CUSTOM_INFO + "`3`" + review.getMemberId());
 				
-				while(true)
+				while (true)
 				{
 					String packet = mainGUI.readLine();
-					String packetArr[] = packet.split("!"); // 패킷 분할
+					String packetArr[] = packet.split("`"); // 패킷 분할
 					String packetType = packetArr[0];
 					String packetCode = packetArr[1];
 					
@@ -353,7 +343,7 @@ public class MovieDetail
 							{
 								this.review = review;
 								String infoList = packetArr[3];
-								String mem_info[] = infoList.split("`"); // 회원 정보 분할
+								String mem_info[] = infoList.split("\\|"); // 회원 정보 분할
 								member = new MemberDTO(mem_info[0], mem_info[1], mem_info[2], mem_info[3], mem_info[4], mem_info[5], mem_info[6], mem_info[7]);
 								return;
 							}

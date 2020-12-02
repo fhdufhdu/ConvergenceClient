@@ -55,9 +55,6 @@ public class ScreenManage
 	private TextField tf_name;
 	
 	@FXML
-	private TextField tf_capacity;
-	
-	@FXML
 	private TextField tf_row;
 	
 	@FXML
@@ -81,9 +78,9 @@ public class ScreenManage
 		try
 		{
 			String name = tf_name.getText();
-			String capacity = tf_capacity.getText();
 			String row = tf_row.getText();
 			String col = tf_col.getText();
+			String capacity = String.valueOf(Integer.valueOf(row) * Integer.valueOf(col));
 			
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SCREEN_ADD + "`" + theater.getId() + "`" + name + "`" + capacity + "`" + row + "`" + col);
 			
@@ -142,9 +139,9 @@ public class ScreenManage
 			}
 			
 			String name = tf_name.getText();
-			String capacity = tf_capacity.getText();
 			String row = tf_row.getText();
 			String col = tf_col.getText();
+			String capacity = String.valueOf(Integer.valueOf(row) * Integer.valueOf(col));
 			
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SCREEN_CHANGE + "`" + table_row_data.getId() + "`" + theater.getId() + "`" + name + "`" + capacity + "`" + row + "`" + col);
 			
@@ -268,7 +265,7 @@ public class ScreenManage
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -281,11 +278,11 @@ public class ScreenManage
 						case "1":
 						{
 							String screenList = packetArr[3];
-							String listArr[] = screenList.split(","); // 각 상영관 별로 리스트 분할
+							String listArr[] = screenList.split("\\{"); // 각 상영관 별로 리스트 분할
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 상영관 별 정보 분할
+								String infoArr[] = listInfo.split("\\|"); // 상영관 별 정보 분할
 								String id = infoArr[0];
 								String theater_id = infoArr[1];
 								String name = infoArr[2];
@@ -349,7 +346,6 @@ public class ScreenManage
 					if (table_row_data != null)
 					{
 						tf_name.setText(table_row_data.getName());
-						tf_capacity.setText(Integer.toString(table_row_data.getTotalCapacity()));
 						tf_row.setText(Integer.toString(table_row_data.getMaxRow()));
 						tf_col.setText(Integer.toString(table_row_data.getMaxCol()));
 					}
@@ -365,7 +361,6 @@ public class ScreenManage
 	private void clearText()
 	{
 		tf_name.clear();
-		tf_capacity.clear();
 		tf_row.clear();
 		tf_col.clear();
 		t_result.setText("");

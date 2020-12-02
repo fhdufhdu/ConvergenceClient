@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.db.model.MovieDTO;
-import com.db.model.TimeTableDAO;
 import com.main.mainGUI;
 import com.protocol.Protocol;
 
@@ -71,39 +70,38 @@ public class MovieSoonSub
             
             t_movie_title.setText(movie.getTitle());
             mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MOVIESUB_VIEW + "`" + movie.getId());
-			
-			while (true)
-			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
-				String packetType = packetArr[0];
-				String packetCode = packetArr[1];
-				
-				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MOVIESUB_VIEW))
-				{
-					String result = packetArr[2];
-					
-					switch (result)
-					{
-						case "1":
-						{
-							double rsv_rate = Double.parseDouble(packetArr[3]);
-							//String aver_star = packetArr[4];
-				            String remain_date = Integer.toString(getRemainDate());
-				            t_rsv_rate.setText("예매율 : " + String.format("%.2f", rsv_rate * 100));
-				            //t_rsv_rate.setText(t_rsv_rate.getText() + "% | 평점 : " + aver_star);
-				            t_rsv_rate.setText(t_rsv_rate.getText() + "% | D - " + remain_date);
-							break;
-						}
-						case "2":
-						{
-							mainGUI.alert("오류", "예매율 요청에 실패했습니다.");
-							break;
-						}
-					}
-					break;
-				}
-			}
+            
+            while (true)
+            {
+                String packet = mainGUI.readLine();
+                String packetArr[] = packet.split("`"); // 패킷 분할
+                String packetType = packetArr[0];
+                String packetCode = packetArr[1];
+                
+                if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MOVIESUB_VIEW))
+                {
+                    String result = packetArr[2];
+                    
+                    switch (result)
+                    {
+                        case "1":
+                        {
+                            double rsv_rate = Double.parseDouble(packetArr[3]);
+                            String remain_date = Integer.toString(getRemainDate());
+                            
+                            t_rsv_rate.setText("예매율 : " + String.format("%.2f", rsv_rate * 100)); 
+                            t_rsv_rate.setText(t_rsv_rate.getText() + "% | D - " + remain_date);
+                            break;
+                        }
+                        case "2":
+                        {
+                            mainGUI.alert("오류", "예매율 요청에 실패했습니다.");
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
             
         }
         catch (Exception e)

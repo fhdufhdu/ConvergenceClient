@@ -3,7 +3,6 @@ package com.view;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 
-import com.db.model.DAOException;
 import com.db.model.MovieDTO;
 import com.main.mainGUI;
 import com.protocol.Protocol;
@@ -165,10 +164,6 @@ public class MovieChange
 		catch (NumberFormatException e)
 		{
 			mainGUI.alert("상영시간", "상영시간에는 숫자를 입력해주세요!");
-		}
-		catch (DAOException e)
-		{
-			mainGUI.alert("영화관 중복", "이미 존재하는 영화가 있습니다!");
 		}
 		catch (SQLException e)
 		{

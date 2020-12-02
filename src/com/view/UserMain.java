@@ -43,7 +43,7 @@ public class UserMain implements Initializable
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_THEATER_VIEW);
 			
 			String packet = mainGUI.readLine();
-			String packetArr[] = packet.split("!");
+			String packetArr[] = packet.split("`");
 			String packetType = packetArr[0];
 			String packetCode = packetArr[1];
 			
@@ -53,11 +53,11 @@ public class UserMain implements Initializable
 				switch (result)
 				{
 					case "1":
-						String theaterList[] = packetArr[3].split(",");
+						String theaterList[] = packetArr[3].split("\\{");
 						int i = 0; // 메뉴 id 번호
 						for (String theater : theaterList)
 						{
-							String theaterArr[] = theater.split("`");
+							String theaterArr[] = theater.split("\\|");
 							String id = theaterArr[0];
 							String name = theaterArr[1];
 							String address = theaterArr[2];
@@ -105,8 +105,8 @@ public class UserMain implements Initializable
 		}
 		catch (Exception e)
 		{
+			mainGUI.alert("오류", "서버에서 DB서버 연결 오류");
 			e.printStackTrace();
-			mainGUI.alert("오류", "DB서버 연결 오류");
 		}
 	}
 	

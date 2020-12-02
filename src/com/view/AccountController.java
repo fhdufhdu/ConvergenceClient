@@ -1,10 +1,8 @@
 package com.view;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.db.model.DAOException;
 import com.main.mainGUI;
 import com.protocol.Protocol;
 
@@ -30,7 +28,7 @@ public class AccountController implements Initializable
             mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_ACCOUNT_VIEW);
             
             String packet = mainGUI.readLine();
-            String packetArr[] = packet.split("!");
+            String packetArr[] = packet.split("`");
             String packetType = packetArr[0];
             String packetCode = packetArr[1];
             
@@ -46,7 +44,6 @@ public class AccountController implements Initializable
                         
                         tf_account.setPromptText(account);
                         tf_bank.setPromptText(bank);
-                        
                         break;
                     case "2":
                         System.out.println("계좌 정보 출력에 실패하였습니다");
@@ -96,16 +93,6 @@ public class AccountController implements Initializable
             }
             
             mainGUI.alert("수정 완료", "수정이 완료 되었습니다");
-        }
-        catch (DAOException e)
-        {
-            mainGUI.alert("오류", "해당 계좌번호가 존재하지 않습니다");
-            e.printStackTrace();
-        }
-        catch (SQLException e)
-        {
-            mainGUI.alert("오류", "DB 접속 오류");
-            e.printStackTrace();
         }
         catch (Exception e)
         {
