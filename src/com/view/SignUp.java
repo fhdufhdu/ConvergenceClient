@@ -8,8 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
@@ -52,14 +50,13 @@ public class SignUp
 	@FXML
 	private Text t_result;
 	
-	// 메뉴 선택시 외부 메뉴 이름 변경
+	// 성별 선택
 	@FXML
 	void setFemale(ActionEvent event)
 	{
 		mb_gender.setText(mi_female.getText());
 	}
 	
-	// 메뉴 선택시 외부 메뉴 이름 변경
 	@FXML
 	void setMale(ActionEvent event)
 	{
@@ -81,13 +78,9 @@ public class SignUp
 			String gender;
 			// 성별에 따라 gender 값 세팅
 			if (mb_gender.getText().equals("남"))
-			{
 				gender = "1";
-			}
 			else
-			{
 				gender = "0";
-			}
 			
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SIGNUP + "`2`" + id + "`" + passwd + "`" + name + "`" + phone_number + "`" + birth + "`" + gender);
 			
@@ -106,11 +99,7 @@ public class SignUp
 					switch (result)
 					{
 						case "1":
-							alert("회원가입 완료", "확인을 누르시면 로그인 화면으로 전환됩니다!");
-							// 스레드사용으로 1.5초 후 로그인 페이지로 전환
-							/*
-							 * new Thread(() -> { Platform.runLater(() -> { try { Thread.sleep(1500); Parent root = FXMLLoader .load(SignUp.class.getResource("../view/xml/login.fxml")); Scene scene = new Scene(root, 600, 400); Stage primaryStage = (Stage) btn_sign_up.getScene().getWindow(); primaryStage.setTitle("로그인"); primaryStage.setResizable(false); primaryStage.setScene(scene); primaryStage.show(); } catch (Exception e) { e.printStackTrace(); } }); }).start();
-							 */
+							mainGUI.alert("회원가입 완료", "확인을 누르시면 로그인 화면으로 전환됩니다!");
 							Parent root = FXMLLoader.load(SignUp.class.getResource("../view/xml/login.fxml"));
 							Scene scene = new Scene(root, 600, 400);
 							Stage primaryStage = (Stage) btn_sign_up.getScene().getWindow();
@@ -131,15 +120,5 @@ public class SignUp
 			mainGUI.alert("회원가입 실패", "회원가입 실패! 알맞은 정보를 입력했나요?");
 			e.printStackTrace();
 		}
-	}
-	
-	private void alert(String head, String msg)
-	{
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("정보");
-		alert.setHeaderText(head);
-		alert.setContentText(msg);
-		
-		alert.showAndWait(); // Alert창 보여주기
 	}
 }

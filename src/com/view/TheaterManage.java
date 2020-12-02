@@ -1,7 +1,6 @@
 package com.view;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.db.model.TheaterDTO;
@@ -27,9 +26,8 @@ import javafx.scene.text.Text;
 
 public class TheaterManage implements Initializable
 {
-	
-	private ObservableList<TheaterDTO> theater_list;
-	private TheaterDTO table_row_data;
+	private ObservableList<TheaterDTO> theater_list; // 테이블 뷰를 위한 리스트
+	private TheaterDTO table_row_data; // 테이블 뷰 row 선택시 저장될 객체
 	
 	@FXML
 	private BorderPane bp_parent;
@@ -79,22 +77,21 @@ public class TheaterManage implements Initializable
 	{
 		try
 		{
-			// 테이블 뷰에 넣을 리스트 세팅
 			theater_list = FXCollections.observableArrayList();
 			
-			// 리스트 초기화
+			// 서버로부터 필요한 정보 받아와 리스트 초기화
 			initList();
 			
-			// 각 테이블뷰 컬럼에 어떠한 값이 들어갈 것인지 세팅
+			// col에 들어갈 값 선택
 			tc_name.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
 			tc_address.setCellValueFactory(cellData -> cellData.getValue().getAddressProperty());
 			tc_screen.setCellValueFactory(cellData -> cellData.getValue().getTotalScreenProperty());
 			tc_seat.setCellValueFactory(cellData -> cellData.getValue().getTotalSeatsProperty());
 			
-			// 테이블 뷰와 리스트를 연결
+			// 테이블 뷰와 리스트 연결
 			tv_theater.setItems(theater_list);
 			
-			// 테이블 뷰 row 선택 시 발생하는 이벤트 지정
+			// row 선택 시 발생하는 이벤트 지정
 			tv_theater.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TheaterDTO>()
 			{
 				@Override
@@ -112,6 +109,7 @@ public class TheaterManage implements Initializable
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			
 		}
 	}
 	
@@ -139,10 +137,8 @@ public class TheaterManage implements Initializable
 					switch (result)
 					{
 						case "1":
-							// 값 추가 후 각 테이블 및 리스트 초기화
-							initList();
-							// text field 초기화
-							clearText();
+							initList(); // 값 추가 후 리스트 초기화
+							clearText(); // 값 추가 후 텍스트 초기화
 							return;
 						case "2":
 							mainGUI.alert("경고", "영화관 등록 실패");
@@ -151,14 +147,14 @@ public class TheaterManage implements Initializable
 				}
 			}
 		}
-		catch (NumberFormatException e)
+		catch (Exception e)
 		{
-			// 입력값 타입이 맞지 않을때
-			mainGUI.alert("경고", "총 상영관, 총 좌석에는 숫자만 입력해주세요!");
 			e.printStackTrace();
+			
 		}
 	}
 	
+	// 영화관 수정
 	@FXML
 	void changeTheater(ActionEvent event) throws Exception
 	{
@@ -170,6 +166,7 @@ public class TheaterManage implements Initializable
 				mainGUI.alert("수정오류", "수정할 데이터를 선택해주세요");
 				return;
 			}
+			
 			String id = table_row_data.getId();
 			String name = tf_name.getText();
 			String address = tf_address.getText();
@@ -190,7 +187,6 @@ public class TheaterManage implements Initializable
 					{
 						case "1":
 							initList();
-							
 							clearText();
 							return;
 						case "2":
@@ -200,16 +196,10 @@ public class TheaterManage implements Initializable
 				}
 			}
 		}
-		catch (SQLException e)
+		catch (Exception e)
 		{
-			// DB관련 문제 발생시
 			e.printStackTrace();
-		}
-		catch (NumberFormatException e)
-		{
-			// 입력값 타입이 맞지 않을때
-			mainGUI.alert("경고", "총 상영관, 총 좌석에는 숫자만 입력해주세요!");
-			e.printStackTrace();
+			
 		}
 	}
 	
@@ -260,16 +250,10 @@ public class TheaterManage implements Initializable
 				}
 			}
 		}
-		catch (SQLException e)
+		catch (Exception e)
 		{
-			// DB관련 문제 발생시
 			e.printStackTrace();
-		}
-		catch (NumberFormatException e)
-		{
-			// 입력값 타입이 맞지 않을때
-			mainGUI.alert("경고", "총 상영관, 총 좌석에는 숫자만 입력해주세요!");
-			e.printStackTrace();
+			
 		}
 	}
 	
@@ -300,18 +284,14 @@ public class TheaterManage implements Initializable
 			
 			clearText();
 		}
-		catch (NumberFormatException e)
-		{
-			// 여긴 타입 안맞을때
-			mainGUI.alert("오류", "총 상영관, 총 좌석에는 숫자만 입력해주세요!");
-			e.printStackTrace();
-		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			
 		}
 	}
 	
+	// 리스트 초기화
 	private void initList()
 	{
 		try
@@ -370,6 +350,7 @@ public class TheaterManage implements Initializable
 		}
 	}
 	
+	// 텍스트 초기화
 	private void clearText()
 	{
 		tf_name.clear();

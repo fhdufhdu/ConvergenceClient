@@ -240,6 +240,7 @@ public class MovieDetail
 	{
 		try
 		{
+			stopWebview();
 			FXMLLoader loader = new FXMLLoader(MovieTable.class.getResource("./xml/user_sub_page/movie_table.fxml"));
 			Parent root = loader.load();
 			MovieTable controller = loader.<MovieTable>getController();

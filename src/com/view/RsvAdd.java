@@ -45,20 +45,24 @@ import javafx.stage.Stage;
 
 public class RsvAdd implements Initializable
 {
+	// 테이블 뷰와 리스트 뷰를 위한 리스트
 	private ObservableList<TheaterDTO> theater_list;
 	private ObservableList<ScreenDTO> screen_list;
 	private ObservableList<MovieDTO> movie_list;
 	private ObservableList<MemberDTO> member_list;
 	private ObservableList<CustomDTO> custom_list;
 	
+	// 선택한 좌석 좌표 리스트
 	private ArrayList<Integer> row_list;
 	private ArrayList<Integer> col_list;
 	
+	// 리스트 뷰, 테이블 뷰에서 선택한 객체
 	private TheaterDTO selectedThea;
 	private ScreenDTO selectedScreen;
 	private MovieDTO selectedMovie;
 	private MemberDTO selectedMember;
 	private CustomDTO selectedCustom;
+	
 	@FXML
 	private ListView<TheaterDTO> lv_theater;
 	
@@ -140,6 +144,7 @@ public class RsvAdd implements Initializable
 	@FXML
 	private TextField tf_account;
 	
+	// 초기화
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
@@ -179,6 +184,7 @@ public class RsvAdd implements Initializable
 								
 								member_list.add(new MemberDTO(id, role, password, account, name, phone_number, birth, gender));
 							}
+							// 리스트뷰 세팅
 							lv_member.setItems(FXCollections.observableArrayList());
 							lv_member.getItems().addAll(member_list);
 							lv_member.setOnMouseClicked((MouseEvent) ->
@@ -190,6 +196,7 @@ public class RsvAdd implements Initializable
 								lv_member.getItems().clear();
 								tf_member.setText(selectedMember.getId());
 							});
+							// 리스트뷰에 들어갈 객체 선택
 							lv_member.setCellFactory(lv -> new ListCell<MemberDTO>()
 							{
 								@Override
@@ -392,6 +399,7 @@ public class RsvAdd implements Initializable
 				}
 			});
 			
+			// 시간 menuitem 설정
 			for (int i = 0; i < 24; i++)
 			{
 				MenuItem hour_s = new MenuItem(Integer.toString(i + 1) + "시");
@@ -423,6 +431,7 @@ public class RsvAdd implements Initializable
 		
 	}
 	
+	// 예매 추가
 	@FXML
 	void addRsv(ActionEvent event) throws Exception
 	{
@@ -492,30 +501,7 @@ public class RsvAdd implements Initializable
 		}
 	}
 	
-	@FXML
-	void clickedLvMovie(MouseEvent event)
-	{
-		
-	}
-	
-	@FXML
-	void clickedLvScreen(MouseEvent event)
-	{
-		
-	}
-	
-	@FXML
-	void clickedLvTheater(MouseEvent event)
-	{
-		
-	}
-	
-	@FXML
-	void clickedLvMember(MouseEvent event)
-	{
-		
-	}
-	
+	// 리스트뷰 활성화
 	@FXML
 	void clickedTfMovie(MouseEvent event)
 	{
@@ -524,6 +510,7 @@ public class RsvAdd implements Initializable
 		lv_movie.setMaxHeight(130);
 	}
 	
+	// 선택한 영화관에 해당하는 상영관 출력
 	@FXML
 	void clickedTfScreen(MouseEvent event)
 	{
@@ -568,6 +555,7 @@ public class RsvAdd implements Initializable
 								
 								screen_list.add(new ScreenDTO(id, theater_id, name, Integer.valueOf(capacity), Integer.valueOf(row), Integer.valueOf(col)));
 							}
+							// 리스트뷰 세팅
 							lv_screen.setItems(FXCollections.observableArrayList());
 							lv_screen.getItems().addAll(screen_list);
 							lv_screen.setOnMouseClicked((MouseEvent) ->
@@ -579,6 +567,7 @@ public class RsvAdd implements Initializable
 								lv_screen.getItems().clear();
 								tf_screen.setText(selectedScreen.getName());
 							});
+							// 리스트뷰에 들어갈 객체 세팅
 							lv_screen.setCellFactory(lv -> new ListCell<ScreenDTO>()
 							{
 								@Override
@@ -596,8 +585,8 @@ public class RsvAdd implements Initializable
 								lv_screen.setMaxHeight(0);
 								return;
 							}
-							lv_screen.setMaxHeight(130);
 							// 값이 있으면 리스트뷰 활성화
+							lv_screen.setMaxHeight(130);
 							break;
 						}
 						case "2":
@@ -622,6 +611,7 @@ public class RsvAdd implements Initializable
 		}
 	}
 	
+	// 리스트뷰 활성화
 	@FXML
 	void clickedTfTheater(MouseEvent event)
 	{
@@ -651,6 +641,7 @@ public class RsvAdd implements Initializable
 		lv_member.getItems().clear();
 	}
 	
+	// 텍스트 필드에 값 입력시
 	@FXML
 	void typedTfMovie(KeyEvent event)
 	{
@@ -705,12 +696,14 @@ public class RsvAdd implements Initializable
 		lv_member.getItems().addAll(temp_list);
 	}
 	
+	// 상영시간표 검색
 	@FXML
 	void searchTimeTable(ActionEvent event)
 	{
 		initList();
 	}
 	
+	// 좌석 선택
 	@FXML
 	void selectSeat(ActionEvent event)
 	{
@@ -741,6 +734,7 @@ public class RsvAdd implements Initializable
 		}
 	}
 	
+	// 리스트 초기화
 	private void initList()
 	{
 		try
@@ -812,6 +806,7 @@ public class RsvAdd implements Initializable
 		}
 	}
 	
+	// DTO의 모음
 	private class CustomDTO
 	{
 		TheaterDTO theater;

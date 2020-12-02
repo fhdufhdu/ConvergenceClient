@@ -36,12 +36,13 @@ public class TheaterSearch
 	@FXML
 	private Text t_type_3;
 	
+	// 메인에서 영화관 상세 페이지 선택시 실행될 초기화 함수
 	public void initData(TheaterDTO theater)
 	{
 		try
 		{
 			WebEngine webEngine = map.getEngine();
-			
+			// 웹뷰 로딩 완료시 실행할 js(지도 api)
 			map.getEngine().getLoadWorker().stateProperty().addListener((obs, old, neww) ->
 			{
 				if (neww == Worker.State.SUCCEEDED)

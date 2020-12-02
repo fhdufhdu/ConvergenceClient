@@ -22,7 +22,7 @@ import javafx.scene.layout.BorderPane;
 public class UserMain implements Initializable
 {
 	private ArrayList<TheaterDTO> theater_list;
-	public static BorderPane user_sub_root;
+	public static BorderPane user_sub_root; // 다른 컨트롤러에서도 화면 전환가능하게하기 위해
 	
 	@FXML
 	private MenuButton mb_theater;
@@ -33,13 +33,23 @@ public class UserMain implements Initializable
 	@FXML
 	private ScrollPane sp_user_main;
 	
+	// 유저 메인 초기화
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
 		try
 		{
+			// 스크롤 속도 조절
+			final double SPEED = 0.005;
+			sp_user_main.getContent().setOnScroll(scrollEvent ->
+			{
+				double deltaY = scrollEvent.getDeltaY() * SPEED;
+				sp_user_main.setVvalue(sp_user_main.getVvalue() - deltaY);
+			});
+			
 			user_sub_root = bp_user_sub;
 			theater_list = new ArrayList<TheaterDTO>();
+			
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_THEATER_VIEW);
 			
 			String packet = mainGUI.readLine();
@@ -65,14 +75,16 @@ public class UserMain implements Initializable
 							int total_seats = Integer.parseInt(theaterArr[4]);
 							theater_list.add(new TheaterDTO(id, name, address, total_screen, total_seats));
 							
+							// 영화관 선택 메뉴 생성
 							MenuItem theater_name = new MenuItem(name);
 							theater_name.setId(Integer.toString(i));
-							theater_name.setOnAction(new EventHandler<ActionEvent>()
+							theater_name.setOnAction(new EventHandler<ActionEvent>() // 영화관 선택시 발생 이벤트
 							{
 								public void handle(ActionEvent event)
 								{
 									try
 									{
+										// 해당 영화관 상세정보 페이지로 이동
 										FXMLLoader loader = new FXMLLoader(UserMain.class.getResource("./xml/user_sub_page/theater_search.fxml"));
 										Parent root = (Parent) loader.load();
 										TheaterSearch controller = loader.<TheaterSearch>getController();
@@ -89,12 +101,6 @@ public class UserMain implements Initializable
 							mb_theater.getItems().add(theater_name);
 							i++;
 						}
-						final double SPEED = 0.005;
-						sp_user_main.getContent().setOnScroll(scrollEvent ->
-						{
-							double deltaY = scrollEvent.getDeltaY() * SPEED;
-							sp_user_main.setVvalue(sp_user_main.getVvalue() - deltaY);
-						});
 						
 						break;
 					case "2":
@@ -140,17 +146,14 @@ public class UserMain implements Initializable
 		loadPage("reservation_cancel");
 	}
 	
-	static public void loadPage(String file_name)
+	// 페이지 로딩 함수
+	private void loadPage(String file_name)
 	{
 		try
 		{
-			MovieDetail.stopWebview();
+			MovieDetail.stopWebview(); // 웹뷰(동영상플레이어) 실행 시 종료하게 함
 			Parent root = FXMLLoader.load(UserMain.class.getResource("./xml/user_sub_page/" + file_name + ".fxml"));
 			user_sub_root.setCenter(root);
-			
-			/*
-			 * GridPane a = new GridPane(); a.add(root, 1, 0);
-			 */
 		}
 		catch (Exception e)
 		{
