@@ -39,10 +39,8 @@
                         <Font name="LG Smart UI Light" size="15.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="tf_name" layoutX="53.0" layoutY="674.0" prefHeight="30.0" prefWidth="120.0" promptText="영화관" />
-                  <TextField fx:id="tf_address" layoutX="173.0" layoutY="674.0" prefHeight="30.0" prefWidth="360.0" promptText="주소" />
-                  <TextField fx:id="tf_screen" layoutX="533.0" layoutY="674.0" prefHeight="30.0" prefWidth="110.0" promptText="총 상영관" />
-                  <TextField fx:id="tf_seat" layoutX="643.0" layoutY="674.0" prefHeight="30.0" prefWidth="110.0" promptText="총 좌석" />
+                  <TextField fx:id="tf_name" layoutX="53.0" layoutY="674.0" prefHeight="30.0" prefWidth="227.0" promptText="영화관이름" />
+                  <TextField fx:id="tf_address" layoutX="281.0" layoutY="674.0" prefHeight="30.0" prefWidth="472.0" promptText="주소" />
                   <Button fx:id="btn_add_theater" layoutX="750.0" layoutY="744.0" mnemonicParsing="false" onAction="#addTheater" prefHeight="30.0" prefWidth="110.0" text="등록" />
                   <Button fx:id="btn_change_theater" layoutX="640.0" layoutY="744.0" mnemonicParsing="false" onAction="#changeTheater" prefHeight="30.0" prefWidth="110.0" text="수정" />
                   <Button fx:id="btn_delete_theater" layoutX="530.0" layoutY="744.0" mnemonicParsing="false" onAction="#deleteTheater" prefHeight="30.0" prefWidth="110.0" text="삭제" />

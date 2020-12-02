@@ -41,10 +41,9 @@
                         <Font name="LG Smart UI Light" size="15.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="tf_name" layoutX="50.0" layoutY="469.0" prefHeight="30.0" prefWidth="175.0" promptText="관" />
-                  <TextField fx:id="tf_capacity" layoutX="225.0" layoutY="469.0" prefHeight="30.0" prefWidth="175.0" promptText="총 수용인원" />
-                  <TextField fx:id="tf_row" layoutX="400.0" layoutY="469.0" prefHeight="30.0" prefWidth="175.0" promptText="최대 행" />
-                  <TextField fx:id="tf_col" layoutX="575.0" layoutY="469.0" prefHeight="30.0" prefWidth="175.0" promptText="최대 열" />
+                  <TextField fx:id="tf_name" layoutX="50.0" layoutY="469.0" prefHeight="30.0" prefWidth="233.0" promptText="관" />
+                  <TextField fx:id="tf_row" layoutX="282.0" layoutY="469.0" prefHeight="30.0" prefWidth="233.0" promptText="최대 행" />
+                  <TextField fx:id="tf_col" layoutX="516.0" layoutY="469.0" prefHeight="30.0" prefWidth="233.0" promptText="최대 열" />
                   <Button fx:id="btn_add_screen" layoutX="750.0" layoutY="539.0" mnemonicParsing="false" onAction="#addScreen" prefHeight="30.0" prefWidth="110.0" text="등록" />
                   <Button fx:id="btn_change_screen" layoutX="640.0" layoutY="539.0" mnemonicParsing="false" onAction="#changeScreen" prefHeight="30.0" prefWidth="110.0" text="수정" />
                   <Button fx:id="btn_delete_screen" layoutX="530.0" layoutY="539.0" mnemonicParsing="false" onAction="#deleteScreen" prefHeight="30.0" prefWidth="110.0" text="삭제" />

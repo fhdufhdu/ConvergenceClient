@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
-import com.db.model.ReservationDAO;
 import com.db.model.ReservationDTO;
 import com.db.model.ScreenDTO;
 import com.db.model.TimeTableDTO;

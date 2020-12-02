@@ -5,17 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.db.model.DAOException;
-import com.db.model.MemberDAO;
 import com.db.model.MemberDTO;
-import com.db.model.MovieDAO;
 import com.db.model.MovieDTO;
 import com.db.model.ReservationDTO;
-import com.db.model.ScreenDAO;
 import com.db.model.ScreenDTO;
-import com.db.model.TheaterDAO;
 import com.db.model.TheaterDTO;
-import com.db.model.TimeTableDAO;
 import com.db.model.TimeTableDTO;
 import com.main.mainGUI;
 import com.protocol.Protocol;
@@ -228,7 +222,7 @@ public class RsvCancel implements Initializable
 				}
 			}
 		}
-		catch (DAOException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -243,7 +237,7 @@ public class RsvCancel implements Initializable
 		ScreenDTO sDto;
 		TheaterDTO tDto;
 		
-		public CustomDTO(ReservationDTO rDto) throws DAOException, SQLException
+		public CustomDTO(ReservationDTO rDto)
 		{
 			try
 			{

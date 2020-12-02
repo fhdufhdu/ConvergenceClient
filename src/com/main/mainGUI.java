@@ -9,8 +9,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import com.db.model.DAO;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,17 +27,15 @@ public class mainGUI extends Application
 	{
 		try
 		{
-			DAO.connectDB();
-//			String localHostAddress = InetAddress.getLocalHost().getHostAddress();
-//			Socket socket = new Socket(localHostAddress, 5000);
-			Socket socket = new Socket("192.168.230.238", 5000);
+			// String localHostAddress = InetAddress.getLocalHost().getHostAddress();
+			// Socket socket = new Socket(localHostAddress, 5000);
+			Socket socket = new Socket(InetAddress.getLocalHost().getHostAddress(), 5000);
 			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			launch();
 			bw.close();
 			br.close();
 			socket.close();
-			DAO.closeDB();
 		}
 		catch (UnknownHostException e)
 		{

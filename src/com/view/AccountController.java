@@ -4,7 +4,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.db.model.DAOException;
 import com.main.mainGUI;
 import com.protocol.Protocol;
 
@@ -96,11 +95,6 @@ public class AccountController implements Initializable
             }
             
             mainGUI.alert("수정 완료", "수정이 완료 되었습니다");
-        }
-        catch (DAOException e)
-        {
-            mainGUI.alert("오류", "해당 계좌번호가 존재하지 않습니다");
-            e.printStackTrace();
         }
         catch (SQLException e)
         {
