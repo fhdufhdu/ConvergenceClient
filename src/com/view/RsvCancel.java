@@ -220,7 +220,11 @@ public class RsvCancel implements Initializable
 							custom_list.addAll(c_list);
 							return;
 						}
-						case "2": // 요청 실패
+						case "2": // 예매 리스트 비어있음
+						{
+							return;
+						}
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "예매 리스트를 불러오는데 실패했습니다.");
 							return;
