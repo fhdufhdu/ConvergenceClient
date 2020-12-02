@@ -302,7 +302,6 @@ public class MovieDetail
 						}
 						case "2":
 						{
-							mainGUI.alert("리뷰 리스트", "리뷰 리스트가 없습니다.");
 							return;
 						}
 					}
