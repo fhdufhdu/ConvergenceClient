@@ -94,6 +94,8 @@ public class SignUp
 			while (true)
 			{
 				String packet = mainGUI.readLine();
+				if (packet.equals(Protocol.PT_REQ_LOGIN_INFO))
+					continue;
 				String packetArr[] = packet.split("`");
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];

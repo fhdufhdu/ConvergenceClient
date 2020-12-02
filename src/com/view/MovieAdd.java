@@ -74,10 +74,12 @@ public class MovieAdd
 			String stillCut = "";
 			for (String temp : ta_stillcut.getText().split("\n"))
 				stillCut += temp + " ";
+			String plot = "";
+			for (String temp : ta_plot.getText().split("\n"))
+				plot += temp + "|";
 			
 			String title = tf_title.getText();
 			String release_date = dateFormat.format(dp_release_date.getValue());
-			String plot = ta_plot.getText();
 			String poster = tf_poster.getText();
 			String trailer = tf_trailer.getText();
 			String director = tf_director.getText();

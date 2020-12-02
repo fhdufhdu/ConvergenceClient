@@ -124,7 +124,7 @@ public class MovieDetail
 			text_director.setText(movie.getDirector());
 			text_actor.setText(movie.getActor());
 			text_plot.wrappingWidthProperty().set(225);
-			text_plot.setText(movie.getPlot());
+			text_plot.setText(movie.getPlot().replace("|", "\n"));
 			Image image = new Image(movie.getPosterPath());
 			image_movie.setImage(image);
 			for (int i = 0; i < view_arr.length; i++)
