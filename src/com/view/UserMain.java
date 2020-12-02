@@ -50,24 +50,26 @@ public class UserMain implements Initializable
 			user_sub_root = bp_user_sub;
 			theater_list = new ArrayList<TheaterDTO>();
 			
+			// 사용자 -> 영화관 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_THEATER_VIEW);
 			
-			String packet = mainGUI.readLine();
-			String packetArr[] = packet.split("`");
+			String packet = mainGUI.readLine(); // 요청 응답 수신
+			String packetArr[] = packet.split("`"); // 패킷 분할
 			String packetType = packetArr[0];
 			String packetCode = packetArr[1];
 			
 			if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_THEATER_VIEW))
 			{
-				String result = packetArr[2];
+				String result = packetArr[2]; // 요청 결과
 				switch (result)
 				{
-					case "1":
-						String theaterList[] = packetArr[3].split("\\{");
+					case "1": // 요청 성공 시 리스트 추가
+					{
+						String theaterList[] = packetArr[3].split("\\{"); // 각 영화관 별로 리스트 분할
 						int i = 0; // 메뉴 id 번호
 						for (String theater : theaterList)
 						{
-							String theaterArr[] = theater.split("\\|");
+							String theaterArr[] = theater.split("\\|"); // 영화관 정보 별로 분할
 							String id = theaterArr[0];
 							String name = theaterArr[1];
 							String address = theaterArr[2];
@@ -101,10 +103,17 @@ public class UserMain implements Initializable
 							mb_theater.getItems().add(theater_name);
 							i++;
 						}
-						
 						break;
-					case "2":
+					}
+					case "2": // 영화관 리스트 비어있음
+					{
 						break;
+					}
+					case "3": // 요청 실패
+					{
+						mainGUI.alert("오류", "영화관 리스트 불러오는데 실패했습니다.");
+						break;
+					}
 				}
 			}
 		}

@@ -111,23 +111,24 @@ public class RsvManage implements Initializable
 	{
 		try
 		{
+			// 회원리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MEMBER_VIEW);
 			member_id_list = FXCollections.observableArrayList();
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MEMBER_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 추가
 						{
 							String memberList = packetArr[3];
 							String listArr[] = memberList.split("\\{"); // 각 회원 별로 리스트 분할
@@ -169,11 +170,11 @@ public class RsvManage implements Initializable
 							});
 							break;
 						}
-						case "2":
+						case "2": // 회원 리스트 비어있음
 						{
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "회원 리스트 요청 실패했습니다.");
 							break;
@@ -184,23 +185,24 @@ public class RsvManage implements Initializable
 				}
 			}
 			
+			// 영화 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MOVIE_VIEW + "`%`1976-01-01`2222-01-01`%`%`%`0");
 			movie_title_list = FXCollections.observableArrayList();
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MOVIE_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 추가
 						{
 							String movieList = packetArr[3];
 							String listArr[] = movieList.split("\\{"); // 각 영화별로 리스트 분할
@@ -245,11 +247,11 @@ public class RsvManage implements Initializable
 							}
 							break;
 						}
-						case "2":
+						case "2": // 영화 리스트 비어있음
 						{
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("영화 리스트", "영화 리스트 요청 실패했습니다.");
 							break;
@@ -260,23 +262,24 @@ public class RsvManage implements Initializable
 				}
 			}
 			
+			// 영화관 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_THEATER_VIEW);
 			theater_list = FXCollections.observableArrayList();
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_THEATER_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 추가
 						{
 							String theaterList = packetArr[3];
 							String listArr[] = theaterList.split("\\{"); // 각 영화관 별로 리스트 분할
@@ -314,11 +317,11 @@ public class RsvManage implements Initializable
 							});
 							break;
 						}
-						case "2":
+						case "2": // 영화관 리스트 비어있음
 						{
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "영화관 리스트 요청 실패했습니다.");
 							break;
@@ -495,30 +498,31 @@ public class RsvManage implements Initializable
 				return;
 			}
 			
+			// 선택한 예매 삭제 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_RESERVATION_DELETE + "`" + selectedCustom.getRsv().getId());
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_RESERVATION_DELETE))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
-							mainGUI.alert("취소 완료", "예매 취소에 성공하였습니다.");
+							mainGUI.alert("삭제 완료", "예매 삭제에 성공하였습니다.");
 							initList();
 							break;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
-							mainGUI.alert("취소 에러", "예매 취소에 실패하였습니다.");
+							mainGUI.alert("삭제 에러", "예매 삭제에 실패하였습니다.");
 							break;
 						}
 					}
@@ -548,30 +552,31 @@ public class RsvManage implements Initializable
 			String start_date = dp_start_date.getValue() == null ? "1976-01-01" : dateFormat.format(dp_start_date.getValue());
 			String end_date = dp_end_date.getValue() == null ? "2222-01-01" : dateFormat.format(dp_end_date.getValue());
 			
+			// 예매 내역 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_RESERVATION_VIEW + "`" + mem_id + "`" + mov_id + "`" + thea_id + "`" + start_date + "`" + end_date);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_RESERVATION_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 추가
 						{
 							String reservationList = packetArr[3];
-							String listArr[] = reservationList.split("\\{");
+							String listArr[] = reservationList.split("\\{"); // 예매 내역 별로 리스트 분할
 							ArrayList<CustomDTO> c_list = new ArrayList<CustomDTO>();
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("\\|");
+								String infoArr[] = listInfo.split("\\|"); // 예매 내역 정보 별로 분할
 								String id = infoArr[0];
 								String member_id = infoArr[1];
 								String time_table_id = infoArr[2];
@@ -592,7 +597,7 @@ public class RsvManage implements Initializable
 							custom_list.addAll(c_list);
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("오류", "예매 리스트를 불러오는데 실패했습니다.");
 							return;
@@ -603,7 +608,6 @@ public class RsvManage implements Initializable
 		}
 		catch (Exception e)
 		{
-			
 			e.printStackTrace();
 		}
 	}
@@ -622,22 +626,23 @@ public class RsvManage implements Initializable
 		{
 			try
 			{
+				// 예매 정보를 포함하는 영화관, 상영관, 영화, 사용자, 상영시간표 정보 요청
 				mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_CUSTOM_INFO + "`2`" + rDto.getTimeTableId() + "`" + rDto.getMemberId());
 				
 				while (true)
 				{
-					String packet = mainGUI.readLine();
+					String packet = mainGUI.readLine(); // 요청 응답 수신
 					String packetArr[] = packet.split("`"); // 패킷 분할
 					String packetType = packetArr[0];
 					String packetCode = packetArr[1];
 					
 					if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_CUSTOM_INFO))
 					{
-						String result = packetArr[2];
+						String result = packetArr[2]; // 요청 결과
 						
 						switch (result)
 						{
-							case "1":
+							case "1": // 요청 성공
 							{
 								this.rDto = rDto;
 								String infoList = packetArr[3];
@@ -655,7 +660,7 @@ public class RsvManage implements Initializable
 								ttDto = new TimeTableDTO(tt_info[0], tt_info[1], tt_info[2], tt_info[3], tt_info[4], tt_info[5], Integer.valueOf(tt_info[6]));
 								return;
 							}
-							case "2":
+							case "2": // 요청 실패
 							{
 								mainGUI.alert("경고", "정보 요청 실패했습니다.");
 								return;
