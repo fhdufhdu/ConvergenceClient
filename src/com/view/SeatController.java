@@ -115,7 +115,7 @@ public class SeatController
                 String packetType = packetArr[0];
                 String packetCode = packetArr[1];
                 
-                if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.CS_REQ_SEAT_VIEW))
+                if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_SEAT_VIEW))
                 {
                     String result = packetArr[2];
                     
@@ -123,13 +123,15 @@ public class SeatController
                     {
                         case "1":
                         {
-                            String rowArr[] = packetArr[3].split("\\|");
-                            String colArr[] = packetArr[4].split("\\|");
-                            
-                            // 예매 되어있는 자리 클릭 비활성화
-                            for (int i = 0; i < rowArr.length; i++)
+                            if (packetArr.length > 3)
                             {
-                                tb_arr[Integer.valueOf(rowArr[i]) + 1][Integer.valueOf(colArr[i]) + 1].setDisable(true);
+                                String rowArr[] = packetArr[3].split("\\|");
+                                String colArr[] = packetArr[4].split("\\|");
+                                // 예매 되어있는 자리 클릭 비활성화
+                                for (int i = 0; i < rowArr.length; i++)
+                                {
+                                    tb_arr[Integer.valueOf(rowArr[i]) + 1][Integer.valueOf(colArr[i]) + 1].setDisable(true);
+                                }
                             }
                             
                             // 버튼배열들 화면에 출력
