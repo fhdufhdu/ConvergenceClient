@@ -18,6 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import oracle.net.aso.p;
 
 public class MovieChange
 {
@@ -99,7 +100,7 @@ public class MovieChange
 		ta_actor.setPromptText(mov.getActor());
 		tf_min.setPromptText(Integer.toString(mov.getMin()));
 		tf_trailer.setPromptText(mov.getTrailerPath());
-		ta_plot.setPromptText(mov.getPlot());
+		ta_plot.setPromptText(mov.getPlot().replace("\\}", "\n"));
 		ta_stillcut.setPromptText(mov.getStillCutPath());
 		tf_poster.setPromptText(mov.getPosterPath());
 	}
@@ -115,12 +116,17 @@ public class MovieChange
 			else
 				for (String temp : ta_stillcut.getText().split("\n"))
 					stillCut += temp + " ";
+			String plot = "";
+			if (ta_plot.getText().equals(""))
+				plot = currentMov.getPlot();
+			else
+				for (String temp : ta_plot.getText().split("\n"))
+					plot += temp + "}";
 				
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String id = currentMov.getId();
 			String title = tf_title.getText().equals("") ? currentMov.getTitle() : tf_title.getText();
 			String release_date = dp_release_date.getValue() == null ? currentMov.getReleaseDate().toString() : dateFormat.format(dp_release_date.getValue());
-			String plot = ta_plot.getText().equals("") ? currentMov.getPlot() : ta_plot.getText();
 			String poster = tf_poster.getText().equals("") ? currentMov.getPosterPath() : tf_poster.getText();
 			String trailer = tf_trailer.getText().equals("") ? currentMov.getTrailerPath() : tf_trailer.getText();
 			String director = tf_director.getText().equals("") ? currentMov.getDirector() : tf_director.getText();

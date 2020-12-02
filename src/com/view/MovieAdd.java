@@ -76,7 +76,7 @@ public class MovieAdd
 				stillCut += temp + " ";
 			String plot = "";
 			for (String temp : ta_plot.getText().split("\n"))
-				plot += temp + "|";
+				plot += temp + "}";
 			
 			String title = tf_title.getText();
 			String release_date = dateFormat.format(dp_release_date.getValue());
@@ -124,7 +124,7 @@ public class MovieAdd
 			alert("상영시간", "상영시간에는 숫자를 입력해주세요!");
 			e.printStackTrace();
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
