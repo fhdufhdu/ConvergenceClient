@@ -44,14 +44,17 @@ import javafx.stage.Stage;
 
 public class MovieTable implements Initializable
 {
+	// 테이블 뷰를 위한 리스트
 	private ObservableList<TheaterDTO> theater_list;
 	private ObservableList<MovieDTO> movie_list;
 	private ObservableList<CustomDTO> custom_list;
 	
+	// 테이블 뷰에서 선택된 객체
 	private TheaterDTO selectedThea;
 	private MovieDTO selectedMovie;
 	private CustomDTO selectedCustom;
 	
+	// 좌석 좌표 객체
 	private ArrayList<Integer> row_list;
 	private ArrayList<Integer> col_list;
 	
@@ -82,21 +85,24 @@ public class MovieTable implements Initializable
 	@FXML
 	private Button btn_reservation;
 	
+	// 초기화
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
 		try
 		{
+			// 리스트 초기화
 			initTheaterList();
 			initMovieList();
 			dp_date.setValue(LocalDate.now());
-			dp_date.valueProperty().addListener(new ChangeListener<LocalDate>()
+			dp_date.valueProperty().addListener(new ChangeListener<LocalDate>() // datepicker 선택시 발생하는 이벤트
 			{
 				@Override
 				public void changed(ObservableValue<? extends LocalDate> observable, LocalDate oldValue, LocalDate newValue)
 				{
 					try
 					{
+						// 예매 버튼 생성
 						setRsvButton();
 					}
 					catch (Exception e)
@@ -114,6 +120,7 @@ public class MovieTable implements Initializable
 		}
 	}
 	
+	// 영화관 리스트 초기화
 	private void initTheaterList() throws Exception
 	{
 		try
@@ -167,6 +174,14 @@ public class MovieTable implements Initializable
 								public void changed(ObservableValue<? extends TheaterDTO> observable, TheaterDTO oldValue, TheaterDTO newValue)
 								{
 									selectedThea = tv_theater.getSelectionModel().getSelectedItem();
+									try
+									{
+										setRsvButton();
+									}
+									catch (Exception e)
+									{
+										e.printStackTrace();
+									}
 								}
 							});
 							return;
@@ -191,6 +206,7 @@ public class MovieTable implements Initializable
 		}
 	}
 	
+	// 영화 리스트 초기화
 	private void initMovieList() throws Exception
 	{
 		try
@@ -290,6 +306,7 @@ public class MovieTable implements Initializable
 		
 	}
 	
+	//
 	private void initCustomList() throws Exception
 	{
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -365,6 +382,7 @@ public class MovieTable implements Initializable
 		}
 	}
 	
+	// 예매 버튼 세팅
 	private void setRsvButton() throws Exception
 	{
 		initCustomList();
@@ -373,6 +391,7 @@ public class MovieTable implements Initializable
 		int cnt = custom_list.size();
 		if (cnt <= 0)
 		{
+			// vbox 재조정
 			t_movie_title.setText("<해당하는 상영시간표가 없습니다>");
 			Node temp = vbox.getChildren().get(0);
 			vbox.getChildren().clear();
@@ -404,6 +423,7 @@ public class MovieTable implements Initializable
 			}
 		}
 		
+		// vbox 재조정, 예매 버튼 날리고 새로 추가
 		Node temp = vbox.getChildren().get(0);
 		vbox.getChildren().clear();
 		vbox.getChildren().add(temp);
@@ -411,10 +431,12 @@ public class MovieTable implements Initializable
 		vbox.setSpacing(10);
 	}
 	
+	// 좌석 선택
 	private void selectSeat()
 	{
 		try
 		{
+			// 새로운 페이지 생성
 			Stage stage = new Stage();
 			FXMLLoader loader = new FXMLLoader(MovieTable.class.getResource("./xml/user_sub_page/seat_choice.fxml"));
 			Parent root = loader.load();
@@ -426,13 +448,15 @@ public class MovieTable implements Initializable
 			stage.initOwner(bp_parent.getScene().getWindow());
 			stage.showAndWait();
 			
-			if (!controller.getIsClickedClose())
-			{
+			if (!controller.getIsClickedClose()) // 만약 선택완료를 누르지 않고 종료시
 				return;
-			}
 			
 			row_list = controller.getSelected().get(0);
 			col_list = controller.getSelected().get(1);
+			
+			if (row_list.size() == 0 || col_list.size() == 0) // 선택한 좌석이 0개일 경우
+				return;
+			
 			String user_id = Login.USER_ID;
 			String timetable_id = selectedCustom.getTimeTable().getId();
 			String rowList = "";
@@ -443,10 +467,10 @@ public class MovieTable implements Initializable
 			
 			while (riter.hasNext())
 				rowList += Integer.toString(riter.next()) + "|"; // 선택한 row별로 |로 구분
-			
+				
 			while (citer.hasNext())
 				colList += Integer.toString(citer.next()) + "|"; // 선택한 col별로 |로 구분
-			
+				
 			// 사용자 -> 선택한 좌석으로 예매 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_RESERVATION_ADD + "`" + user_id + "`" + timetable_id + "`" + rowList + "`" + colList);
 			
@@ -488,10 +512,12 @@ public class MovieTable implements Initializable
 		}
 	}
 	
+	// 결제 진행
 	private void startPayment(int price)
 	{
 		try
 		{
+			// 결제창 띄움
 			Stage stage = new Stage();
 			FXMLLoader loader = new FXMLLoader(MovieTable.class.getResource("./xml/user_sub_page/payment.fxml"));
 			Parent root = loader.load();

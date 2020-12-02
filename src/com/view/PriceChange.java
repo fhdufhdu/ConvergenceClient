@@ -23,6 +23,7 @@ public class PriceChange implements Initializable
 	@FXML
 	private TextField tf_night;
 	
+	// 초기화
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
