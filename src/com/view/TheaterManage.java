@@ -322,7 +322,7 @@ public class TheaterManage implements Initializable
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -335,10 +335,10 @@ public class TheaterManage implements Initializable
 						case "1":
 						{
 							String theaterList = packetArr[3];
-							String listArr[] = theaterList.split(","); // 각 영화관 별로 리스트 분할
+							String listArr[] = theaterList.split("{"); // 각 영화관 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 영화관 별 정보 분할
+								String infoArr[] = listInfo.split("|"); // 영화관 별 정보 분할
 								String id = infoArr[0];
 								String name = infoArr[1];
 								String address = infoArr[2];

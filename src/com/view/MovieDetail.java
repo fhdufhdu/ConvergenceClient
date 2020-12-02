@@ -203,9 +203,9 @@ public class MovieDetail
 			{
 				mainGUI.alert("에러", "평점과 리뷰를 입력해주세요");
 			}
+			
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_REVIEW_ADD + "`" + DTO.EMPTY_ID + "`" + Login.USER_ID + "`" + movie.getId() + "`" + Integer.valueOf(mb_review.getText()) + "`" + tf_review.getText() + "`" + "2000-01-01 00:00:00.0");
-			// ReviewDAO rDao = new ReviewDAO();
-			// rDao.addReview(new ReviewDTO(DTO.EMPTY_ID, Login.USER_ID, movie.getId(), Integer.valueOf(mb_review.getText()), tf_review.getText(), "2000-01-01 00:00:00.0"));
+			
 			while (true)
 			{
 				String packet = mainGUI.readLine();
@@ -269,12 +269,13 @@ public class MovieDetail
 			custom_list.clear();
 			
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_REVIEW_VIEW + "`" + movie.getId());
-			// ReviewDAO rDao = new ReviewDAO();
-			ArrayList<ReviewDTO> r_list = new ArrayList<ReviewDTO>();// rDao.getRvListFromMov(movie.getId());
+
+			ArrayList<ReviewDTO> r_list = new ArrayList<ReviewDTO>();
+			
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -287,11 +288,11 @@ public class MovieDetail
 						case "1":
 						{
 							String reviewList = packetArr[3];
-							String listArr[] = reviewList.split(",");
+							String listArr[] = reviewList.split("{");
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`");
+								String infoArr[] = listInfo.split("|");
 								String rv_id = infoArr[0];
 								String rv_memId = infoArr[1];
 								String rv_movId = infoArr[2];
@@ -336,7 +337,7 @@ public class MovieDetail
 				while (true)
 				{
 					String packet = mainGUI.readLine();
-					String packetArr[] = packet.split("!"); // 패킷 분할
+					String packetArr[] = packet.split("`"); // 패킷 분할
 					String packetType = packetArr[0];
 					String packetCode = packetArr[1];
 					
@@ -350,7 +351,7 @@ public class MovieDetail
 							{
 								this.review = review;
 								String infoList = packetArr[3];
-								String mem_info[] = infoList.split("`"); // 회원 정보 분할
+								String mem_info[] = infoList.split("|"); // 회원 정보 분할
 								member = new MemberDTO(mem_info[0], mem_info[1], mem_info[2], mem_info[3], mem_info[4], mem_info[5], mem_info[6], mem_info[7]);
 								return;
 							}

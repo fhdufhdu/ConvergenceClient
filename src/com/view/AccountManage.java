@@ -36,6 +36,4 @@ public class AccountManage {
     void getChange(ActionEvent event) {
 
     }
-
-    
 }

@@ -114,7 +114,7 @@ public class RsvManage implements Initializable
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -127,10 +127,10 @@ public class RsvManage implements Initializable
 						case "1":
 						{
 							String memberList = packetArr[3];
-							String listArr[] = memberList.split(","); // 각 회원 별로 리스트 분할
+							String listArr[] = memberList.split("{"); // 각 회원 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 회원 별 정보 분할
+								String infoArr[] = listInfo.split("|"); // 회원 별 정보 분할
 								String id = infoArr[0];
 								String name = infoArr[1];
 								String password = infoArr[2];
@@ -186,7 +186,7 @@ public class RsvManage implements Initializable
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -199,11 +199,11 @@ public class RsvManage implements Initializable
 						case "1":
 						{
 							String movieList = packetArr[3];
-							String listArr[] = movieList.split(","); // 각 영화별로 리스트 분할
+							String listArr[] = movieList.split("{"); // 각 영화별로 리스트 분할
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 영화 별 정보 분할
+								String infoArr[] = listInfo.split("|"); // 영화 별 정보 분할
 								String mv_id = infoArr[0];
 								String mv_title = infoArr[1];
 								String mv_release_date = infoArr[2];
@@ -263,7 +263,7 @@ public class RsvManage implements Initializable
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -276,10 +276,10 @@ public class RsvManage implements Initializable
 						case "1":
 						{
 							String theaterList = packetArr[3];
-							String listArr[] = theaterList.split(","); // 각 영화관 별로 리스트 분할
+							String listArr[] = theaterList.split("{"); // 각 영화관 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 영화관 별 정보 분할
+								String infoArr[] = listInfo.split("|"); // 영화관 별 정보 분할
 								String id = infoArr[0];
 								String name = infoArr[1];
 								String address = infoArr[2];
@@ -546,7 +546,7 @@ public class RsvManage implements Initializable
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -559,12 +559,12 @@ public class RsvManage implements Initializable
 						case "1":
 						{
 							String reservationList = packetArr[3];
-							String listArr[] = reservationList.split(",");
+							String listArr[] = reservationList.split("{");
 							ArrayList<CustomDTO> c_list = new ArrayList<CustomDTO>();
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`");
+								String infoArr[] = listInfo.split("|");
 								String id = infoArr[0];
 								String member_id = infoArr[1];
 								String time_table_id = infoArr[2];
@@ -618,7 +618,7 @@ public class RsvManage implements Initializable
 				while (true)
 				{
 					String packet = mainGUI.readLine();
-					String packetArr[] = packet.split("!"); // 패킷 분할
+					String packetArr[] = packet.split("`"); // 패킷 분할
 					String packetType = packetArr[0];
 					String packetCode = packetArr[1];
 					
@@ -632,12 +632,12 @@ public class RsvManage implements Initializable
 							{
 								this.rDto = rDto;
 								String infoList = packetArr[3];
-								String listArr[] = infoList.split(","); // 각 리스트 분할
-								String sc_info[] = listArr[0].split("`"); // 상영관 정보 분할
-								String mv_info[] = listArr[1].split("`"); // 영화 정보 분할
-								String th_info[] = listArr[2].split("`"); // 영화관 정보 분할
-								String mem_info[] = listArr[3].split("`"); // 회원 정보 분할
-								String tt_info[] = listArr[4].split("`"); // 상영시간표 정보 분할
+								String listArr[] = infoList.split("{"); // 각 리스트 분할
+								String sc_info[] = listArr[0].split("|"); // 상영관 정보 분할
+								String mv_info[] = listArr[1].split("|"); // 영화 정보 분할
+								String th_info[] = listArr[2].split("|"); // 영화관 정보 분할
+								String mem_info[] = listArr[3].split("|"); // 회원 정보 분할
+								String tt_info[] = listArr[4].split("|"); // 상영시간표 정보 분할
 								
 								sDto = new ScreenDTO(sc_info[0], sc_info[1], sc_info[2], Integer.valueOf(sc_info[3]), Integer.valueOf(sc_info[4]), Integer.valueOf(sc_info[5]));
 								movDto = new MovieDTO(mv_info[0], mv_info[1], mv_info[2], mv_info[3], mv_info[4], mv_info[5], mv_info[6], mv_info[7], mv_info[8], mv_info[9], Integer.valueOf(mv_info[10]));

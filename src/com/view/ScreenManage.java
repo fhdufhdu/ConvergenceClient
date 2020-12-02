@@ -265,7 +265,7 @@ public class ScreenManage
 			while (true)
 			{
 				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("!"); // 패킷 분할
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
@@ -278,11 +278,11 @@ public class ScreenManage
 						case "1":
 						{
 							String screenList = packetArr[3];
-							String listArr[] = screenList.split(","); // 각 상영관 별로 리스트 분할
+							String listArr[] = screenList.split("{"); // 각 상영관 별로 리스트 분할
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("`"); // 상영관 별 정보 분할
+								String infoArr[] = listInfo.split("|"); // 상영관 별 정보 분할
 								String id = infoArr[0];
 								String theater_id = infoArr[1];
 								String name = infoArr[2];

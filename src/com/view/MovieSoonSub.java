@@ -74,7 +74,7 @@ public class MovieSoonSub
             while (true)
             {
                 String packet = mainGUI.readLine();
-                String packetArr[] = packet.split("!"); // 패킷 분할
+                String packetArr[] = packet.split("`"); // 패킷 분할
                 String packetType = packetArr[0];
                 String packetCode = packetArr[1];
                 
@@ -87,10 +87,9 @@ public class MovieSoonSub
                         case "1":
                         {
                             double rsv_rate = Double.parseDouble(packetArr[3]);
-                            // String aver_star = packetArr[4];
                             String remain_date = Integer.toString(getRemainDate());
-                            t_rsv_rate.setText("예매율 : " + String.format("%.2f", rsv_rate * 100));
-                            // t_rsv_rate.setText(t_rsv_rate.getText() + "% | 평점 : " + aver_star);
+                            
+                            t_rsv_rate.setText("예매율 : " + String.format("%.2f", rsv_rate * 100)); 
                             t_rsv_rate.setText(t_rsv_rate.getText() + "% | D - " + remain_date);
                             break;
                         }

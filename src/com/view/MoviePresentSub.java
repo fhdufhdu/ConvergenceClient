@@ -78,7 +78,7 @@ public class MoviePresentSub
             {
                 String packet = mainGUI.readLine();
                 System.out.println(packet);
-                String packetArr[] = packet.split("!"); // 패킷 분할
+                String packetArr[] = packet.split("`"); // 패킷 분할
                 String packetType = packetArr[0];
                 String packetCode = packetArr[1];
                 

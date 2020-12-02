@@ -31,7 +31,7 @@ public class PriceChange implements Initializable
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_PRICE_VIEW);
 			
 			String packet = mainGUI.readLine();
-			String packetArr[] = packet.split("!");
+			String packetArr[] = packet.split("`");
 			String packetType = packetArr[0];
 			String packetCode = packetArr[1];
 			
@@ -42,10 +42,10 @@ public class PriceChange implements Initializable
 				{
 					case "1":
 					{
-						String priceArr[] = packetArr[3].split(",");
+						String priceArr[] = packetArr[3].split("{");
 						for (String priceInfo : priceArr)
 						{
-							String priceList[] = priceInfo.split("`");
+							String priceList[] = priceInfo.split("|");
 							String priceType = priceList[0];
 							String price = priceList[1];
 							switch (priceType)
@@ -120,7 +120,7 @@ public class PriceChange implements Initializable
 		}
 		catch (Exception e)
 		{
-			mainGUI.alert("오류", "DB 접속 오류");
+			mainGUI.alert("오류", "서버에서 DB 접속 오류");
 			e.printStackTrace();
 		}
 	}

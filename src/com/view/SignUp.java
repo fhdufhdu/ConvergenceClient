@@ -89,7 +89,8 @@ public class SignUp
 				gender = "0";
 			}
 			
-			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SIGNUP + "/2/" + id + "`" + passwd + "`" + name + "`" + phone_number + "`" + birth + "`" + gender);
+			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SIGNUP + "`2`" + id + "`" + passwd + "`" + name + "`" + phone_number + "`" + birth + "`" + gender);
+			
 			while (true)
 			{
 				String packet = mainGUI.readLine();
@@ -117,7 +118,7 @@ public class SignUp
 							primaryStage.show();
 							return;
 						case "2":
-							t_result.setText("회원가입 실패! 아이디가 중복됩니다!");
+							mainGUI.alert("회원가입 실패", "회원가입 실패! 아이디가 중복됩니다!");
 							return;
 					}
 				}
@@ -125,7 +126,7 @@ public class SignUp
 		}
 		catch (Exception e)
 		{
-			t_result.setText("회원가입 실패! 알맞은 정보를 입력했나요?");
+			mainGUI.alert("회원가입 실패", "회원가입 실패! 알맞은 정보를 입력했나요?");
 			e.printStackTrace();
 		}
 	}

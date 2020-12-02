@@ -78,10 +78,10 @@ public class Payment
 			Iterator<Integer> citer = col_list.iterator();
 			
 			while (riter.hasNext())
-				rowList += Integer.toString(riter.next()) + ",";
+				rowList += Integer.toString(riter.next()) + "|";
 			
 			while (citer.hasNext())
-				colList += Integer.toString(citer.next()) + ",";
+				colList += Integer.toString(citer.next()) + "|";
 			
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_PAYMENT_ADD + "`" + member_id + "`" + timetable_id + "`" + rowList + "`" + colList + "`" + account + "`" + bank + "`" + passwd);
 			
