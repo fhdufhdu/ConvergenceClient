@@ -176,7 +176,8 @@ public class MovieTable implements Initializable
 									selectedThea = tv_theater.getSelectionModel().getSelectedItem();
 									try
 									{
-										setRsvButton();
+										if (selectedMovie != null && dp_date.getValue() != null)
+											setRsvButton();
 									}
 									catch (Exception e)
 									{
@@ -354,8 +355,7 @@ public class MovieTable implements Initializable
 								String tb_end_time = infoArr[6];
 								
 								TimeTableDTO temp = new TimeTableDTO(tb_id, tb_mov_id, tb_screen_id, tb_start_time, tb_end_time, tb_type, Integer.valueOf(tb_current_rsv));
-								if (temp.getStartTime().after(new Timestamp(System.currentTimeMillis())))
-									custom_list.add(new CustomDTO(temp));
+								custom_list.add(new CustomDTO(temp));
 							}
 							return;
 						}
@@ -418,6 +418,9 @@ public class MovieTable implements Initializable
 						selectSeat();
 					}
 				});
+				// 현재시간보다 이전일 경우 비활성화
+				if (selectedCustom.getTimeTable().getStartTime().before(new Timestamp(System.currentTimeMillis())))
+					btn.setDisable(true);
 				ButtonBar.setButtonData(btn, ButtonData.LEFT);
 				bar_list.get(i).getButtons().addAll(btn);
 			}
@@ -527,7 +530,7 @@ public class MovieTable implements Initializable
 			seat_list.add(col_list);
 			controller.initData(selectedThea, selectedCustom.getScreen(), selectedMovie, selectedCustom.getTimeTable(), seat_list, price);
 			stage.setScene(new Scene(root));
-			stage.setTitle("좌석 선택");
+			stage.setTitle("결제창");
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.initOwner(bp_parent.getScene().getWindow());
 			stage.showAndWait();

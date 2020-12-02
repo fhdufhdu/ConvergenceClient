@@ -27,8 +27,8 @@ public class mainGUI extends Application
 	{
 		try
 		{
-			// String localHostAddress = InetAddress.getLocalHost().getHostAddress();
-			String localHostAddress = "192.168.230.238";
+			String localHostAddress = InetAddress.getLocalHost().getHostAddress();
+			// String localHostAddress = "192.168.230.238";
 			// Socket socket = new Socket(InetAddress.getLocalHost().getHostAddress(), 5000);
 			Socket socket = new Socket(localHostAddress, 5000);
 			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
