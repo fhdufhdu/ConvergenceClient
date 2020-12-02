@@ -681,7 +681,7 @@ public class RsvManage implements Initializable
 		
 		public StringProperty getMember()
 		{
-			return new SimpleStringProperty(memDto.getName());
+			return new SimpleStringProperty(memDto.getId());
 		}
 		
 		public StringProperty getMovie()

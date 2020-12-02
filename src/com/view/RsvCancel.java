@@ -208,7 +208,7 @@ public class RsvCancel implements Initializable
 								
 								ReservationDTO rsvDto = new ReservationDTO(id, member_id, time_table_id, screen_row, screen_col, price, type, rsv_time, account, bank);
 								
-								if (rsvDto.getType().equals("2"))
+								if (rsvDto.getType().equals("2") || rsvDto.getType().equals("0"))
 									continue;
 								
 								c_list.add(new CustomDTO(rsvDto));
