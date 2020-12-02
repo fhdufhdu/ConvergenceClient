@@ -150,7 +150,6 @@ public class TheaterManage implements Initializable
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			
 		}
 	}
 	
@@ -196,10 +195,14 @@ public class TheaterManage implements Initializable
 				}
 			}
 		}
-		catch (Exception e)
+		catch (NumberFormatException e)
 		{
 			e.printStackTrace();
 			
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	
@@ -253,7 +256,6 @@ public class TheaterManage implements Initializable
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			
 		}
 	}
 	
@@ -331,7 +333,6 @@ public class TheaterManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "영화관 리스트가 없습니다");
 							return;
 						}
 						case "3":
@@ -345,7 +346,6 @@ public class TheaterManage implements Initializable
 		}
 		catch (Exception e)
 		{
-			t_result.setText("영화관 리스트 요청 실패했습니다.");
 			e.printStackTrace();
 		}
 	}

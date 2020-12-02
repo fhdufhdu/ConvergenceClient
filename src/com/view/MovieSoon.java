@@ -76,7 +76,6 @@ public class MovieSoon implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("영화 리스트", "영화 리스트가 없습니다.");
 							return;
 						}
 						case "3":

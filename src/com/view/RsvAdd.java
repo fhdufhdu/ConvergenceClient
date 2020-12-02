@@ -210,7 +210,6 @@ public class RsvAdd implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "회원 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -280,7 +279,6 @@ public class RsvAdd implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "영화관 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -356,7 +354,6 @@ public class RsvAdd implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("영화 리스트", "영화 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -591,7 +588,6 @@ public class RsvAdd implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "상영관 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -786,7 +782,6 @@ public class RsvAdd implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "상영시간표가 없습니다.");
 							break;
 						}
 						case "3":

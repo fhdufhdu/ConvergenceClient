@@ -173,7 +173,6 @@ public class MovieTableManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "영화관 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -250,7 +249,6 @@ public class MovieTableManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("영화 리스트", "영화 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -386,13 +384,13 @@ public class MovieTableManage implements Initializable
 						}
 						case "3":
 						{
-							mainGUI.alert("추가 실패", "DB접속 오류");
+							mainGUI.alert("추가 실패", "서버에서 DB접속 오류");
 							break;
 						}
 					}
+					if (result != null)
+						return;
 				}
-				if (result != null)
-					return;
 			}
 		}
 		catch (Exception e)
@@ -412,11 +410,13 @@ public class MovieTableManage implements Initializable
 				mainGUI.alert("경고", "데이터를 선택해주세요");
 				return;
 			}
+			
 			if (selectedMovie == null || selectedScreen == null || dp_start_date.getValue() == null || mb_hours_start.getText().equals("시간") || mb_minute_start.getText().equals("분") || mb_hours_end.getText().equals("시간") || (mb_minute_end.getText().equals("분")))
 			{
 				mainGUI.alert("경고", "모든 데이터를 입력해주세요");
 				return;
 			}
+			
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			String date = dp_start_date.getValue() == null ? "1976-01-01 " : dateFormat.format(dp_start_date.getValue()) + " ";
 			String start_time = mb_hours_start.getText().equals("시간") ? "00:00:00.0" : (mb_minute_start.getText().equals("분") ? mb_hours_start.getText().replace("시", "") + ":00:00.0" : mb_hours_start.getText().replace("시", "") + ":" + mb_minute_start.getText().replace("분", "") + ":00.0");
@@ -450,13 +450,13 @@ public class MovieTableManage implements Initializable
 						}
 						case "3":
 						{
-							mainGUI.alert("수정 실패", "DB접속 오류");
+							mainGUI.alert("수정 실패", "서버에서 DB접속 오류");
 							break;
 						}
 					}
+					if (result != null)
+						return;
 				}
-				if (result != null)
-					return;
 			}
 		}
 		catch (Exception e)
@@ -512,9 +512,9 @@ public class MovieTableManage implements Initializable
 							break;
 						}
 					}
+					if (result != null)
+						return;
 				}
-				if (result != null)
-					return;
 			}
 		}
 		catch (Exception e)
@@ -634,7 +634,6 @@ public class MovieTableManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "상영관 리스트가 없습니다.");
 							break;
 						}
 						case "3":
@@ -765,7 +764,6 @@ public class MovieTableManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "상영시간표가 없습니다.");
 							break;
 						}
 						case "3":

@@ -341,7 +341,6 @@ public class ScreenManage
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "상영관 리스트가 없습니다");
 							return;
 						}
 						case "3":

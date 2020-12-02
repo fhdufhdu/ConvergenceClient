@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.db.model.MovieDTO;
-import com.db.model.TheaterDTO;
 import com.main.mainGUI;
 import com.protocol.Protocol;
 
@@ -98,7 +97,6 @@ public class MoviePresent implements Initializable
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MOVIE_VIEW))
 				{
 					String result = packetArr[2];
-					System.out.println(packet);
 					
 					switch (result)
 					{
@@ -137,7 +135,6 @@ public class MoviePresent implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("영화 리스트", "영화 리스트가 없습니다.");
 							return;
 						}
 						case "3":
