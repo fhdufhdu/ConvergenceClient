@@ -127,7 +127,7 @@ public class RsvManage implements Initializable
 						case "1":
 						{
 							String memberList = packetArr[3];
-							String listArr[] = memberList.split("{"); // 각 회원 별로 리스트 분할
+							String listArr[] = memberList.split("\\{"); // 각 회원 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
 								String infoArr[] = listInfo.split("|"); // 회원 별 정보 분할
@@ -199,7 +199,7 @@ public class RsvManage implements Initializable
 						case "1":
 						{
 							String movieList = packetArr[3];
-							String listArr[] = movieList.split("{"); // 각 영화별로 리스트 분할
+							String listArr[] = movieList.split("\\{"); // 각 영화별로 리스트 분할
 							
 							for (String listInfo : listArr)
 							{
@@ -276,7 +276,7 @@ public class RsvManage implements Initializable
 						case "1":
 						{
 							String theaterList = packetArr[3];
-							String listArr[] = theaterList.split("{"); // 각 영화관 별로 리스트 분할
+							String listArr[] = theaterList.split("\\{"); // 각 영화관 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
 								String infoArr[] = listInfo.split("|"); // 영화관 별 정보 분할
@@ -559,7 +559,7 @@ public class RsvManage implements Initializable
 						case "1":
 						{
 							String reservationList = packetArr[3];
-							String listArr[] = reservationList.split("{");
+							String listArr[] = reservationList.split("\\{");
 							ArrayList<CustomDTO> c_list = new ArrayList<CustomDTO>();
 							
 							for (String listInfo : listArr)
@@ -632,7 +632,7 @@ public class RsvManage implements Initializable
 							{
 								this.rDto = rDto;
 								String infoList = packetArr[3];
-								String listArr[] = infoList.split("{"); // 각 리스트 분할
+								String listArr[] = infoList.split("\\{"); // 각 리스트 분할
 								String sc_info[] = listArr[0].split("|"); // 상영관 정보 분할
 								String mv_info[] = listArr[1].split("|"); // 영화 정보 분할
 								String th_info[] = listArr[2].split("|"); // 영화관 정보 분할

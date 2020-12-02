@@ -44,7 +44,7 @@ public class MovieSoon implements Initializable
 						case "1":
 						{
 							String movieList = packetArr[3];
-							String listArr[] = movieList.split("{"); // 각 영화별로 리스트 분할
+							String listArr[] = movieList.split("\\{"); // 각 영화별로 리스트 분할
 							
 							for (String listInfo : listArr)
 							{

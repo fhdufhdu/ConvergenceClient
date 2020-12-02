@@ -335,7 +335,7 @@ public class TheaterManage implements Initializable
 						case "1":
 						{
 							String theaterList = packetArr[3];
-							String listArr[] = theaterList.split("{"); // 각 영화관 별로 리스트 분할
+							String listArr[] = theaterList.split("\\{"); // 각 영화관 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
 								String infoArr[] = listInfo.split("|"); // 영화관 별 정보 분할

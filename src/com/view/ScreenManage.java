@@ -278,7 +278,7 @@ public class ScreenManage
 						case "1":
 						{
 							String screenList = packetArr[3];
-							String listArr[] = screenList.split("{"); // 각 상영관 별로 리스트 분할
+							String listArr[] = screenList.split("\\{"); // 각 상영관 별로 리스트 분할
 							
 							for (String listInfo : listArr)
 							{

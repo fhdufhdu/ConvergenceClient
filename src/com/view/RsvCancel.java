@@ -182,7 +182,7 @@ public class RsvCancel implements Initializable
 						case "1":
 						{
 							String reservationList = packetArr[3];
-							String listArr[] = reservationList.split("{");
+							String listArr[] = reservationList.split("\\{");
 							ArrayList<CustomDTO> c_list = new ArrayList<CustomDTO>();
 							
 							for (String listInfo : listArr)
@@ -260,7 +260,7 @@ public class RsvCancel implements Initializable
 							{
 								this.rDto = rDto;
 								String infoList = packetArr[3];
-								String listArr[] = infoList.split("{"); // 각 리스트 분할
+								String listArr[] = infoList.split("\\{"); // 각 리스트 분할
 								String sc_info[] = listArr[0].split("|"); // 상영관 정보 분할
 								String mv_info[] = listArr[1].split("|"); // 영화 정보 분할
 								String th_info[] = listArr[2].split("|"); // 영화관 정보 분할

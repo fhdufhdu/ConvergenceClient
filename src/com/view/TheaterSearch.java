@@ -69,7 +69,7 @@ public class TheaterSearch
 				switch (result)
 				{
 					case "1":
-						String priceArr[] = packetArr[3].split("{");
+						String priceArr[] = packetArr[3].split("\\{");
 						for (String priceInfo : priceArr)
 						{
 							String priceList[] = priceInfo.split("|");

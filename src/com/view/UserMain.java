@@ -53,7 +53,7 @@ public class UserMain implements Initializable
 				switch (result)
 				{
 					case "1":
-						String theaterList[] = packetArr[3].split("{");
+						String theaterList[] = packetArr[3].split("\\{");
 						int i = 0; // 메뉴 id 번호
 						for (String theater : theaterList)
 						{

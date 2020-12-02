@@ -138,7 +138,7 @@ public class MovieTable implements Initializable
 						case "1":
 						{
 							String theaterList = packetArr[3];
-							String listArr[] = theaterList.split("{"); // 각 영화관 별로 리스트 분할
+							String listArr[] = theaterList.split("\\{"); // 각 영화관 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
 								String infoArr[] = listInfo.split("|"); // 영화관 별 정보 분할
@@ -214,7 +214,7 @@ public class MovieTable implements Initializable
 						case "1":
 						{
 							String movieList = packetArr[3];
-							String listArr[] = movieList.split("{"); // 각 영화별로 리스트 분할
+							String listArr[] = movieList.split("\\{"); // 각 영화별로 리스트 분할
 							
 							for (String listInfo : listArr)
 							{
@@ -320,7 +320,7 @@ public class MovieTable implements Initializable
 						case "1":
 						{
 							String screenList = packetArr[3];
-							String listArr[] = screenList.split("{"); // 각 상영시간표 리스트 분할
+							String listArr[] = screenList.split("\\{"); // 각 상영시간표 리스트 분할
 							
 							for (String listInfo : listArr)
 							{

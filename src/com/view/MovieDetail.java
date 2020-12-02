@@ -119,14 +119,6 @@ public class MovieDetail
 			ImageView view_arr[] = {
 					image_stillcut, image_stillcut2, image_stillcut3 };
 			
-			// 영화 예매 안해두면 입력 불가능하게 - 얘는 죽여도 될 것 같음
-			// ReservationDAO rDao = new ReservationDAO();
-			// if (!rDao.isRsvMovie(Login.USER_ID, movie.getId()))
-			// {
-			// tf_review.setDisable(true);
-			// mb_review.setDisable(true);
-			// }
-			
 			text_title.setText(movie.getTitle());
 			text_open_date.setText(movie.getReleaseDate().toString());
 			text_director.setText(movie.getDirector());
@@ -288,7 +280,7 @@ public class MovieDetail
 						case "1":
 						{
 							String reviewList = packetArr[3];
-							String listArr[] = reviewList.split("{");
+							String listArr[] = reviewList.split("\\{");
 							
 							for (String listInfo : listArr)
 							{
