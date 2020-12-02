@@ -358,7 +358,6 @@ public class MovieTable implements Initializable
 		}
 		catch (Exception e)
 		{
-			mainGUI.alert("오류", "상영시간표 요청 실패했습니다.");
 			e.printStackTrace();
 		}
 	}

@@ -124,7 +124,7 @@ public class MovieDetail
 			text_director.setText(movie.getDirector());
 			text_actor.setText(movie.getActor());
 			text_plot.wrappingWidthProperty().set(225);
-			text_plot.setText(movie.getPlot().replace("\\|", "\n"));
+			text_plot.setText(movie.getPlot().replace("\\}", "\n"));
 			Image image = new Image(movie.getPosterPath());
 			image_movie.setImage(image);
 			for (int i = 0; i < view_arr.length; i++)
@@ -261,7 +261,7 @@ public class MovieDetail
 			custom_list.clear();
 			
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_REVIEW_VIEW + "`" + movie.getId());
-
+			
 			ArrayList<ReviewDTO> r_list = new ArrayList<ReviewDTO>();
 			
 			while (true)
@@ -302,7 +302,6 @@ public class MovieDetail
 						}
 						case "2":
 						{
-							mainGUI.alert("리뷰 리스트", "리뷰 리스트가 없습니다.");
 							return;
 						}
 					}
