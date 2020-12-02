@@ -338,7 +338,7 @@ public class TheaterManage implements Initializable
 							String listArr[] = theaterList.split("\\{"); // 각 영화관 별로 리스트 분할
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("|"); // 영화관 별 정보 분할
+								String infoArr[] = listInfo.split("\\|"); // 영화관 별 정보 분할
 								String id = infoArr[0];
 								String name = infoArr[1];
 								String address = infoArr[2];

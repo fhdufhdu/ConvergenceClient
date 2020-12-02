@@ -282,7 +282,7 @@ public class ScreenManage
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("|"); // 상영관 별 정보 분할
+								String infoArr[] = listInfo.split("\\|"); // 상영관 별 정보 분할
 								String id = infoArr[0];
 								String theater_id = infoArr[1];
 								String name = infoArr[2];

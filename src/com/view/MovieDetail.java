@@ -124,7 +124,7 @@ public class MovieDetail
 			text_director.setText(movie.getDirector());
 			text_actor.setText(movie.getActor());
 			text_plot.wrappingWidthProperty().set(225);
-			text_plot.setText(movie.getPlot().replace("|", "\n"));
+			text_plot.setText(movie.getPlot().replace("\\|", "\n"));
 			Image image = new Image(movie.getPosterPath());
 			image_movie.setImage(image);
 			for (int i = 0; i < view_arr.length; i++)
@@ -284,7 +284,7 @@ public class MovieDetail
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("|");
+								String infoArr[] = listInfo.split("\\|");
 								String rv_id = infoArr[0];
 								String rv_memId = infoArr[1];
 								String rv_movId = infoArr[2];
@@ -343,7 +343,7 @@ public class MovieDetail
 							{
 								this.review = review;
 								String infoList = packetArr[3];
-								String mem_info[] = infoList.split("|"); // 회원 정보 분할
+								String mem_info[] = infoList.split("\\|"); // 회원 정보 분할
 								member = new MemberDTO(mem_info[0], mem_info[1], mem_info[2], mem_info[3], mem_info[4], mem_info[5], mem_info[6], mem_info[7]);
 								return;
 							}

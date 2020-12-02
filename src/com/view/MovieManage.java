@@ -288,7 +288,7 @@ public class MovieManage implements Initializable
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("|"); // 영화 별 정보 분할
+								String infoArr[] = listInfo.split("\\|"); // 영화 별 정보 분할
 								String mv_id = infoArr[0];
 								String mv_title = infoArr[1];
 								String mv_release_date = infoArr[2];

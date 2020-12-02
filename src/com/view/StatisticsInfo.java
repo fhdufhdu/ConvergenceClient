@@ -146,9 +146,9 @@ public class StatisticsInfo implements Initializable
                         {
                             String statistics_list = packetArr[3];
                             String statisticsArr[] = statistics_list.split("\\{");
-                            String benefirArr[] = statisticsArr[0].split("|");
-                            String rsvArr[] = statisticsArr[1].split("|");
-                            String cancelArr[] = statisticsArr[2].split("|");
+                            String benefirArr[] = statisticsArr[0].split("\\|");
+                            String rsvArr[] = statisticsArr[1].split("\\|");
+                            String cancelArr[] = statisticsArr[2].split("\\|");
                             
                             benefit_list.addAll(benefirArr);
                             rsv_list.addAll(rsvArr);

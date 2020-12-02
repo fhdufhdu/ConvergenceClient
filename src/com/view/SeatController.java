@@ -123,8 +123,8 @@ public class SeatController implements Initializable
 					{
 						case "1":
 						{
-							String rowArr[] = packetArr[3].split("|");
-							String colArr[] = packetArr[4].split("|");
+							String rowArr[] = packetArr[3].split("\\|");
+							String colArr[] = packetArr[4].split("\\|");
 							
 							for (int i = 0; i < rowArr.length; i++)
 							{

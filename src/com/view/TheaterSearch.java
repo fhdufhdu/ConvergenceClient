@@ -72,7 +72,7 @@ public class TheaterSearch
 						String priceArr[] = packetArr[3].split("\\{");
 						for (String priceInfo : priceArr)
 						{
-							String priceList[] = priceInfo.split("|");
+							String priceList[] = priceInfo.split("\\|");
 							String priceType = priceList[0];
 							String price = priceList[1];
 							switch (priceType)

@@ -57,7 +57,7 @@ public class UserMain implements Initializable
 						int i = 0; // 메뉴 id 번호
 						for (String theater : theaterList)
 						{
-							String theaterArr[] = theater.split("|");
+							String theaterArr[] = theater.split("\\|");
 							String id = theaterArr[0];
 							String name = theaterArr[1];
 							String address = theaterArr[2];
