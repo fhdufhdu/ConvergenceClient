@@ -100,7 +100,7 @@ public class MovieChange
 		ta_actor.setPromptText(mov.getActor());
 		tf_min.setPromptText(Integer.toString(mov.getMin()));
 		tf_trailer.setPromptText(mov.getTrailerPath());
-		ta_plot.setPromptText(mov.getPlot().replace("\\}", "\n"));
+		ta_plot.setPromptText(mov.getPlot().replace("}", "\n"));
 		ta_stillcut.setPromptText(mov.getStillCutPath());
 		tf_poster.setPromptText(mov.getPosterPath());
 	}
