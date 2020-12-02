@@ -120,7 +120,6 @@ public class PriceChange implements Initializable
 		}
 		catch (Exception e)
 		{
-			mainGUI.alert("오류", "서버에서 DB 접속 오류");
 			e.printStackTrace();
 		}
 	}

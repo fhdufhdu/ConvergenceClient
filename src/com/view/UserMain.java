@@ -98,14 +98,13 @@ public class UserMain implements Initializable
 						
 						break;
 					case "2":
-						mainGUI.alert("경고", "영화관 없음");
 						break;
 				}
 			}
 		}
 		catch (Exception e)
 		{
-			mainGUI.alert("오류", "서버에서 DB서버 연결 오류");
+			mainGUI.alert("오류", "서버 오류");
 			e.printStackTrace();
 		}
 	}

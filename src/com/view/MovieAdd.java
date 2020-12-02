@@ -97,8 +97,8 @@ public class MovieAdd
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_MOVIE_ADD))
 				{
-					String pakcet_result = packetArr[2];
-					switch (pakcet_result)
+					String result = packetArr[2];
+					switch (result)
 					{
 						case "1":
 						{

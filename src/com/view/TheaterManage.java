@@ -157,6 +157,10 @@ public class TheaterManage implements Initializable
 			mainGUI.alert("경고", "총 상영관, 총 좌석에는 숫자만 입력해주세요!");
 			e.printStackTrace();
 		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -200,15 +204,14 @@ public class TheaterManage implements Initializable
 				}
 			}
 		}
-		catch (SQLException e)
-		{
-			// DB관련 문제 발생시
-			e.printStackTrace();
-		}
 		catch (NumberFormatException e)
 		{
 			// 입력값 타입이 맞지 않을때
 			mainGUI.alert("경고", "총 상영관, 총 좌석에는 숫자만 입력해주세요!");
+			e.printStackTrace();
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -260,15 +263,14 @@ public class TheaterManage implements Initializable
 				}
 			}
 		}
-		catch (SQLException e)
-		{
-			// DB관련 문제 발생시
-			e.printStackTrace();
-		}
 		catch (NumberFormatException e)
 		{
 			// 입력값 타입이 맞지 않을때
 			mainGUI.alert("경고", "총 상영관, 총 좌석에는 숫자만 입력해주세요!");
+			e.printStackTrace();
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -351,7 +353,6 @@ public class TheaterManage implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "영화관 리스트가 없습니다");
 							return;
 						}
 						case "3":
@@ -365,7 +366,6 @@ public class TheaterManage implements Initializable
 		}
 		catch (Exception e)
 		{
-			t_result.setText("영화관 리스트 요청 실패했습니다.");
 			e.printStackTrace();
 		}
 	}

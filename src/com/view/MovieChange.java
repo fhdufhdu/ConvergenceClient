@@ -1,6 +1,5 @@
 package com.view;
 
-import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 
 import com.db.model.MovieDTO;
@@ -18,7 +17,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import oracle.net.aso.p;
 
 public class MovieChange
 {
@@ -146,8 +144,8 @@ public class MovieChange
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_MOVIE_CHANGE))
 				{
-					String pakcet_result = packetArr[2];
-					switch (pakcet_result)
+					String result = packetArr[2];
+					switch (result)
 					{
 						case "1":
 						{
@@ -170,10 +168,6 @@ public class MovieChange
 		catch (NumberFormatException e)
 		{
 			mainGUI.alert("상영시간", "상영시간에는 숫자를 입력해주세요!");
-		}
-		catch (SQLException e)
-		{
-			mainGUI.alert("DB서버 연결오류", "잠시 후 다시 시도해주세요!");
 		}
 		catch (Exception e)
 		{

@@ -97,6 +97,7 @@ public class Login
 					 */
 					case Protocol.PT_RES_LOGIN:
 						String result = packetArr[1];
+						
 						switch (result)
 						{
 							case "1":

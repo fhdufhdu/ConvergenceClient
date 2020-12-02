@@ -1,9 +1,6 @@
 package com.view;
 
-import java.sql.Timestamp;
-
 import com.db.model.MovieDTO;
-import com.db.model.TimeTableDTO;
 import com.main.mainGUI;
 import com.protocol.Protocol;
 
@@ -11,7 +8,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

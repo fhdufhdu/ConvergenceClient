@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.ResourceBundle;
-import java.util.Timer;
 
 import com.db.model.MovieDTO;
 import com.db.model.ScreenDTO;
@@ -172,7 +171,6 @@ public class MovieTable implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("오류", "영화관 리스트가 없습니다");
 							return;
 						}
 						case "3":
@@ -269,7 +267,6 @@ public class MovieTable implements Initializable
 						}
 						case "2":
 						{
-							mainGUI.alert("영화 리스트", "영화 리스트가 없습니다.");
 							return;
 						}
 						case "3":
@@ -508,7 +505,7 @@ public class MovieTable implements Initializable
 		}
 	}
 	
-	private class CustomDTO // 네트워크
+	private class CustomDTO
 	{
 		ScreenDTO screen;
 		TimeTableDTO timetable;
