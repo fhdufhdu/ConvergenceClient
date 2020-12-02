@@ -31,7 +31,7 @@ public class mainGUI extends Application
 		{
 			DAO.connectDB();
 			String localHostAddress = InetAddress.getLocalHost().getHostAddress();
-			Socket socket = new Socket(localHostAddress, 5000);
+			Socket socket = new Socket("192.168.230.238", 5000);
 			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			launch();
