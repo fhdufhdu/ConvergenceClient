@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane fx:id="sp_admin_main" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1015.0" minHeight="666.0" minWidth="1015.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.AdminMain">
+   <content>
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1000.0" minHeight="666.0" minWidth="1000.0" prefWidth="1000.0" stylesheets="@../css/admin_main.css">
+         <children>
+            <Line endX="600.0" layoutX="324.0" layoutY="78.0" startX="-245.0" />
+            <Text layoutX="434.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="관리자 모드">
+               <font>
+                  <Font name="LG Smart UI Bold" size="30.0" />
+               </font>
+            </Text>
+            <MenuBar id="admin_menu" layoutX="159.0" layoutY="88.0" prefHeight="15.0" style="-fx-padding: 0 10 0 10;">
+               <menus>
+                  <Menu id="menu_movie" fx:id="m_theater" mnemonicParsing="false" onHiding="#menuTheaterManage" onShowing="#menuTheaterManage">
+                     <graphic>
+                        <Button mnemonicParsing="false" onAction="#menuTheaterManage" prefHeight="15.0" style="-fx-background-color: transparent;" text="영화관" />
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                     <graphic>
+                        <MenuButton mnemonicParsing="false" prefHeight="15.0" style="-fx-background-color: transparent;" text="영화">
+                           <items>
+                              <MenuItem fx:id="mi_movie_add" mnemonicParsing="false" onAction="#menuMovieAdd" text="등록" />
+                              <MenuItem fx:id="mi_movie_change" mnemonicParsing="false" onAction="#menuMovieChange" text="관리" />
+                           </items>
+                        </MenuButton>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                     <graphic>
+                        <MenuButton mnemonicParsing="false" prefHeight="15.0" style="-fx-background-color: transparent;" text="예매 정보">
+                          <items>
+                              <MenuItem fx:id="mi_rsv_add" mnemonicParsing="false" onAction="#menuRsvAdd" text="등록" />
+                              <MenuItem fx:id="mi_rsv_manage" mnemonicParsing="false" onAction="#menuRsvManage" text="관리" />
+                          </items>
+                        </MenuButton>
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                     <graphic>
+                        <Button mnemonicParsing="false" onAction="#menuTimeTableManage" style="-fx-background-color: transparent;" text="상영시간표" />
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                     <graphic>
+                        <Button mnemonicParsing="false" onAction="#menuSatistics" prefHeight="15.0" style="-fx-background-color: transparent;" text="통계정보" />
+                     </graphic>
+                  </Menu>
+                  <Menu fx:id="m_admin_account" mnemonicParsing="false" onAction="#menuAdminAccount">
+                     <graphic>
+                        <Button mnemonicParsing="false" onAction="#menuAdminAccount" prefHeight="15.0" style="-fx-background-color: transparent;" text="수입 계좌 관리" />
+                     </graphic>
+                  </Menu>
+                  <Menu mnemonicParsing="false">
+                     <graphic>
+                        <Button mnemonicParsing="false" onAction="#menuPriceChange" prefHeight="15.0" style="-fx-background-color: transparent;" text="가격정보 수정" />
+                     </graphic>
+                  </Menu>
+               </menus>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend />
+               </effect>
+            </MenuBar>
+            <BorderPane fx:id="bp_admin_sub" layoutX="45.0" layoutY="155.0" maxHeight="1.7976931348623157E308" maxWidth="910.0" minHeight="475.0" minWidth="910.0" style="-fx-background-color: #ffffff;" />
+         </children>
+         <padding>
+            <Insets bottom="40.0" />
+         </padding>
+      </AnchorPane>
+   </content>
+</ScrollPane>

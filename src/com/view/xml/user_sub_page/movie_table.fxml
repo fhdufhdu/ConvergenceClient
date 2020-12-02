@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="910.0" minWidth="910.0" pickOnBounds="false" stylesheets="@../../css/theater_add.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.MovieTable">
+   <children>
+      <BorderPane fx:id="bp_parent" maxHeight="1.7976931348623157E308" maxWidth="910.0" minWidth="910.0">
+         <center>
+            <AnchorPane maxWidth="910.0" minWidth="910.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text focusTraversable="true" layoutX="50.0" layoutY="40.0" pickOnBounds="true" strokeType="OUTSIDE" strokeWidth="0.0" text="상영시간표 리스트">
+                     <font>
+                        <Font name="LG Smart UI Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <TableView fx:id="tv_theater" layoutX="49.0" layoutY="64.0" prefHeight="515.0" prefWidth="147.0">
+                    <columns>
+                      <TableColumn fx:id="tc_theater" prefWidth="146.0" text="영화관" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tv_movie" layoutX="200.0" layoutY="64.0" prefHeight="516.0" prefWidth="242.0">
+                    <columns>
+                      <TableColumn fx:id="tc_movie" prefWidth="241.0" text="영화" />
+                    </columns>
+                  </TableView>
+                  <DatePicker fx:id="dp_date" layoutX="538.0" layoutY="62.0" prefHeight="23.0" prefWidth="330.0" />
+                  <Text layoutX="461.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 선택">
+                     <font>
+                        <Font name="LG Smart UI Regular" size="18.0" />
+                     </font>
+                  </Text>
+                  <VBox fx:id="vbox" layoutX="455.0" layoutY="97.0" prefHeight="484.0" prefWidth="419.0">
+                     <children>
+                        <AnchorPane prefHeight="46.0" prefWidth="419.0">
+                           <children>
+                              <Text fx:id="t_movie_title" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="영화 이름" textAlignment="CENTER" wrappingWidth="419.0">
+                                 <font>
+                                    <Font name="LG Smart UI Regular" size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
+</AnchorPane>

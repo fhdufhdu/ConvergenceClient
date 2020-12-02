@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="300.0" maxWidth="200.0" minHeight="300.0" minWidth="200.0" prefHeight="300.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.MoviePresentSub">
+   <children>
+      <VBox alignment="CENTER" minHeight="234.0" minWidth="200.0">
+         <children>
+            <HBox alignment="CENTER" minHeight="234.0" minWidth="200.0">
+               <children>
+                  <ImageView fx:id="iv_movie_poster" fitHeight="234.0" fitWidth="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Text fx:id="t_movie_title" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="영화제목" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="LG Smart UI Regular" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="t_rsv_rate" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="예매율" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="LG Smart UI Regular" size="15.0" />
+         </font>
+      </Text>
+      <Button minHeight="300.0" minWidth="200.0" mnemonicParsing="false" onAction="#clickedTheater" style="-fx-background-color: transparent;" />
+   </children>
+</AnchorPane>

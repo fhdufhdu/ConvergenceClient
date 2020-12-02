@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="ap_statistics_main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="910.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.StatisticsInfo">
+   <children>
+      <Text layoutX="35.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="통계정보">
+         <font>
+            <Font name="LG Smart UI Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="111.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수익률(%)">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="398.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="예매율(%)">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="683.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="취소율(%)">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="25.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tv_benefit_rate" layoutX="50.0" layoutY="159.0" prefHeight="326.0" prefWidth="236.0">
+        <columns>
+          <TableColumn fx:id="tc_theater" prefWidth="99.0" text="영화관" />
+          <TableColumn fx:id="tc_benefit" prefWidth="100.0" text="수익비율" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tv_rsv_rate" layoutX="336.0" layoutY="159.0" prefHeight="326.0" prefWidth="236.0">
+        <columns>
+          <TableColumn fx:id="tc_movie_rsv" prefWidth="99.0" text="영화" />
+          <TableColumn fx:id="tc_rsv" prefWidth="100.0" text="예매율" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tv_cancel_rate" layoutX="622.0" layoutY="159.0" prefHeight="326.0" prefWidth="236.0">
+        <columns>
+          <TableColumn fx:id="tc_movie_cancel" prefWidth="99.0" text="영화" />
+          <TableColumn fx:id="tc_cancel" prefWidth="100.0" text="취소율" />
+        </columns>
+      </TableView>
+      <!--<DatePicker layoutX="710.0" layoutY="43.0" prefWidth="150.0" />-->
+      <Text layoutX="569.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 선택">
+         <font>
+            <Font name="LG Smart UI Regular" size="15.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="dp_start" layoutX="633.0" layoutY="43.0" onAction="#selectStartDate" prefHeight="22.0" prefWidth="100.0" />
+      <DatePicker fx:id="dp_end" layoutX="760.0" layoutY="43.0" onAction="#selectEndDate" prefHeight="22.0" prefWidth="100.0" />
+      <Text layoutX="746.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="~">
+         <font>
+            <Font name="LG Smart UI Regular" size="15.0" />
+         </font>
+      </Text>
+      <Button layoutX="818.0" layoutY="83.0" mnemonicParsing="false" onAction="#search" text="검색" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
+</AnchorPane>

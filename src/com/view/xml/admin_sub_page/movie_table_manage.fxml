@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="910.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.MovieTableManage">
+   <children>
+    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="910.0" onMouseClicked="#clickedParent" style="-fx-background-color: #ffffff;">
+         <children>
+            <Text layoutX="50.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상영시간표 관리">
+               <font>
+                  <Font name="LG Smart UI Bold" size="25.0" />
+               </font>
+            </Text>
+            <Text fx:id="result" layoutX="484.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="359.7599983215332">
+               <font>
+                  <Font name="LG Smart UI Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="60.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="영화관 선택">
+               <font>
+                  <Font name="LG Smart UI Light" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="173.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상영관 선택">
+               <font>
+                  <Font name="LG Smart UI Light" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="294.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="영화 선택">
+               <font>
+                  <Font name="LG Smart UI Light" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="408.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 선택">
+               <font>
+                  <Font name="LG Smart UI Light" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="510.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="시작시간 선택">
+               <font>
+                  <Font name="LG Smart UI Light" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tf_theater" editable="false" layoutX="42.0" layoutY="104.0" minHeight="0.0" minWidth="100.0" onMouseClicked="#clickedTfTheater" prefWidth="100.0" />
+            <TextField fx:id="tf_screen" editable="false" layoutX="156.0" layoutY="104.0" onMouseClicked="#clickedTfScreen" prefWidth="100.0" />
+            <TextField fx:id="tf_movie" layoutX="270.0" layoutY="104.0" onKeyTyped="#typedTfMovie" onMouseClicked="#clickedTfMovie" prefWidth="100.0" />
+            <DatePicker fx:id="dp_start_date" layoutX="384.0" layoutY="104.0" prefWidth="100.0" />
+            <MenuButton fx:id="mb_hours_start" layoutX="500.0" layoutY="104.0" mnemonicParsing="false" text="시간" />
+            <MenuButton fx:id="mb_hours_end" layoutX="618.0" layoutY="104.0" mnemonicParsing="false" text="시간" />
+            <Text layoutX="636.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="종료시간 선택">
+               <font>
+                  <Font name="LG Smart UI Light" size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="btn_search_timetable" layoutX="741.0" layoutY="104.0" mnemonicParsing="false" onAction="#searchTimeTable" text="상영시간표 검색하기" />
+            <TableView fx:id="tv_timetable" layoutX="25.0" layoutY="164.0" prefHeight="377.0" prefWidth="870.0">
+              <columns>
+                  <TableColumn fx:id="tc_theater" prefWidth="111.99999618530273" text="영화관" />
+                <TableColumn fx:id="tc_screen" prefWidth="111.99999618530273" text="상영관" />
+                  <TableColumn fx:id="tc_movie" prefWidth="119.19999694824219" text="영화" />
+                  <TableColumn fx:id="tc_start_time" prefWidth="125.0" text="시작시간" />
+                  <TableColumn fx:id="tc_end_time" prefWidth="109.0" text="종료시간" />
+                  <TableColumn fx:id="tc_current" prefWidth="109.0" text="현재예매인원" />
+              </columns>
+            </TableView>
+            <ListView fx:id="lv_theater" layoutX="42.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" onMouseClicked="#clickedLvTheater" prefWidth="100.0" />
+            <ListView fx:id="lv_screen" layoutX="156.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" onMouseClicked="#clickedLvScreen" prefWidth="100.0" />
+            <ListView fx:id="lv_movie" layoutX="270.0" layoutY="126.0" maxHeight="0.0" maxWidth="100.0" minHeight="0.0" minWidth="100.0" onMouseClicked="#clickedLvMovie" prefWidth="100.0" />
+            <MenuButton fx:id="mb_minute_start" layoutX="559.0" layoutY="104.0" mnemonicParsing="false" text="분" />
+            <MenuButton fx:id="mb_minute_end" layoutX="680.0" layoutY="104.0" mnemonicParsing="false" text="분" />
+            <Button layoutX="829.0" layoutY="75.0" mnemonicParsing="false" onAction="#add" text="등록" />
+            <Button layoutX="741.0" layoutY="75.0" mnemonicParsing="false" onAction="#remove" text="삭제" />
+            <Button layoutX="785.0" layoutY="75.0" mnemonicParsing="false" onAction="#change" text="수정" />
+         </children>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
+</AnchorPane>

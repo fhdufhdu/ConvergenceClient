@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/sign_up.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.SignUp">
+   <children>
+      <Text layoutX="160.0" layoutY="63.0" strokeType="INSIDE" strokeWidth="0.0" text="회원가입" textAlignment="CENTER" wrappingWidth="280.6513671875">
+         <font>
+            <Font name="LG Smart UI Bold" size="37.0" />
+         </font>
+      </Text>
+      <Text layoutX="134.0" layoutY="94.0" strokeType="INSIDE" strokeWidth="0.0" text="반갑습니다! 회원가입에 필요한 정보를 입력해 주세요!" textAlignment="CENTER" wrappingWidth="331.6513671875">
+         <font>
+            <Font name="LG Smart UI Regular" size="15.0" />
+         </font>
+      </Text>
+      <Line endX="176.0" layoutX="276.0" layoutY="107.0" startX="-128.0" />
+      <TextField fx:id="tf_id" layoutX="80.0" layoutY="150.0" prefHeight="40.0" prefWidth="200.0" promptText="아이디" style="-fx-background-color: #ffffff; -fx-background-radius: 0; -fx-border-color: #dddddd;" />
+      <PasswordField fx:id="pf_passwd" layoutX="317.0" layoutY="150.0" prefHeight="40.0" prefWidth="200.0" promptText="비밀번호 " style="-fx-background-color: #ffffff; -fx-background-radius: 0; -fx-border-color: #dddddd;" />
+      <TextField fx:id="tf_name" layoutX="80.0" layoutY="200.0" prefHeight="40.0" prefWidth="200.0" promptText="이름" style="-fx-background-color: #ffffff; -fx-background-radius: 0; -fx-border-color: #dddddd;" />
+      <DatePicker fx:id="dp_birth" layoutX="317.0" layoutY="200.0" prefHeight="40.0" prefWidth="200.0" promptText="생년월일" style="-fx-background-color: #ffffff; -fx-border-radius: 0; -fx-border-color: #dddddd; -fx-effect: null;" />
+      <TextField fx:id="tf_phone" layoutX="317.0" layoutY="250.0" prefHeight="40.0" prefWidth="200.0" promptText="전화번호" style="-fx-background-color: #ffffff; -fx-background-radius: 0; -fx-border-color: #dddddd;" />
+      <MenuButton fx:id="mb_gender" layoutX="80.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0; -fx-border-color: #dddddd;" text="성별을 선택해 주세요">
+        <items>
+          <MenuItem fx:id="mi_male" mnemonicParsing="false" onAction="#setMale" text="남" />
+          <MenuItem fx:id="mi_female" mnemonicParsing="false" onAction="#setFemale" text="여" />
+        </items>
+      </MenuButton>
+      <Button id="btn_sign_up" fx:id="btn_sign_up" layoutX="317.0" layoutY="300.0" mnemonicParsing="false" onAction="#trySignUp" prefHeight="40.0" prefWidth="200.0" text="가입" textFill="WHITE">
+         <font>
+            <Font name="LG Smart UI Bold" size="20.0" />
+         </font></Button>
+      <Text fx:id="t_result" layoutX="74.0" layoutY="326.0" strokeType="INSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="200.0">
+         <font>
+            <Font name="LG Smart UI Bold" size="15.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

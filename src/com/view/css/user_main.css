@@ -1,0 +1,26 @@
+#user_menu{
+    -fx-background-color : #ffffff;
+    -fx-background-radius : 10;
+    -fx-border-color : #7f7f7f;
+    -fx-border-radius : 10;
+}
+.menu{
+	-fx-background-color : #ffffff;
+}
+.menu-item{
+	-fx-background-color : #ffffff;
+}
+.menu .label{
+	-fx-text-fill : #000000;
+}
+.menu-item .label{
+	-fx-text-fill : #000000;
+}
+
+
+.menu:hover{
+	-fx-background-color : #e3e3e3;
+}
+.menu-item:hover{
+	-fx-background-color : #e3e3e3;
+}

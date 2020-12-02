@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="910.0" minWidth="910.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.MovieDetail">
+   <children>
+      <Text layoutX="50.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="상세정보">
+         <font>
+            <Font name="LG Smart UI Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="30.0" layoutY="564.0" strokeType="OUTSIDE" strokeWidth="0.0" text="스틸컷">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="18.0" />
+         </font></Text>
+      <Text layoutX="342.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="트레일러">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="18.0" />
+         </font></Text>
+      <Text layoutX="234.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="개봉일">
+         <font>
+            <Font name="LG Smart UI Regular" size="17.0" />
+         </font>
+      </Text>
+      <Text layoutX="234.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="감독">
+         <font>
+            <Font name="LG Smart UI Regular" size="17.0" />
+         </font>
+      </Text>
+      <Text layoutX="234.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="출연">
+         <font>
+            <Font name="LG Smart UI Regular" size="17.0" />
+         </font>
+      </Text>
+      <Button fx:id="btn_reservation" layoutX="800.0" layoutY="75.0" mnemonicParsing="false" onAction="#getReservation" prefHeight="7.0" prefWidth="64.0" text="예매하기" />
+      <ImageView fx:id="image_movie" fitHeight="184.0" fitWidth="171.0" layoutX="30.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+         
+      </ImageView>
+      <Text fx:id="text_title" layoutX="233.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="제목">
+         <font>
+            <Font name="LG Smart UI Regular" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="text_open_date" layoutX="291.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="????/??/??">
+         <font>
+            <Font name="LG Smart UI Regular" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="text_director" layoutX="291.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="???">
+         <font>
+            <Font name="LG Smart UI Regular" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="text_actor" layoutX="291.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="???,???,???,???,???">
+         <font>
+            <Font name="LG Smart UI Regular" size="16.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tv_review" layoutX="30.0" layoutY="908.0" prefHeight="236.0" prefWidth="850.0">
+        <columns>
+          <TableColumn fx:id="tc_reviewer" prefWidth="63.0" text="작성자" />
+          <TableColumn fx:id="tc_review_score" minWidth="6.0" prefWidth="40.0" text="별점" />
+            <TableColumn fx:id="tc_review_date" prefWidth="115.0" text="작성일" />
+            <TableColumn fx:id="tc_review" prefWidth="254.0" text="리뷰내용" />
+            <TableColumn fx:id="tc_other" prefWidth="69.0" text="기타" />
+        </columns>
+      </TableView>
+      <MenuButton fx:id="mb_review" layoutX="30.0" layoutY="853.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="70.0" text="평점" />
+      <TextField fx:id="tf_review" layoutX="106.0" layoutY="853.0" prefHeight="39.0" prefWidth="679.0" promptText="관람평을 작성하세요" />
+      <Button fx:id="btn_review" layoutX="792.0" layoutY="854.0" mnemonicParsing="false" onAction="#addReview" prefHeight="37.0" prefWidth="88.0" text="관람평 작성">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Text layoutX="30.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="줄거리">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="30.0" layoutY="819.0" strokeType="OUTSIDE" strokeWidth="0.0" text="평점&amp;관람평">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="18.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="image_stillcut" fitHeight="180.0" fitWidth="250.0" layoutX="30.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
+         
+      </ImageView>
+      <ImageView fx:id="image_stillcut2" fitHeight="180.0" fitWidth="250.0" layoutX="330.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
+         
+      </ImageView>
+      <ImageView fx:id="image_stillcut3" fitHeight="180.0" fitWidth="250.0" layoutX="630.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
+         
+      </ImageView>
+      <ScrollPane layoutX="33.0" layoutY="309.0" prefHeight="230.0" prefWidth="250.0" style="-fx-background-color: #ffffff; -fx-border-color: #ffffff;">
+         <content>
+            <AnchorPane minHeight="225.0" minWidth="245.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Text fx:id="text_plot" layoutY="11.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="225.0">
+                     <font>
+                        <Font name="LG Smart UI Regular" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <WebView fx:id="web_trailer" layoutX="330.0" layoutY="309.0" prefHeight="230.0" prefWidth="550.0" />
+   </children>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
+</AnchorPane>

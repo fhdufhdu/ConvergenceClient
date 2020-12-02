@@ -1,0 +1,9 @@
+#btn_sign_up{
+    -fx-background-color : #cc3e44;
+}
+#btn_sign_up:pressed {
+    -fx-background-color : #6f2426;
+}
+#btn_sign_up:hover { 
+   -fx-background-color : #6f2426;
+}

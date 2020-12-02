@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane maxWidth="910.0" minHeight="0.0" minWidth="910.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.view.TheaterSearch">
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
+   <children>
+      <Text fx:id="t_theater_name" layoutX="50.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="영화관 이름">
+         <font>
+            <Font name="LG Smart UI Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="50.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="○ 총 상영관 수">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="275.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="○ 총 좌석 수">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="t_screen" layoutX="150.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="6 개관">
+         <font>
+            <Font name="LG Smart UI Bold" size="17.5" />
+         </font>
+      </Text>
+      <Text fx:id="t_total_seat" layoutX="362.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="909석">
+         <font>
+            <Font name="LG Smart UI Bold" size="17.5" />
+         </font>
+      </Text>
+      <Text fx:id="t_address" layoutX="485.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="○ 경북 영주시 영주동 497번지">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="15.0" />
+         </font>
+      </Text>
+      <WebView fx:id="map" layoutX="484.0" layoutY="161.0" prefHeight="431.0" prefWidth="368.0" />
+      <Text layoutX="485.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="○ 지도 보기">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="50.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="○ 공통 가격">
+         <font>
+            <Font name="LG Smart UI SemiBold" size="15.0" />
+         </font>
+      </Text>
+      <GridPane alignment="CENTER" layoutX="50.0" layoutY="161.0" prefHeight="200.0" prefWidth="368.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="122.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="246.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="81.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="99.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="90.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="90.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane style="-fx-background-color: #f8f8f8;">
+               <children>
+                  <Text layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="타입" textAlignment="CENTER" wrappingWidth="121.109375">
+                     <font>
+                        <Font name="LG Smart UI Light" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane style="-fx-background-color: #f8f8f8;" GridPane.columnIndex="1">
+               <children>
+                  <Text layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="가격" textAlignment="CENTER" wrappingWidth="246.109375">
+                     <font>
+                        <Font name="LG Smart UI Light" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <Line endX="266.5" startX="-100.0" stroke="#bbbbbb" GridPane.rowIndex="1" />
+            <Line endX="266.5" startX="-100.0" stroke="#eeeeee" GridPane.rowIndex="3" />
+            <Line endX="266.5" startX="-100.0" stroke="#eeeeee" GridPane.rowIndex="5" />
+            <Line endX="266.5" startX="-100.0" stroke="#eeeeee" GridPane.rowIndex="7" />
+            <AnchorPane prefHeight="89.0" prefWidth="159.0" GridPane.rowIndex="2">
+               <children>
+                  <Text layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="조조" textAlignment="CENTER" wrappingWidth="121.109375">
+                     <font>
+                        <Font name="LG Smart UI Light" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="89.0" prefWidth="159.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Text fx:id="t_type_1" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="타입" textAlignment="CENTER" wrappingWidth="246.0">
+                     <font>
+                        <Font name="LG Smart UI Light" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="89.0" prefWidth="159.0" GridPane.rowIndex="4">
+               <children>
+                  <Text layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="일반" textAlignment="CENTER" wrappingWidth="121.109375">
+                     <font>
+                        <Font name="LG Smart UI Light" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="89.0" prefWidth="159.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <Text fx:id="t_type_2" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="타입" textAlignment="CENTER" wrappingWidth="247.0">
+                     <font>
+                        <Font name="LG Smart UI Light" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="89.0" prefWidth="159.0" GridPane.rowIndex="6">
+               <children>
+                  <Text layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="심야" textAlignment="CENTER" wrappingWidth="121.109375">
+                     <font>
+                        <Font name="LG Smart UI Light" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="89.0" prefWidth="159.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <children>
+                  <Text fx:id="t_type_3" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="타입" textAlignment="CENTER" wrappingWidth="246.0">
+                     <font>
+                        <Font name="LG Smart UI Light" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
