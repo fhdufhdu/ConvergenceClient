@@ -99,7 +99,8 @@ public class MovieDetail
 	@FXML
 	private Text text_plot;
 	
-	public void initData(MovieDTO movie)
+	// 영화 상제 정보 초기화
+	public void initData(MovieDTO movie) 
 	{
 		try
 		{
@@ -196,22 +197,23 @@ public class MovieDetail
 				mainGUI.alert("에러", "평점과 리뷰를 입력해주세요");
 			}
 			
+			// 리뷰 등록 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_REVIEW_ADD + "`" + DTO.EMPTY_ID + "`" + Login.USER_ID + "`" + movie.getId() + "`" + Integer.valueOf(mb_review.getText()) + "`" + tf_review.getText() + "`" + "2000-01-01 00:00:00.0");
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 리뷰 등록 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_REVIEW_ADD))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							initList();
 							tf_review.clear();
@@ -219,7 +221,7 @@ public class MovieDetail
 							mainGUI.alert("등록 성공", "리뷰 등록 성공");
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("등록 실패", "리뷰 등록 실패");
 							return;
@@ -261,31 +263,32 @@ public class MovieDetail
 		{
 			custom_list.clear();
 			
+			// 리뷰 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_REVIEW_VIEW + "`" + movie.getId());
 			
 			ArrayList<ReviewDTO> r_list = new ArrayList<ReviewDTO>();
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 리뷰 리스트 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_REVIEW_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 데이터 추가
 						{
 							String reviewList = packetArr[3];
-							String listArr[] = reviewList.split("\\{");
+							String listArr[] = reviewList.split("\\{"); // 각 리뷰 분리
 							
 							for (String listInfo : listArr)
 							{
-								String infoArr[] = listInfo.split("\\|");
+								String infoArr[] = listInfo.split("\\|"); // 리뷰 별 정보 분리
 								String rv_id = infoArr[0];
 								String rv_memId = infoArr[1];
 								String rv_movId = infoArr[2];
@@ -295,13 +298,13 @@ public class MovieDetail
 								
 								r_list.add(new ReviewDTO(rv_id, rv_memId, rv_movId, rv_star, rv_text, rv_time));
 							}
-							for (ReviewDTO temp : r_list)
+							for (ReviewDTO temp : r_list) // 리스트에 추가
 							{
 								custom_list.add(new CustomDTO(temp));
 							}
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							return;
 						}
@@ -324,22 +327,23 @@ public class MovieDetail
 		{
 			try
 			{
+				// 리뷰 등록을 위한 사용자 정보 요청
 				mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_CUSTOM_INFO + "`3`" + review.getMemberId());
 				
 				while (true)
 				{
-					String packet = mainGUI.readLine();
+					String packet = mainGUI.readLine(); // 정보 요청 응답 수신
 					String packetArr[] = packet.split("`"); // 패킷 분할
 					String packetType = packetArr[0];
 					String packetCode = packetArr[1];
 					
 					if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_CUSTOM_INFO))
 					{
-						String result = packetArr[2];
+						String result = packetArr[2]; // 요청 결과
 						
 						switch (result)
 						{
-							case "1":
+							case "1": // 요청 성공
 							{
 								this.review = review;
 								String infoList = packetArr[3];
@@ -347,7 +351,7 @@ public class MovieDetail
 								member = new MemberDTO(mem_info[0], mem_info[1], mem_info[2], mem_info[3], mem_info[4], mem_info[5], mem_info[6], mem_info[7]);
 								return;
 							}
-							case "2":
+							case "2": // 요청 실패
 							{
 								mainGUI.alert("경고", "정보 요청 실패했습니다.");
 								return;
@@ -385,12 +389,12 @@ public class MovieDetail
 				try
 				{
 					CustomDTO currentCustom = getTableView().getItems().get(getIndex());
-					System.out.println(currentCustom.getReview().getText());
 					
+					// 리뷰 삭제 요청
 					mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_REVIEW_DELETE + "`" + currentCustom.getReview().getId());
 					while (true)
 					{
-						String packet = mainGUI.readLine();
+						String packet = mainGUI.readLine(); // 요청 응답 수신
 						String packetArr[] = packet.split("`"); // 패킷 분할
 						String packetType = packetArr[0];
 						String packetCode = packetArr[1];
@@ -401,13 +405,13 @@ public class MovieDetail
 							
 							switch (result)
 							{
-								case "1":
+								case "1": // 요청 성공 시 리스트 초기화
 								{
 									initList();
 									mainGUI.alert("삭제 성공", "리뷰 삭제 성공");
 									return;
 								}
-								case "2":
+								case "2": // 요청 실패
 								{
 									mainGUI.alert("삭제 실패", "리뷰 삭제 실패");
 									return;

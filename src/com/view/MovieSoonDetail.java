@@ -63,8 +63,6 @@ public class MovieSoonDetail
             ImageView view_arr[] = {
                     image_stillcut, image_stillcut2, image_stillcut3 };
             
-            // 영화 예매 안해두면 입력 불가능하게 - 얘는 죽여도 될 것 같음
-            
             text_title.setText(movie.getTitle());
             text_open_date.setText(movie.getReleaseDate().toString());
             text_director.setText(movie.getDirector());

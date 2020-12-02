@@ -28,39 +28,41 @@ public class PriceChange implements Initializable
 	{
 		try
 		{
+			// 관리자 -> 영화 가격정보 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_PRICE_VIEW);
 			
-			String packet = mainGUI.readLine();
-			String packetArr[] = packet.split("`");
+			String packet = mainGUI.readLine(); // 요청 응답 수신
+			String packetArr[] = packet.split("`"); // 패킷 분할
 			String packetType = packetArr[0];
 			String packetCode = packetArr[1];
 			
 			if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_PRICE_VIEW))
 			{
-				String result = packetArr[2];
+				String result = packetArr[2]; // 요청 결과
 				switch (result)
 				{
-					case "1":
+					case "1": // 요청 성공
 					{
-						String priceArr[] = packetArr[3].split("\\{");
+						String priceArr[] = packetArr[3].split("\\{"); // 조조, 일반, 심야별로 정보 분할
 						for (String priceInfo : priceArr)
 						{
-							String priceList[] = priceInfo.split("\\|");
+							String priceList[] = priceInfo.split("\\|"); // 정보별 내용과 금액 분할
 							String priceType = priceList[0];
 							String price = priceList[1];
+							
 							switch (priceType)
 							{
-								case "1":
+								case "1": // 조조 가격 표시
 								{
 									tf_morning.setText(price);
 									break;
 								}
-								case "2":
+								case "2": // 일반 가격 표시
 								{
 									tf_afternoon.setText(price);
 									break;
 								}
-								case "3":
+								case "3": // 심야 가격 표시
 								{
 									tf_night.setText(price);
 									break;
@@ -69,7 +71,7 @@ public class PriceChange implements Initializable
 						}
 						break;
 					}
-					case "2":
+					case "2": // 요청 실패
 					{
 						mainGUI.alert("경고", "가격정보 요청에 실패하였습니다.");
 						break;
@@ -98,23 +100,28 @@ public class PriceChange implements Initializable
 			String afternoon = tf_afternoon.getText();
 			String night = tf_night.getText();
 			
+			// 관리자 -> 가격정보 수정 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_PRICE_CHANGE + "`" + morning + "`" + afternoon + "`" + night);
 			
-			String packet = mainGUI.readLine();
-			String packetArr[] = packet.split("`");
+			String packet = mainGUI.readLine(); // 요청 응답 수신
+			String packetArr[] = packet.split("`"); // 패킷 분할
 			String packetType = packetArr[0];
 			String packetCode = packetArr[1];
 			if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_PRICE_CHANGE))
 			{
-				String result = packetArr[2];
+				String result = packetArr[2]; // 요청 결과
 				switch (result)
 				{
-					case "1":
+					case "1": // 요청 성공
+					{
 						mainGUI.alert("수정 완료", "데이터 수정 완료");
 						break;
-					case "2":
+					}
+					case "2": // 요청 실패
+					{
 						mainGUI.alert("경고", "가격정보 수정 실패!");
 						break;
+					}
 				}
 			}
 		}

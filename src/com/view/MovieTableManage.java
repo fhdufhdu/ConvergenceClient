@@ -118,22 +118,24 @@ public class MovieTableManage implements Initializable
 		try
 		{
 			theater_list = FXCollections.observableArrayList();
+			
+			// 관리자 -> 영화관 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_THEATER_VIEW);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_THEATER_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 영화관 리스트에 추가
 						{
 							String theaterList = packetArr[3];
 							String listArr[] = theaterList.split("\\{"); // 각 영화관 별로 리스트 분할
@@ -171,11 +173,11 @@ public class MovieTableManage implements Initializable
 							});
 							break;
 						}
-						case "2":
+						case "2": // 영화관 리스트 비어있음
 						{
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "영화관 리스트 요청 실패했습니다.");
 							break;
@@ -186,23 +188,25 @@ public class MovieTableManage implements Initializable
 				}
 			}
 			
+			
+			// 관리자 -> 영화 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MOVIE_VIEW + "`%`1976-01-01`2222-01-01`%`%`%`0");
 			movie_list = FXCollections.observableArrayList();
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MOVIE_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 영화 리스트에 추가
 						{
 							String movieList = packetArr[3];
 							String listArr[] = movieList.split("\\{"); // 각 영화별로 리스트 분할
@@ -247,11 +251,11 @@ public class MovieTableManage implements Initializable
 							});
 							break;
 						}
-						case "2":
+						case "2": // 영화 리스트 비어있음
 						{
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("영화 리스트", "영화 리스트 요청 실패했습니다.");
 							break;
@@ -356,33 +360,34 @@ public class MovieTableManage implements Initializable
 			String start_time = mb_hours_start.getText().equals("시간") ? "00:00:00.0" : (mb_minute_start.getText().equals("분") ? mb_hours_start.getText().replace("시", "") + ":00:00.0" : mb_hours_start.getText().replace("시", "") + ":" + mb_minute_start.getText().replace("분", "") + ":00.0");
 			String end_time = mb_hours_end.getText().equals("시간") ? "23:59:00.0" : (mb_minute_end.getText().equals("분") ? mb_hours_end.getText().replace("시", "") + ":00:00.0" : mb_hours_end.getText().replace("시", "") + ":" + mb_minute_end.getText().replace("분", "") + ":00.0");
 			
+			// 관리자 -> 입력한 데이터에 해당하는 상영시간표 등록 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_TIMETABLE_ADD + "`" + selectedMovie.getId() + "`" + selectedScreen.getId() + "`" + date + start_time + "`" + date + end_time);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_TIMETABLE_ADD))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							initList();
 							mainGUI.alert("추가 성공", "상영시간표 추가 성공");
 							break;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("추가 실패", "상영시간표 중복 발생");
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("추가 실패", "서버에서 DB접속 오류");
 							break;
@@ -422,33 +427,34 @@ public class MovieTableManage implements Initializable
 			String start_time = mb_hours_start.getText().equals("시간") ? "00:00:00.0" : (mb_minute_start.getText().equals("분") ? mb_hours_start.getText().replace("시", "") + ":00:00.0" : mb_hours_start.getText().replace("시", "") + ":" + mb_minute_start.getText().replace("분", "") + ":00.0");
 			String end_time = mb_hours_end.getText().equals("시간") ? "23:59:00.0" : (mb_minute_end.getText().equals("분") ? mb_hours_end.getText().replace("시", "") + ":00:00.0" : mb_hours_end.getText().replace("시", "") + ":" + mb_minute_end.getText().replace("분", "") + ":00.0");
 			
+			// 관리자 -> 입력한 데이터로 상영시간표 수정 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_TIMETABLE_CHANGE + "`" + selectedCustom.getTimeTable().getId() + "`" + selectedScreen.getId() + "`" + selectedMovie.getId() + "`" + date + start_time + "`" + date + end_time);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_TIMETABLE_CHANGE))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							initList();
 							mainGUI.alert("수정 성공", "상영시간표 수정 성공");
 							break;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("수정 실패", "상영시간표 중복 발생");
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("수정 실패", "서버에서 DB접속 오류");
 							break;
@@ -485,28 +491,30 @@ public class MovieTableManage implements Initializable
 			
 			String timetable_id = selectedCustom.getTimeTable().getId();
 			
+			
+			// 관리자 -> 선택한 상영시간표 삭제 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_TIMETABLE_DELETE + "`" + timetable_id);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_TIMETALBE_DELETE))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							initList();
 							mainGUI.alert("삭제 성공", "상영시간표 삭제 성공");
 							break;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("삭제  실패", "상영시간표 삭제 실패");
 							break;
@@ -567,23 +575,24 @@ public class MovieTableManage implements Initializable
 				return;
 			}
 			
+			// 관리자 -> 선택한 영화관에 존재하는 상영관 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_SCREEN_VIEW + "`" + selectedThea.getId());
 			screen_list = FXCollections.observableArrayList();
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_SCREEN_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 상영관 리스트에 추가
 						{
 							String screenList = packetArr[3];
 							String listArr[] = screenList.split("\\{"); // 각 상영관 별로 리스트 분할
@@ -632,11 +641,11 @@ public class MovieTableManage implements Initializable
 							// 값이 있으면 리스트뷰 활성화
 							break;
 						}
-						case "2":
+						case "2": // 해당 영화관에 상영관 존재하지 않음
 						{
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "상영관 리스트 요청 실패했습니다.");
 							break;
@@ -727,22 +736,23 @@ public class MovieTableManage implements Initializable
 			String end_time = mb_hours_end.getText().equals("시간") ? "23:59:00.0" : (mb_minute_end.getText().equals("분") ? mb_hours_end.getText().replace("시", "") + ":00:00.0" : mb_hours_end.getText().replace("시", "") + ":" + mb_minute_end.getText().replace("분", "") + ":00.0");
 			String theater_id = "null";
 			
+			// 관리자 -> 선택 영화에 해당하는 상영시간표 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_TIMETABLE_VIEW + "`" + mov_id + "`" + screen_id + "`" + date + "`" + start_time + "`" + end_time + "`" + theater_id);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_TIMETABLE_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							String screenList = packetArr[3];
 							String listArr[] = screenList.split("\\{"); // 각 상영시간표 리스트 분할
@@ -762,11 +772,11 @@ public class MovieTableManage implements Initializable
 							}
 							break;
 						}
-						case "2":
+						case "2": // 상영시간표 리스트 비어있음
 						{
 							break;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "상영시간표 요청 실패했습니다.");
 							break;
@@ -794,11 +804,12 @@ public class MovieTableManage implements Initializable
 		{
 			try
 			{
+				// 상영시간표에 해당하는 영화관, 상영관, 영화 정보 요청
 				mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_CUSTOM_INFO + "`1`" + timetable.getId());
 				
 				while (true)
 				{
-					String packet = mainGUI.readLine();
+					String packet = mainGUI.readLine(); // 요청 응답 수신
 					String packetArr[] = packet.split("`"); // 패킷 분할
 					String packetType = packetArr[0];
 					String packetCode = packetArr[1];
@@ -809,7 +820,7 @@ public class MovieTableManage implements Initializable
 						
 						switch (result)
 						{
-							case "1":
+							case "1": // 요청 성공
 							{
 								this.timetable = timetable;
 								String infoList = packetArr[3];
@@ -821,16 +832,14 @@ public class MovieTableManage implements Initializable
 								screen = new ScreenDTO(sc_info[0], sc_info[1], sc_info[2], Integer.valueOf(sc_info[3]), Integer.valueOf(sc_info[4]), Integer.valueOf(sc_info[5]));
 								movie = new MovieDTO(mv_info[0], mv_info[1], mv_info[2], mv_info[3], mv_info[4], mv_info[5], mv_info[6], mv_info[7], mv_info[8], mv_info[9], Integer.valueOf(mv_info[10]));
 								theater = new TheaterDTO(th_info[0], th_info[1], th_info[2], Integer.valueOf(th_info[3]), Integer.valueOf(th_info[4]));
-								break;
+								return;
 							}
-							case "2":
+							case "2": // 요청 실패
 							{
 								mainGUI.alert("경고", "정보 요청 실패했습니다.");
-								break;
+								return;
 							}
 						}
-						if (result != null)
-							break;
 					}
 				}
 			}

@@ -77,45 +77,48 @@ public class Payment
 			Iterator<Integer> riter = row_list.iterator();
 			Iterator<Integer> citer = col_list.iterator();
 			
+			// 선택한 좌석 열 |로 구분
 			while (riter.hasNext())
 				rowList += Integer.toString(riter.next()) + "|";
 			
+			// 선택한 좌석 행 |로 구분
 			while (citer.hasNext())
 				colList += Integer.toString(citer.next()) + "|";
 			
+			// 사용자 -> 예매된 내역 결제 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_PAYMENT_ADD + "`" + member_id + "`" + timetable_id + "`" + rowList + "`" + colList + "`" + account + "`" + bank + "`" + passwd);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_PAYMENT_ADD))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 						{
 							mainGUI.alert("결제 완료", "정상적으로 예매가 처리되었습니다");
 							Stage stage = (Stage) btn_payment.getScene().getWindow();
 							stage.close();
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("결제 오류", "결제 오류 발생, 결제 정보를 확인해주세요");
 							return;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("결제 오류", "좌석 정보 오류 발생");
 							return;
 						}
-						case "4":
+						case "4": // 요청 실패
 						{
 							mainGUI.alert("오류", "오류 발생");
 							return;
