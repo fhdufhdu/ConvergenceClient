@@ -185,6 +185,13 @@ public class MovieSearch implements Initializable
 		is_current = "2";
 	}
 	
+	// 입력 필드 초기화
+	@FXML
+	void initBtn(ActionEvent event)
+	{
+		UserMain.loadPage("movie_manage");
+	}
+	
 	// 테이블뷰에 들어갈 리스트 초기화
 	private void initList(String title, String start_date, String end_date, String is_current, String director, String actor)
 	{

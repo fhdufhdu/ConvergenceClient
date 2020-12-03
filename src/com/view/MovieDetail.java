@@ -264,6 +264,15 @@ public class MovieDetail
 		
 	}
 	
+	// 입력 필드 초기화
+	@FXML
+	void initBtn(ActionEvent event)
+	{
+		mb_review.setText("평점");
+		tf_review.clear();
+		initList();
+	}
+	
 	// 리스트 초기화
 	private void initList()
 	{

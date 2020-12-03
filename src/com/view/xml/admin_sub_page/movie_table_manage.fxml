@@ -81,6 +81,7 @@
             <Button layoutX="829.0" layoutY="75.0" mnemonicParsing="false" onAction="#add" text="등록" />
             <Button layoutX="741.0" layoutY="75.0" mnemonicParsing="false" onAction="#remove" text="삭제" />
             <Button layoutX="785.0" layoutY="75.0" mnemonicParsing="false" onAction="#change" text="수정" />
+            <Button layoutX="818.0" layoutY="44.0" mnemonicParsing="false" onAction="#initBtn" text="초기화" />
          </children>
       </AnchorPane>
    </children>

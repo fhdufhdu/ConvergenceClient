@@ -60,6 +60,7 @@ public class MoviePresentSub
                     {
                         Image image = new Image(movie.getPosterPath());
                         iv_movie_poster.setImage(image);
+                        iv_movie_poster.setCache(true);
                     });
                     return;
                 }

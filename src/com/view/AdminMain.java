@@ -40,6 +40,8 @@ public class AdminMain implements Initializable
     @FXML
     private BorderPane bp_admin_sub;
     
+    static private BorderPane root_admin_sub;
+    
     @FXML
     private ImageView img_web;
     
@@ -47,6 +49,7 @@ public class AdminMain implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        root_admin_sub = bp_admin_sub;
         // 스크롤 속도 조정
         final double SPEED = 0.005;
         sp_admin_main.getContent().setOnScroll(scrollEvent ->
@@ -111,12 +114,12 @@ public class AdminMain implements Initializable
     }
     
     // 각 파일이름에 해당하는 뷰 불러오기
-    private void loadPage(String file_name)
+    static public void loadPage(String file_name)
     {
         try
         {
             Parent root = FXMLLoader.load(AdminMain.class.getResource("./xml/admin_sub_page/" + file_name + ".fxml"));
-            bp_admin_sub.setCenter(root);
+            root_admin_sub.setCenter(root);
         }
         catch (Exception e)
         {

@@ -23,6 +23,7 @@
             <TableColumn fx:id="tc_end_time" text="종료시간" />
             <TableColumn fx:id="tc_seat" prefWidth="85.0" text="좌석" />
             <TableColumn fx:id="tc_price" prefWidth="83.0" text="가격" />
+            <TableColumn fx:id="tc_type" prefWidth="83.0" text="타입" />
         </columns>
       </TableView>
       <Text layoutX="50.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="예매정보 리스트">
@@ -65,6 +66,7 @@
          </font>
       </Text>
       <Button layoutX="840.0" layoutY="534.0" mnemonicParsing="false" onAction="#deleteRsv" text="삭제" />
+      <Button layoutX="808.0" layoutY="73.0" mnemonicParsing="false" onAction="#initBtn" prefHeight="22.0" prefWidth="54.0" text="초기화" />
    </children>
    <padding>
       <Insets bottom="30.0" />

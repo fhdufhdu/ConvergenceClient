@@ -79,6 +79,9 @@ public class RsvManage implements Initializable
 	private TableColumn<CustomDTO, String> tc_price;
 	
 	@FXML
+	private TableColumn<CustomDTO, String> tc_type;
+	
+	@FXML
 	private TextField tf_member_id;
 	
 	@FXML
@@ -346,6 +349,7 @@ public class RsvManage implements Initializable
 			tc_end_time.setCellValueFactory(cellData -> cellData.getValue().getEndTime());
 			tc_seat.setCellValueFactory(cellData -> cellData.getValue().getSeat());
 			tc_price.setCellValueFactory(cellData -> cellData.getValue().getPrice());
+			tc_type.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRsv().getType()));
 			
 			// 테이블 뷰와 리스트를 연결
 			tv_reservation.setItems(custom_list);
@@ -536,6 +540,13 @@ public class RsvManage implements Initializable
 			e.printStackTrace();
 			
 		}
+	}
+	
+	// 입력 필드 초기화
+	@FXML
+	void initBtn(ActionEvent event)
+	{
+		AdminMain.loadPage("reservation_manage");
 	}
 	
 	// 리스트 초기화

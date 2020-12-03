@@ -116,6 +116,7 @@
          </content>
       </ScrollPane>
       <WebView fx:id="web_trailer" layoutX="330.0" layoutY="309.0" prefHeight="230.0" prefWidth="550.0" />
+      <Button layoutX="804.0" layoutY="801.0" mnemonicParsing="false" onAction="#initBtn" prefHeight="7.0" prefWidth="64.0" text="초기화" />
    </children>
    <padding>
       <Insets bottom="20.0" />

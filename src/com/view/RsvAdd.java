@@ -163,7 +163,7 @@ public class RsvAdd implements Initializable
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_MEMBER_VIEW))
 				{
-					String result = packetArr[2]; // 응답 결과 
+					String result = packetArr[2]; // 응답 결과
 					
 					switch (result)
 					{
@@ -223,7 +223,6 @@ public class RsvAdd implements Initializable
 						break;
 				}
 			}
-			
 			
 			// 관리자 -> 영화관 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_THEATER_VIEW);
@@ -450,10 +449,10 @@ public class RsvAdd implements Initializable
 			
 			while (riter.hasNext())
 				rowList += Integer.toString(riter.next()) + "|"; // 선택 좌석 열 |로 구분
-			
+				
 			while (citer.hasNext())
 				colList += Integer.toString(citer.next()) + "|"; // 선택 좌석 행 |로 구분
-			
+				
 			// 관리자 -> 예매 등록 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_ADMINRESERVATION_ADD + "`" + member + "`" + timetable_id + "`" + rowList + "`" + colList + "`" + account + "`" + bank);
 			
@@ -485,7 +484,7 @@ public class RsvAdd implements Initializable
 							mainGUI.alert("에러", "가예매의 존재가 없음");
 							break;
 						}
-						case "4": // 요청 실패 
+						case "4": // 요청 실패
 						{
 							mainGUI.alert("예매 실패", "예매에 실패했습니다");
 							break;
@@ -734,6 +733,13 @@ public class RsvAdd implements Initializable
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	// 입력 필드 초기화
+	@FXML
+	void initBtn(ActionEvent event)
+	{
+		AdminMain.loadPage("reservation_add");
 	}
 	
 	// 리스트 초기화

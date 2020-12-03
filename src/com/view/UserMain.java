@@ -155,7 +155,7 @@ public class UserMain implements Initializable
 	}
 	
 	// 페이지 로딩 함수
-	private void loadPage(String file_name)
+	public static void loadPage(String file_name)
 	{
 		try
 		{
