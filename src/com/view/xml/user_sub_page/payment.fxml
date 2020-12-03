@@ -27,6 +27,7 @@
       </Text>
       <TextField fx:id="tf_bank" layoutX="130.0" layoutY="340.0" prefHeight="29.0" prefWidth="190.0" />
       <TextField fx:id="tf_account" layoutX="130.0" layoutY="380.0" prefHeight="29.0" prefWidth="191.0" />
+      <PasswordField fx:id="pf_passwd" layoutX="130.0" layoutY="420.0" prefHeight="29.0" prefWidth="190.0" />
       <Button fx:id="btn_payment" layoutX="193.0" layoutY="477.0" mnemonicParsing="false" onAction="#getPayment" text="결제하기" />
       <Text fx:id="t_theater" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="영화관 : " textAlignment="CENTER" wrappingWidth="450.0">
          <font>
@@ -68,7 +69,6 @@
             <Font name="LG Smart UI SemiBold" size="20.0" />
          </font>
       </Text>
-      <PasswordField fx:id="pf_passwd" layoutX="130.0" layoutY="420.0" prefHeight="29.0" prefWidth="190.0" />
       <Text fx:id="t_price" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="가격 : " textAlignment="CENTER" wrappingWidth="450.0">
          <font>
             <Font name="LG Smart UI Regular" size="20.0" />

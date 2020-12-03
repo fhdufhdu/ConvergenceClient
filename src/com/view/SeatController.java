@@ -204,9 +204,9 @@ public class SeatController
     private ArrayList<String> checkSelected()
     {
         ArrayList<String> result_list = new ArrayList<String>();
-        for (int i = 0; i < row; i++)
+        for (int i = 0; i < row + 1; i++)
         {
-            for (int j = 0; j < col; j++)
+            for (int j = 0; j < col + 1; j++)
             {
                 if (tb_arr[i][j].isSelected())
                 {
@@ -223,9 +223,9 @@ public class SeatController
         ArrayList<ArrayList<Integer>> seat_list = new ArrayList<ArrayList<Integer>>();
         seat_list.add(new ArrayList<Integer>());
         seat_list.add(new ArrayList<Integer>());
-        for (int i = 0; i < row; i++)
+        for (int i = 0; i < row + 1; i++)
         {
-            for (int j = 0; j < col; j++)
+            for (int j = 0; j < col + 1; j++)
             {
                 if (tb_arr[i][j].isSelected())
                 {
