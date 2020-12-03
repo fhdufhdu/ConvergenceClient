@@ -859,7 +859,7 @@ public class MovieTableManage implements Initializable
 		
 		public StringProperty getCurrent()
 		{
-			return new SimpleStringProperty(timetable.getCurrentRsv() + "`" + screen.getTotalCapacity());
+			return new SimpleStringProperty(timetable.getCurrentRsv() + "/" + screen.getTotalCapacity());
 		}
 		
 		public TimeTableDTO getTimeTable()
