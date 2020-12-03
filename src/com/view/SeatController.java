@@ -106,7 +106,7 @@ public class SeatController
         
         try
         {
-        	// 상영관 좌석 정보 요청
+            // 상영관 좌석 정보 요청
             mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_SEAT_VIEW + "`" + timetable.getId());
             
             while (true)

@@ -52,11 +52,14 @@ public class MovieTable implements Initializable
 	// 테이블 뷰에서 선택된 객체
 	private TheaterDTO selectedThea;
 	private MovieDTO selectedMovie;
-	private CustomDTO selectedCustom;
+	private ArrayList<CustomDTO> selectedCustomList;
 	
 	// 좌석 좌표 객체
 	private ArrayList<Integer> row_list;
 	private ArrayList<Integer> col_list;
+	
+	// 버튼을 누를 때 인덱스 저장
+	private int idx;
 	
 	@FXML
 	private BorderPane bp_parent;
@@ -92,6 +95,7 @@ public class MovieTable implements Initializable
 		try
 		{
 			// 리스트 초기화
+			selectedCustomList = new ArrayList<CustomDTO>();
 			initTheaterList();
 			initMovieList();
 			dp_date.setValue(LocalDate.now());
@@ -401,21 +405,25 @@ public class MovieTable implements Initializable
 		t_movie_title.setText("<" + selectedMovie.getTitle() + ">");
 		ArrayList<ButtonBar> bar_list = new ArrayList<ButtonBar>();
 		
-		for (int i = 0; i < (cnt < 4 ? 1 : cnt / 4); i++)
+		for (int i = 0; i <= (cnt <= 4 ? 0 : cnt / 4); i++)
 		{
 			bar_list.add(new ButtonBar());
 			for (int j = 0; j < 4; j++)
 			{
-				if ((i + 1) * (j + 1) > cnt)
+				if ((i * 4) + (j + 1) > cnt)
 					break;
-				selectedCustom = custom_list.get(((i + 1) * (j + 1) - 1));
+				CustomDTO selectedCustom = custom_list.get(((i * 4) + (j + 1) - 1));
+				selectedCustomList.add(selectedCustom);
 				Button btn = new Button(selectedCustom.getScreen().getName() + "관\n" + selectedCustom.getTimeTable().getCurrentRsv() + "/" + selectedCustom.getScreen().getTotalCapacity() + "\n" + format.format(new Date(selectedCustom.getTimeTable().getStartTime().getTime())));
+				btn.setId(Integer.toString(((i * 4) + (j + 1) - 1)));
 				btn.setOnAction(new EventHandler<ActionEvent>()
 				{
 					@Override
 					public void handle(ActionEvent event)
 					{
-						selectSeat();
+						idx = Integer.valueOf(btn.getId());
+						selectSeat(selectedCustomList.get(idx).getScreen(), selectedCustomList.get(idx).getTimeTable());
+						
 					}
 				});
 				// 현재시간보다 이전일 경우 비활성화
@@ -435,7 +443,7 @@ public class MovieTable implements Initializable
 	}
 	
 	// 좌석 선택
-	private void selectSeat()
+	private void selectSeat(ScreenDTO screen, TimeTableDTO timetable)
 	{
 		try
 		{
@@ -444,7 +452,7 @@ public class MovieTable implements Initializable
 			FXMLLoader loader = new FXMLLoader(MovieTable.class.getResource("./xml/user_sub_page/seat_choice.fxml"));
 			Parent root = loader.load();
 			SeatController controller = loader.<SeatController>getController();
-			controller.initData(selectedCustom.getScreen(), selectedCustom.getTimeTable());
+			controller.initData(screen, timetable);
 			stage.setScene(new Scene(root));
 			stage.setTitle("좌석 선택");
 			stage.initModality(Modality.WINDOW_MODAL);
@@ -461,7 +469,7 @@ public class MovieTable implements Initializable
 				return;
 			
 			String user_id = Login.USER_ID;
-			String timetable_id = selectedCustom.getTimeTable().getId();
+			String timetable_id = selectedCustomList.get(idx).getTimeTable().getId();
 			String rowList = "";
 			String colList = "";
 			
@@ -528,7 +536,7 @@ public class MovieTable implements Initializable
 			ArrayList<ArrayList<Integer>> seat_list = new ArrayList<ArrayList<Integer>>();
 			seat_list.add(row_list);
 			seat_list.add(col_list);
-			controller.initData(selectedThea, selectedCustom.getScreen(), selectedMovie, selectedCustom.getTimeTable(), seat_list, price);
+			controller.initData(selectedThea, selectedCustomList.get(idx).getScreen(), selectedMovie, selectedCustomList.get(idx).getTimeTable(), seat_list, price);
 			stage.setScene(new Scene(root));
 			stage.setTitle("결제창");
 			stage.initModality(Modality.WINDOW_MODAL);
