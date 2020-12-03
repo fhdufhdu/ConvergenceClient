@@ -189,7 +189,7 @@ public class MovieSearch implements Initializable
 	@FXML
 	void initBtn(ActionEvent event)
 	{
-		UserMain.loadPage("movie_manage");
+		UserMain.loadPage("movie_search");
 	}
 	
 	// 테이블뷰에 들어갈 리스트 초기화
