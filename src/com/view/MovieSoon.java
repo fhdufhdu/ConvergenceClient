@@ -16,10 +16,10 @@ import javafx.scene.layout.GridPane;
 
 public class MovieSoon implements Initializable
 {
-	
 	@FXML
 	private GridPane gp_soon_movie;
 	
+	// 리스트
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
@@ -64,9 +64,10 @@ public class MovieSoon implements Initializable
 								
 								m_list.add(new MovieDTO(mv_id, mv_title, mv_release_date, mv_is_current, mv_plot, mv_poster_path, mv_stillCut_path, mv_trailer_path, mv_director, mv_actor, mv_min));
 							}
-
+							
 							for (int i = 0; i < m_list.size(); i++)
 							{
+								// 현재 상영작을 모두 받아와서 gridview에 뿌리기, 각 gridview에는 MovieSoonSub.java가 컨트롤함
 								FXMLLoader loader = new FXMLLoader(MovieTable.class.getResource("./xml/user_sub_page/movie_soon_sub.fxml"));
 								Parent root = loader.load();
 								MovieSoonSub controller = loader.<MovieSoonSub>getController();

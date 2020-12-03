@@ -16,7 +16,7 @@
          <center>
             <AnchorPane maxWidth="910.0" minWidth="910.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text focusTraversable="true" layoutX="50.0" layoutY="40.0" pickOnBounds="true" strokeType="OUTSIDE" strokeWidth="0.0" text="상영시간표 리스트">
+                  <Text focusTraversable="true" layoutX="50.0" layoutY="50.0" pickOnBounds="true" strokeType="OUTSIDE" strokeWidth="0.0" text="상영시간표 리스트">
                      <font>
                         <Font name="LG Smart UI Bold" size="25.0" />
                      </font>

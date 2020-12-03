@@ -20,10 +20,6 @@ import javafx.stage.Stage;
 
 public class Payment
 {
-	private int price;
-	private TheaterDTO theater;
-	private ScreenDTO screen;
-	private MovieDTO movie;
 	private TimeTableDTO timetable;
 	private ArrayList<Integer> row_list;
 	private ArrayList<Integer> col_list;
@@ -60,6 +56,26 @@ public class Payment
 	
 	@FXML
 	private PasswordField pf_passwd;
+	
+	public void initData(TheaterDTO theater, ScreenDTO screen, MovieDTO movie, TimeTableDTO timetable, ArrayList<ArrayList<Integer>> seat_list, int price)
+	{
+		String date[] = timetable.getStartTime().toString().split(" ");
+		row_list = seat_list.get(0);
+		col_list = seat_list.get(1);
+		
+		this.timetable = timetable;
+		
+		t_theater.setText(t_theater.getText() + theater.getName());
+		t_movie.setText(t_movie.getText() + movie.getTitle());
+		t_screen.setText(t_screen.getText() + screen.getName() + "관");
+		t_date.setText(t_date.getText() + date[0]);
+		t_start_time.setText(t_start_time.getText() + date[1]);
+		t_price.setText(t_price.getText() + price + "원");
+		for (int i = 0; i < row_list.size(); i++)
+		{
+			t_seat.setText(t_seat.getText() + row_list.get(i) + col_list.get(i) + "`");
+		}
+	}
 	
 	@FXML
 	void getPayment(ActionEvent event) throws Exception
@@ -134,29 +150,4 @@ public class Payment
 			mainGUI.alert("오류", "오류 발생");
 		}
 	}
-	
-	public void initData(TheaterDTO theater, ScreenDTO screen, MovieDTO movie, TimeTableDTO timetable, ArrayList<ArrayList<Integer>> seat_list, int price)
-	{
-		String date[] = timetable.getStartTime().toString().split(" ");
-		row_list = seat_list.get(0);
-		col_list = seat_list.get(1);
-		
-		this.price = price;
-		this.theater = theater;
-		this.screen = screen;
-		this.movie = movie;
-		this.timetable = timetable;
-		
-		t_theater.setText(t_theater.getText() + theater.getName());
-		t_movie.setText(t_movie.getText() + movie.getTitle());
-		t_screen.setText(t_screen.getText() + screen.getName() + "관");
-		t_date.setText(t_date.getText() + date[0]);
-		t_start_time.setText(t_start_time.getText() + date[1]);
-		t_price.setText(t_price.getText() + price + "원");
-		for (int i = 0; i < row_list.size(); i++)
-		{
-			t_seat.setText(t_seat.getText() + row_list.get(i) + col_list.get(i) + "`");
-		}
-	}
-	
 }

@@ -106,27 +106,28 @@ public class SeatController
         
         try
         {
+            // 상영관 좌석 정보 요청
             mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_SEAT_VIEW + "`" + timetable.getId());
             
             while (true)
             {
-                String packet = mainGUI.readLine();
+                String packet = mainGUI.readLine(); // 요청 응답 수신
                 String packetArr[] = packet.split("`"); // 패킷 분할
                 String packetType = packetArr[0];
                 String packetCode = packetArr[1];
                 
                 if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_SEAT_VIEW))
                 {
-                    String result = packetArr[2];
+                    String result = packetArr[2]; // 요청 결과
                     
                     switch (result)
                     {
-                        case "1":
+                        case "1": // 요청 성공 시 좌석 정보 추가
                         {
                             if (packetArr.length > 3)
                             {
-                                String rowArr[] = packetArr[3].split("\\|");
-                                String colArr[] = packetArr[4].split("\\|");
+                                String rowArr[] = packetArr[3].split("\\|"); // 상영관 열 리스트 분할
+                                String colArr[] = packetArr[4].split("\\|"); // 상영관 행 리스트 분할
                                 // 예매 되어있는 자리 클릭 비활성화
                                 for (int i = 0; i < rowArr.length; i++)
                                 {
@@ -173,7 +174,7 @@ public class SeatController
                             btn_select.setLayoutX(root_width - 90);
                             return;
                         }
-                        case "2":
+                        case "2": // 요청 실패
                         {
                             mainGUI.alert("오류", "좌석 정보를 불러오는데 실패했습니다.");
                             return;
@@ -203,9 +204,9 @@ public class SeatController
     private ArrayList<String> checkSelected()
     {
         ArrayList<String> result_list = new ArrayList<String>();
-        for (int i = 0; i < row; i++)
+        for (int i = 0; i < row + 1; i++)
         {
-            for (int j = 0; j < col; j++)
+            for (int j = 0; j < col + 1; j++)
             {
                 if (tb_arr[i][j].isSelected())
                 {
@@ -222,9 +223,9 @@ public class SeatController
         ArrayList<ArrayList<Integer>> seat_list = new ArrayList<ArrayList<Integer>>();
         seat_list.add(new ArrayList<Integer>());
         seat_list.add(new ArrayList<Integer>());
-        for (int i = 0; i < row; i++)
+        for (int i = 0; i < row + 1; i++)
         {
-            for (int j = 0; j < col; j++)
+            for (int j = 0; j < col + 1; j++)
             {
                 if (tb_arr[i][j].isSelected())
                 {

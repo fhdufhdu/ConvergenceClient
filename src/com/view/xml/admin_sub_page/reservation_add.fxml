@@ -102,6 +102,7 @@
                </font>
             </Text>
             <TextField fx:id="tf_account" layoutX="613.0" layoutY="576.0" minHeight="0.0" minWidth="100.0" prefWidth="100.0" />
+            <Button layoutX="818.0" layoutY="72.0" mnemonicParsing="false" onAction="#initBtn" text="초기화" />
          </children>
       </AnchorPane>
    </children>

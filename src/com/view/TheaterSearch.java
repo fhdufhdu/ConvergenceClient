@@ -57,38 +57,39 @@ public class TheaterSearch
 			t_total_seat.setText(theater.getTotalSeats() + "석");
 			t_address.setText("○ " + theater.getAddress());
 			
+			// 가격정보 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_PRICE_VIEW);
 			
-			String packet = mainGUI.readLine();
-			String packetArr[] = packet.split("`");
+			String packet = mainGUI.readLine(); // 요청 응답 수신
+			String packetArr[] = packet.split("`"); // 패킷 분할
 			String packetType = packetArr[0];
 			String packetCode = packetArr[1];
 			
 			if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_PRICE_VIEW))
 			{
-				String result = packetArr[2];
+				String result = packetArr[2]; // 요청 결과
 				switch (result)
 				{
-					case "1":
-						String priceArr[] = packetArr[3].split("\\{");
+					case "1": // 요청 성공 시 값 세팅
+						String priceArr[] = packetArr[3].split("\\{"); // 조조, 일반, 심야별로 정보 분할
 						for (String priceInfo : priceArr)
 						{
-							String priceList[] = priceInfo.split("\\|");
+							String priceList[] = priceInfo.split("\\|"); // 내용과 금액으로 정보 분할
 							String priceType = priceList[0];
 							String price = priceList[1];
 							switch (priceType)
 							{
-								case "1":
+								case "1": // 조조 금액
 								{
 									t_type_1.setText(price);
 									break;
 								}
-								case "2":
+								case "2": // 일반 금액
 								{
 									t_type_2.setText(price);
 									break;
 								}
-								case "3":
+								case "3": // 심야  금액
 								{
 									t_type_3.setText(price);
 									break;
@@ -96,7 +97,7 @@ public class TheaterSearch
 							}
 						}
 						break;
-					case "2":
+					case "2": // 요청 실패
 						mainGUI.alert("경고", "가격정보 요청에 실패하였습니다.");
 						break;
 				}

@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class mainGUI extends Application
@@ -27,9 +28,17 @@ public class mainGUI extends Application
 	{
 		try
 		{
+<<<<<<< HEAD
 
 
 			Socket socket = new Socket("192.168.230.238", 5000);
+=======
+			String localHostAddress = InetAddress.getLocalHost().getHostAddress();
+			/// String localHostAddress = "192.168.230.238";
+			// Socket socket = new Socket(InetAddress.getLocalHost().getHostAddress(), 5000);
+			Socket socket = new Socket(localHostAddress, 5000);
+			
+>>>>>>> branch 'master' of https://github.com/fhdufhdu/ConvergenceClient
 			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 			launch();
@@ -52,6 +61,11 @@ public class mainGUI extends Application
 	{
 		try
 		{
+			Font.loadFont(mainGUI.class.getResource("/com/main/LG_Smart_UI-Bold.ttf").toExternalForm(), 10);
+			Font.loadFont(mainGUI.class.getResource("/com/main/LG_Smart_UI-Light.ttf").toExternalForm(), 10);
+			Font.loadFont(mainGUI.class.getResource("/com/main/LG_Smart_UI-Regular.ttf").toExternalForm(), 10);
+			Font.loadFont(mainGUI.class.getResource("/com/main/LG_Smart_UI-SemiBold.ttf").toExternalForm(), 10);
+			
 			Parent root = FXMLLoader.load(mainGUI.class.getResource("../view/xml/login.fxml"));
 			// Parent root = FXMLLoader.load(mainGUI.class.getResource("../view/xml/user_sub_page/theater_search.fxml"));
 			Scene scene = new Scene(root);

@@ -122,25 +122,26 @@ public class TheaterManage implements Initializable
 			String name = tf_name.getText();
 			String address = tf_address.getText();
 			
+			// 관리자 -> 영화관 추가 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_THEATER_ADD + "`" + name + "`" + address + "`0`0");
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_THEATER_ADD))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공
 							initList(); // 값 추가 후 리스트 초기화
 							clearText(); // 값 추가 후 텍스트 초기화
 							return;
-						case "2":
+						case "2": // 요청 실패
 							mainGUI.alert("경고", "영화관 등록 실패");
 							return;
 					}
@@ -170,25 +171,26 @@ public class TheaterManage implements Initializable
 			String name = tf_name.getText();
 			String address = tf_address.getText();
 			
+			// 관리자 -> 선택 영화관 수정 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_THEATER_CHANGE + "`" + id + "`" + name + "`" + address + "`0`0");
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_THEATER_CHANGE))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 초기화
 							initList();
 							clearText();
 							return;
-						case "2":
+						case "2": // 요청 실패
 							mainGUI.alert("경고", "영화관 수정 실패!");
 							return;
 					}
@@ -226,27 +228,28 @@ public class TheaterManage implements Initializable
 			
 			String id = table_row_data.getId();
 			
+			// 관리자 -> 선택한 영화관 삭제 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_THEATER_DELETE + "`" + id);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_THEATER_DELETE))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 초기화
 							mainGUI.alert("삭제완료", "삭제 완료 되었습니다");
 							initList();
 							
 							clearText();
 							return;
-						case "2":
+						case "2": // 요청 실패
 							mainGUI.alert("경고", "영화관 삭제 실패!");
 							return;
 					}
@@ -299,18 +302,20 @@ public class TheaterManage implements Initializable
 		try
 		{
 			theater_list.clear();
+			
+			// 관리자 -> 영화관 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_THEATER_VIEW);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_THEATER_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
@@ -331,11 +336,11 @@ public class TheaterManage implements Initializable
 							}
 							return;
 						}
-						case "2":
+						case "2": // 영화관 리스트 비어있음
 						{
 							return;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "영화관 리스트 요청 실패했습니다");
 							return;

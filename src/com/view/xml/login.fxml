@@ -34,7 +34,7 @@
       <Button fx:id="btn_signup" layoutX="267.0" layoutY="321.0" mnemonicParsing="false" onAction="#signUp" style="-fx-background-color: #00000000;" text="회원가입" textFill="#a1a1a1" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="143.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wOwns1484 시네마" textAlignment="CENTER" wrappingWidth="312.0">
+      <Text layoutX="143.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CMD" textAlignment="CENTER" wrappingWidth="312.0">
          <font>
             <Font name="LG Smart UI Bold" size="36.0" />
          </font>
@@ -43,5 +43,10 @@
          <font>
             <Font size="15.0" />
          </font></Text>
+      <Text layoutX="149.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cinema Mania Druwhak" textAlignment="CENTER" wrappingWidth="299.1015625">
+         <font>
+            <Font name="LG Smart UI Bold" size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

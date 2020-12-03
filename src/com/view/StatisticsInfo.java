@@ -133,22 +133,23 @@ public class StatisticsInfo implements Initializable
             rsv_list.clear();
             cancel_list.clear();
             
+            // 관리자 -> 선택 날짜에 해당하는 통계정보 요청
             mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_STATISTICS_VIEW + "`" + start_date + "`" + end_date);
             
             while (true)
             {
-                String packet = mainGUI.readLine();
+                String packet = mainGUI.readLine(); // 요청 응답 수신
                 String packetArr[] = packet.split("`"); // 패킷 분할
                 String packetType = packetArr[0];
                 String packetCode = packetArr[1];
                 
                 if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_STATISTICS_VIEW))
                 {
-                    String result = packetArr[2];
+                    String result = packetArr[2]; // 요청 결과
                     
                     switch (result)
                     {
-                        case "1":
+                        case "1": // 요청 성공 시 리스트 추가
                         {
                             String statistics_list = packetArr[3];
                             String statisticsArr[] = statistics_list.split("\\{");
@@ -161,7 +162,7 @@ public class StatisticsInfo implements Initializable
                             cancel_list.addAll(cancelArr);
                             return;
                         }
-                        case "2":
+                        case "2": // 요청 실패
                         {
                             mainGUI.alert("오류", "통계 정보를 불러오는데 실패했습니다.");
                             return;

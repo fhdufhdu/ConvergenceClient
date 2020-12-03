@@ -127,27 +127,28 @@ public class ScreenManage
 			String col = tf_col.getText();
 			String capacity = String.valueOf(Integer.valueOf(row) * Integer.valueOf(col));
 			
+			// 관리자 -> 선택 영화관에 상영관 추가 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SCREEN_ADD + "`" + theater.getId() + "`" + name + "`" + capacity + "`" + row + "`" + col);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_SCREEN_ADD))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 초기화
 						{
 							initList(); // 값 추가 후 각 테이블 및 리스트 초기화
 							clearText(); // 텍스트 초기화
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("오류", "상영관 등록 실패!");
 							return;
@@ -186,27 +187,28 @@ public class ScreenManage
 			String col = tf_col.getText();
 			String capacity = String.valueOf(Integer.valueOf(row) * Integer.valueOf(col));
 			
+			// 관리자 -> 선택한 상영관 정보 수정 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SCREEN_CHANGE + "`" + table_row_data.getId() + "`" + theater.getId() + "`" + name + "`" + capacity + "`" + row + "`" + col);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_SCREEN_CHANGE))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 초기화
 						{
 							initList();
 							clearText();
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("오류", "상영관 수정 실패");
 							return;
@@ -256,28 +258,29 @@ public class ScreenManage
 			// 선택한 행 상영관 아이디 획득
 			String id = table_row_data.getId();
 			
+			// 관리자 -> 선택한 상영관 삭제 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SCREEN_DELETE + "`" + id);
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
-				String packetArr[] = packet.split("`");
+				String packet = mainGUI.readLine(); // 요청 응답 수신
+				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_SCREEN_DELETE))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 초기화
 						{
 							mainGUI.alert("삭제완료", "삭제되었습니다");
 							initList();
 							clearText();
 							return;
 						}
-						case "2":
+						case "2": // 요청 실패
 						{
 							mainGUI.alert("오류", "상영관 삭제 실패!");
 							return;
@@ -305,22 +308,23 @@ public class ScreenManage
 		{
 			screen_list.clear();
 			
+			// 관리자 -> 상영관 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_SCREEN_VIEW + "`" + theater.getId());
 			
 			while (true)
 			{
-				String packet = mainGUI.readLine();
+				String packet = mainGUI.readLine(); // 요청 응답 수신
 				String packetArr[] = packet.split("`"); // 패킷 분할
 				String packetType = packetArr[0];
 				String packetCode = packetArr[1];
 				
 				if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_SCREEN_VIEW))
 				{
-					String result = packetArr[2];
+					String result = packetArr[2]; // 요청 결과
 					
 					switch (result)
 					{
-						case "1":
+						case "1": // 요청 성공 시 리스트 추가
 						{
 							String screenList = packetArr[3];
 							String listArr[] = screenList.split("\\{"); // 각 상영관 별로 리스트 분할
@@ -339,11 +343,11 @@ public class ScreenManage
 							}
 							return;
 						}
-						case "2":
+						case "2": // 상영관 리스트 비어있음
 						{
 							return;
 						}
-						case "3":
+						case "3": // 요청 실패
 						{
 							mainGUI.alert("오류", "상영관 리스트 요청 실패했습니다");
 							return;

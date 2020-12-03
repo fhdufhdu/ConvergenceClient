@@ -4,7 +4,6 @@ import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import com.db.model.MemberDTO;
 import com.db.model.MovieDTO;
 import com.db.model.ScreenDTO;
 import com.db.model.TheaterDTO;
@@ -38,12 +37,13 @@ import javafx.scene.text.Text;
 
 public class MovieTableManage implements Initializable
 {
+	// 리스트뷰와 테이블뷰를 위한 리스트
 	private ObservableList<TheaterDTO> theater_list;
 	private ObservableList<ScreenDTO> screen_list;
 	private ObservableList<MovieDTO> movie_list;
-	private ObservableList<MemberDTO> member_list;
 	private ObservableList<CustomDTO> custom_list;
-
+	
+	// 리스트뷰와 테이블뷰에서 선택한 객체
 	private TheaterDTO selectedThea;
 	private ScreenDTO selectedScreen;
 	private MovieDTO selectedMovie;
@@ -57,9 +57,6 @@ public class MovieTableManage implements Initializable
 	
 	@FXML
 	private ListView<MovieDTO> lv_movie;
-	
-	@FXML
-	private ListView<MemberDTO> lv_member;
 	
 	@FXML
 	private TableView<CustomDTO> tv_timetable;
@@ -112,6 +109,7 @@ public class MovieTableManage implements Initializable
 	@FXML
 	private MenuButton mb_minute_end;
 	
+	// 초기화
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -150,7 +148,7 @@ public class MovieTableManage implements Initializable
 								
 								theater_list.add(new TheaterDTO(id, name, address, Integer.parseInt(screen), Integer.parseInt(seat)));
 							}
-							
+							// 리스트뷰 세팅
 							lv_theater.setItems(FXCollections.observableArrayList());
 							lv_theater.getItems().addAll(theater_list);
 							lv_theater.setOnMouseClicked((MouseEvent) ->
@@ -162,6 +160,7 @@ public class MovieTableManage implements Initializable
 								lv_theater.getItems().clear();
 								tf_theater.setText(selectedThea.getName());
 							});
+							// 리스트뷰에 어떤 객체가 들어가는지 세팅
 							lv_theater.setCellFactory(lv -> new ListCell<TheaterDTO>()
 							{
 								@Override
@@ -187,7 +186,6 @@ public class MovieTableManage implements Initializable
 						break;
 				}
 			}
-			
 			
 			// 관리자 -> 영화 리스트 요청
 			mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_MOVIE_VIEW + "`%`1976-01-01`2222-01-01`%`%`%`0");
@@ -292,6 +290,7 @@ public class MovieTableManage implements Initializable
 				}
 			});
 			
+			// 검색을 위한 menuitem 세팅
 			for (int i = 0; i < 24; i++)
 			{
 				MenuItem hour_s = new MenuItem(Integer.toString(i + 1) + "시");
@@ -345,6 +344,7 @@ public class MovieTableManage implements Initializable
 		}
 	}
 	
+	// 상영시간표 추가
 	@FXML
 	void add(ActionEvent event)
 	{
@@ -405,6 +405,7 @@ public class MovieTableManage implements Initializable
 		}
 	}
 	
+	// 상영시간표 변경
 	@FXML
 	void change(ActionEvent event)
 	{
@@ -472,6 +473,7 @@ public class MovieTableManage implements Initializable
 		}
 	}
 	
+	// 상영시간표 제거
 	@FXML
 	void remove(ActionEvent event)
 	{
@@ -490,7 +492,6 @@ public class MovieTableManage implements Initializable
 			}
 			
 			String timetable_id = selectedCustom.getTimeTable().getId();
-			
 			
 			// 관리자 -> 선택한 상영시간표 삭제 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_TIMETABLE_DELETE + "`" + timetable_id);
@@ -532,30 +533,7 @@ public class MovieTableManage implements Initializable
 		}
 	}
 	
-	@FXML
-	void clickedLvMovie(MouseEvent event)
-	{
-		
-	}
-	
-	@FXML
-	void clickedLvScreen(MouseEvent event)
-	{
-		
-	}
-	
-	@FXML
-	void clickedLvTheater(MouseEvent event)
-	{
-		
-	}
-	
-	@FXML
-	void clickedLvMember(MouseEvent event)
-	{
-		
-	}
-	
+	// 텍스트 필드 클릭시 리스트뷰 보이게하기
 	@FXML
 	void clickedTfMovie(MouseEvent event)
 	{
@@ -564,6 +542,7 @@ public class MovieTableManage implements Initializable
 		lv_movie.setMaxHeight(130);
 	}
 	
+	// 선택한 영화관에 맞는 상영관 불러오기
 	@FXML
 	void clickedTfScreen(MouseEvent event)
 	{
@@ -670,14 +649,7 @@ public class MovieTableManage implements Initializable
 		lv_theater.setMaxHeight(130);
 	}
 	
-	@FXML
-	void clickedTfMember(MouseEvent event)
-	{
-		lv_member.getItems().clear();
-		lv_member.getItems().addAll(member_list);
-		lv_member.setMaxHeight(130);
-	}
-	
+	// 외부 클릭시 리스트뷰 보이지 않게 하기
 	@FXML
 	void clickedParent(MouseEvent event)
 	{
@@ -689,6 +661,7 @@ public class MovieTableManage implements Initializable
 		lv_movie.getItems().clear();
 	}
 	
+	// 텍스트필드에 타이핑시 발생하는 이벤트
 	@FXML
 	void typedTfMovie(KeyEvent event)
 	{
@@ -716,12 +689,21 @@ public class MovieTableManage implements Initializable
 		lv_movie.getItems().addAll(temp_list);
 	}
 	
+	// 상영시간표 검색
 	@FXML
 	void searchTimeTable(ActionEvent event)
 	{
 		initList();
 	}
 	
+	// 입력 필드 초기화
+	@FXML
+	void initBtn(ActionEvent event)
+	{
+		AdminMain.loadPage("movie_table_manage");
+	}
+	
+	// 리스트 초기화
 	private void initList()
 	{
 		try
@@ -793,6 +775,7 @@ public class MovieTableManage implements Initializable
 		}
 	}
 	
+	// DTO들을 모은 DTO
 	private class CustomDTO
 	{
 		TheaterDTO theater;
@@ -876,7 +859,7 @@ public class MovieTableManage implements Initializable
 		
 		public StringProperty getCurrent()
 		{
-			return new SimpleStringProperty(timetable.getCurrentRsv() + "`" + screen.getTotalCapacity());
+			return new SimpleStringProperty(timetable.getCurrentRsv() + "/" + screen.getTotalCapacity());
 		}
 		
 		public TimeTableDTO getTimeTable()

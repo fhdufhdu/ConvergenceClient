@@ -16,7 +16,7 @@
             <Font name="LG Smart UI Bold" size="25.0" />
          </font>
       </Text>
-      <Text layoutX="111.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수익률(%)">
+      <Text layoutX="107.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수익비율(%)">
          <font>
             <Font name="LG Smart UI SemiBold" size="25.0" />
          </font>
@@ -36,18 +36,27 @@
           <TableColumn fx:id="tc_theater" prefWidth="99.0" text="영화관" />
           <TableColumn fx:id="tc_benefit" prefWidth="100.0" text="수익비율" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <TableView fx:id="tv_rsv_rate" layoutX="336.0" layoutY="159.0" prefHeight="326.0" prefWidth="236.0">
         <columns>
           <TableColumn fx:id="tc_movie_rsv" prefWidth="99.0" text="영화" />
           <TableColumn fx:id="tc_rsv" prefWidth="100.0" text="예매율" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <TableView fx:id="tv_cancel_rate" layoutX="622.0" layoutY="159.0" prefHeight="326.0" prefWidth="236.0">
         <columns>
           <TableColumn fx:id="tc_movie_cancel" prefWidth="99.0" text="영화" />
           <TableColumn fx:id="tc_cancel" prefWidth="100.0" text="취소율" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
       <!--<DatePicker layoutX="710.0" layoutY="43.0" prefWidth="150.0" />-->
       <Text layoutX="569.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="날짜 선택">

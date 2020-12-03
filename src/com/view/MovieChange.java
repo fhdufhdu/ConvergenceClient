@@ -103,11 +103,13 @@ public class MovieChange
 		tf_poster.setPromptText(mov.getPosterPath());
 	}
 	
+	// 영화 변경
 	@FXML
 	void changeMovie(ActionEvent event)
 	{
 		try
 		{
+			// text area의 개행 처리
 			String stillCut = "";
 			if (ta_stillcut.getText().equals(""))
 				stillCut = currentMov.getStillCutPath();

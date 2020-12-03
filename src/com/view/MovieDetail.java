@@ -35,6 +35,7 @@ public class MovieDetail
 {
 	private MovieDTO movie;
 	
+	// 리뷰 테이블 뷰를 위한 리스트
 	private ObservableList<CustomDTO> custom_list;
 	
 	@FXML
@@ -85,6 +86,7 @@ public class MovieDetail
 	@FXML
 	private WebView web_trailer;
 	
+	// 웹뷰 백그라운드 실행을 막기위한 변수
 	static private WebView webview;
 	
 	@FXML
@@ -100,7 +102,7 @@ public class MovieDetail
 	private Text text_plot;
 	
 	// 영화 상제 정보 초기화
-	public void initData(MovieDTO movie) 
+	public void initData(MovieDTO movie)
 	{
 		try
 		{
@@ -128,11 +130,13 @@ public class MovieDetail
 			text_plot.setText(movie.getPlot().replace("}", "\n"));
 			Image image = new Image(movie.getPosterPath());
 			image_movie.setImage(image);
+			// 스틸컷 설정
 			for (int i = 0; i < view_arr.length; i++)
 			{
 				Image image_temp = new Image(stillcut[i]);
 				view_arr[i].setImage(image_temp);
 			}
+			// 트레일러 설정
 			String[] trailer = movie.getTrailerPath().split("v=");
 			try
 			{
@@ -145,15 +149,17 @@ public class MovieDetail
 			
 			custom_list = FXCollections.observableArrayList();
 			
+			// 리스트 초기화
 			initList();
 			
 			tv_review.getItems().clear();
 			
+			// 테이블 뷰 col 설정
 			tc_reviewer.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMember().getId()));
 			tc_review_score.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getReview().getStar())));
 			tc_review_date.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReview().getWriteTime().toString()));
 			tc_review.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getReview().getText()));
-			// 테이블 뷰에 버튼을 넣기위한 필사의 노력
+			// 테이블 뷰에 버튼설정
 			tc_other.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CustomDTO, String>, ObservableValue<String>>()
 			{
 				@Override
@@ -164,6 +170,7 @@ public class MovieDetail
 			});
 			tc_other.setCellFactory(cellData -> new ButtonCell());
 			
+			// 테이블뷰에 리스트 세팅
 			tv_review.setItems(custom_list);
 			
 			// 별점 세팅
@@ -257,6 +264,16 @@ public class MovieDetail
 		
 	}
 	
+	// 입력 필드 초기화
+	@FXML
+	void initBtn(ActionEvent event)
+	{
+		mb_review.setText("평점");
+		tf_review.clear();
+		initList();
+	}
+	
+	// 리스트 초기화
 	private void initList()
 	{
 		try
@@ -318,6 +335,7 @@ public class MovieDetail
 		}
 	}
 	
+	// DTO 모음 DTO
 	private class CustomDTO
 	{
 		private MemberDTO member;

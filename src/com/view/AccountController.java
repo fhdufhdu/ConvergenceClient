@@ -25,15 +25,15 @@ public class AccountController implements Initializable
     {
         try
         {
-        	// 관리자 -> 계좌 정보 요청
-            mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_ACCOUNT_VIEW); 
+            // 관리자 -> 계좌 정보 요청
+            mainGUI.writePacket(Protocol.PT_REQ_VIEW + "`" + Protocol.CS_REQ_ACCOUNT_VIEW);
             
             String packet = mainGUI.readLine(); // 계좌 정보 요청 응답 수신
             String packetArr[] = packet.split("`"); // 패킷 분할
             String packetType = packetArr[0];
             String packetCode = packetArr[1];
             
-            if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_ACCOUNT_VIEW)) 
+            if (packetType.equals(Protocol.PT_RES_VIEW) && packetCode.equals(Protocol.SC_RES_ACCOUNT_VIEW))
             {
                 String result = packetArr[2]; // 요청 결과
                 
@@ -73,7 +73,7 @@ public class AccountController implements Initializable
             String account = tf_account.getText();
             
             // 계좌 정보 수정 요청
-            mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_ACCOUNT_CHANGE + "`" + bank + "`" + account); 
+            mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_ACCOUNT_CHANGE + "`" + bank + "`" + account);
             
             String packet = mainGUI.readLine(); // 계좌 정보 수정 요청 응답 수신
             String packetArr[] = packet.split("`"); // 패킷 분항
@@ -89,12 +89,10 @@ public class AccountController implements Initializable
                         mainGUI.alert("수정 완료", "데이터 수정 완료");
                         break;
                     case "2": // 요청 실패
-                        mainGUI.alert("경고", "가격정보 수정 실패!");
+                        mainGUI.alert("경고", "계좌 정보 수정 실패!");
                         break;
                 }
             }
-            
-            mainGUI.alert("수정 완료", "수정이 완료 되었습니다");
         }
         catch (Exception e)
         {
