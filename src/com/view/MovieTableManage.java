@@ -224,6 +224,9 @@ public class MovieTableManage implements Initializable
 								String mv_actor = infoArr[9];
 								int mv_min = Integer.parseInt(infoArr[10]);
 								
+								if (mv_is_current.equals("0"))
+									continue;
+								
 								movie_list.add(new MovieDTO(mv_id, mv_title, mv_release_date, mv_is_current, mv_plot, mv_poster_path, mv_stillCut_path, mv_trailer_path, mv_director, mv_actor, mv_min));
 							}
 							
