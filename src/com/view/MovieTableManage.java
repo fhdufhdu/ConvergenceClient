@@ -455,6 +455,28 @@ public class MovieTableManage implements Initializable
 			String start_time = mb_hours_start.getText().equals("시간") ? "00:00:00.0" : (mb_minute_start.getText().equals("분") ? mb_hours_start.getText().replace("시", "") + ":00:00.0" : mb_hours_start.getText().replace("시", "") + ":" + mb_minute_start.getText().replace("분", "") + ":00.0");
 			String end_time = mb_hours_end.getText().equals("시간") ? "23:59:00.0" : (mb_minute_end.getText().equals("분") ? mb_hours_end.getText().replace("시", "") + ":00:00.0" : mb_hours_end.getText().replace("시", "") + ":" + mb_minute_end.getText().replace("분", "") + ":00.0");
 			
+			SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.S");
+			
+			Date startDate = format.parse(date + start_time);
+			long startDateTime = startDate.getTime();
+			
+			Date endDate = format.parse(date + end_time);
+			long endDateTime = endDate.getTime();
+			
+			long minute = (endDateTime - startDateTime) / 60000;
+			
+			if (minute < 0)
+			{
+				mainGUI.alert("경고", "시간 범위를 확인해주세요");
+				return;
+			}
+			
+			if (minute < selectedMovie.getMin())
+			{
+				mainGUI.alert("경고", "영화 상영시간보다 작은 시간입니다");
+				return;
+			}
+			
 			// 관리자 -> 입력한 데이터로 상영시간표 수정 요청
 			mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_TIMETABLE_CHANGE + "`" + selectedCustom.getTimeTable().getId() + "`" + selectedScreen.getId() + "`" + selectedMovie.getId() + "`" + date + start_time + "`" + date + end_time);
 			
